@@ -1,0 +1,18 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="#e44d26"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 2 L5 6 L2 4 L3 8 L1 10 L5 10" />
+  <path d="M16 2 L19 6 L22 4 L21 8 L23 10 L19 10" />
+  <ellipse cx="12" cy="14" rx="8" ry="6" />
+  <circle cx="9" cy="13" r="1" fill="#e44d26" />
+  <circle cx="15" cy="13" r="1" fill="#e44d26" />
+  <path d="M9 17 L12 19 L15 17" />
+</svg>

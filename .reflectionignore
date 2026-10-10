@@ -1,0 +1,11 @@
+﻿# Projekt-spezifische Ignorier-Muster für die Auto-Reflexion (wie .gitignore)
+# Jede Zeile definiert eine Datei oder einen Pfad, der keine Code-Reflexion auslösen soll.
+
+# Projekt-spezifische Tracking-Dateien
+docs/error-tracker.json
+docs/fehlerhistorie.md
+docs/error-reports/
+
+# Temporäre Logs & Auswertungen
+*.log
+*.tmp

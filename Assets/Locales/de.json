@@ -1,0 +1,49 @@
+{
+  "Nav": {
+    "Chats": "Chats",
+    "ChatsTooltip": "Chats & Sessions (Strg+1 · Neuer Chat, Verlauf & Subagenten)",
+    "Prompts": "Prompts",
+    "PromptsTooltip": "Prompt-Vorlagen (Strg+2 · Schnelle Befehle & Automationen)",
+    "Files": "Dateien",
+    "FilesTab": "Dateien",
+    "FilesTooltip": "Projekt-Dateien & Kontext (Strg+3 · Dateien durchsuchen & einbinden)",
+    "Docs": "Wissen",
+    "DocsTab": "Wissen",
+    "DocsTooltip": "Projekt-Wissen & MCP (Strg+4 · Regeln, Skills & Docs)",
+    "Git": "Git",
+    "GitTooltip": "Git-Repository & Commits (Strg+5 · Diff-Viewer & History)"
+  },
+  "Chat": {
+    "Placeholder": "Nachricht an Antigravity eingeben... (Eingabe zum Senden, Umschalt+Eingabe für Zeilenumbruch, Dateien hierher ziehen)",
+    "SendTooltip": "Befehl an Antigravity senden (Eingabetaste · Gedrückthalten: mit Schnellaktion senden)",
+    "CancelTooltip": "Laufende KI-Aktion abbrechen (Strg+C / Esc)",
+    "VoiceTooltip": "Spracheingabe starten / stoppen (Diktatmodus)",
+    "DeepThinkTooltip": "Deep Think (Numpad 1 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "DocsTooltip": "Projekt-Wissen & Dokumentation (Numpad 2 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "SubagentTooltip": "Autonome Subagenten (Numpad 3 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "ReflectionTooltip": "Auto-Reflexion & Code-Audit (Numpad 4 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "WebResearchTooltip": "Web-Recherche via Co-Browser (Numpad 5 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "E2ETestTooltip": "E2E-Tests ausführen (Numpad 7 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "DeadCodeTooltip": "Dead-Code-Prüfung ausführen (Numpad 8 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "LanguageToggled": "Sprache umgestellt: {0}"
+  },
+  "Settings": {
+    "Title": "Projekteinstellungen",
+    "MasterFolder": "Master-Ordner für Projekte:",
+    "ProjectsVisible": "Projekte (Sichtbar):",
+    "DefaultReflection": "Standard-Reflexion:",
+    "RestoreSessions": "Offene Chats bei Neustart wiederherstellen",
+    "LanguageLabel": "Sprache / Language:",
+    "LanguageAuto": "Automatisch (System)",
+    "LanguageDe": "Deutsch (DE)",
+    "LanguageEn": "English (EN)",
+    "Done": "Fertig"
+  },
+  "Common": {
+    "Ready": "Bereit",
+    "Copied": "Kopiert",
+    "Active": "Aktiv",
+    "Inactive": "Inaktiv",
+    "CommunityEdition": "AGY CLI Dashboard • Community Edition"
+  }
+}

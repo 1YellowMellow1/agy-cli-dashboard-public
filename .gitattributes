@@ -1,0 +1,22 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=crlf
+
+# Source code files
+*.cs text diff=csharp eol=crlf
+*.xaml text eol=crlf
+*.json text eol=crlf
+*.md text eol=crlf
+*.rs text eol=lf
+*.sh text eol=lf
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+*.bat text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.dll binary
+*.exe binary
+*.pdb binary

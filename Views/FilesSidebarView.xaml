@@ -1,0 +1,17 @@
+<UserControl
+    x:Class="AgyCliDashboard.Views.FilesSidebarView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer x:Name="FilesPanelScrollViewer" x:FieldModifier="public" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled"
+                  AllowDrop="True" Background="Transparent">
+        <StackPanel x:Name="FilesPanel" x:FieldModifier="public" Visibility="Visible" Spacing="4"
+                    AllowDrop="True" Background="Transparent">
+            <TextBlock Style="{StaticResource AgySidebarSectionHeaderStyle}" Text="PROJEKT-DATEIEN" Margin="0,0,0,6" />
+            <TextBlock Text="Bitte wähle oben ein konkretes Projekt aus, um dessen Dateien anzuzeigen." FontSize="{StaticResource AgyFontSizeBodyLarge}" Foreground="{StaticResource AgyTextMuted}" TextWrapping="Wrap" Margin="0,4,0,0" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

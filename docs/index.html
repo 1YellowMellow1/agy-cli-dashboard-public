@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGY CLI Dashboard • Desktop-Cockpit für KI-gestützte Entwicklung</title>
+  <meta name="description" content="Das native Windows 11 Desktop-Cockpit für die Antigravity CLI. Mit integriertem Split-Screen KI-Co-Browser, Multi-LLM Steuerung, Git-Historien-Zentrale und Token-Pegelanzeige.">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Subtle Ambient Glow -->
+  <div class="ambient-glow"></div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="nav-brand">
+        <img src="assets/logo.png" alt="AGY Logo" class="nav-logo">
+        <span>AGY CLI Dashboard</span>
+        <span class="nav-badge">v1.0 Community</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features">Funktionen</a></li>
+        <li><a href="#toolbar-guide">Aktionsleiste</a></li>
+        <li><a href="#governance">Governance</a></li>
+        <li><a href="#comparison">Architektur</a></li>
+        <li><a href="#quickstart">Schnellstart</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a href="https://github.com/1YellowMellow1/agy-cli-dashboard-public" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-github-nav">
+          <img src="assets/github.svg" alt="GitHub" class="btn-icon">
+          <span>GitHub</span>
+          <span class="github-star-pill">★ Star</span>
+        </a>
+        <a href="https://github.com/1YellowMellow1/agy-cli-dashboard-public/releases" class="btn btn-primary">
+          <img src="assets/zap.svg" alt="Download" class="btn-icon">
+          <span>Download</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-pill">
+        <span class="hero-pill-dot"></span>
+        <span>WINDOWS 11 NATIVE • WINUI 3 &amp; .NET 10 • DE / EN BILINGUAL • 1-KLICK DIKTATMODUS</span>
+      </div>
+      <h1 class="hero-title">
+        Das native Desktop-Cockpit für
+        <span class="title-sub">KI-gestützte Software-Entwicklung</span>
+      </h1>
+      <p class="hero-desc">
+        Steuere die Antigravity CLI, koordiniere Subagenten, prüfe DOM-Strukturen im Split-Screen Co-Browser und behalte den vollen Überblick über Git-Historie und Token-Verbrauch – in einer performanten, nativen Windows-App.
+      </p>
+
+      <!-- Begleitendes GUI-Cockpit Clarification Pill -->
+      <div class="hero-companion-pill">
+        <span class="companion-pulse"></span>
+        <span class="companion-text"><strong>Begleitendes GUI-Cockpit:</strong> Ergänzt deine installierte Google Antigravity CLI (<code>agy</code>) um native WinUI 3 Steuerung – dein Terminal bleibt das Herzstück.</span>
+      </div>
+
+      <div class="hero-actions" id="download">
+        <a href="https://github.com/1YellowMellow1/agy-cli-dashboard-public/releases" class="btn btn-primary" id="btn-main-download">
+          <img src="assets/zap.svg" alt="Download" class="btn-icon">
+          <span>Release herunterladen (Windows x64 ZIP)</span>
+        </a>
+        <a href="https://github.com/1YellowMellow1/agy-cli-dashboard-public" class="btn btn-secondary btn-github-hero" target="_blank" rel="noopener noreferrer">
+          <img src="assets/github.svg" alt="Repository" class="btn-icon">
+          <span>Quellcode auf GitHub</span>
+          <span class="github-star-pill">★ Star</span>
+        </a>
+      </div>
+
+      <!-- Terminal Clone Quick-Box -->
+      <div class="terminal-box">
+        <span>$</span>
+        <code>git clone https://github.com/1YellowMellow1/agy-cli-dashboard-public.git</code>
+        <button class="btn-copy" data-copy="git clone https://github.com/1YellowMellow1/agy-cli-dashboard-public.git" title="Befehl in Zwischenablage kopieren">
+          <img src="assets/copy.svg" alt="Copy" width="14" height="14">
+          <span>Kopieren</span>
+        </button>
+      </div>
+
+      <!-- Interactive App Mockup -->
+      <div class="mockup-wrapper">
+        <div class="mockup-window">
+          <!-- Windows 11 Titlebar -->
+          <div class="mockup-titlebar">
+            <div class="mockup-title">
+              <img src="assets/logo.png" width="20" height="20" alt="logo" style="border-radius: 4px;">
+              <span>Antigravity CLI Dashboard — Community Edition</span>
+            </div>
+            <div class="win-controls">
+              <div class="win-btn" title="Minimieren">
+                <svg width="10" height="1" viewBox="0 0 10 1"><rect width="10" height="1" fill="currentColor"/></svg>
+              </div>
+              <div class="win-btn" title="Maximieren">
+                <svg width="10" height="10" viewBox="0 0 10 10"><rect x="0.5" y="0.5" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+              </div>
+              <div class="win-btn win-btn-close" title="Schließen">
+                <svg width="10" height="10" viewBox="0 0 10 10"><path d="M1,1 L9,9 M9,1 L1,9" stroke="currentColor" stroke-width="1.2"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature View Tabs -->
+          <div class="mockup-tabs">
+            <div class="mockup-tab active" data-tab="tab-cobrowser">Split-Screen Co-Browser</div>
+            <div class="mockup-tab" data-tab="tab-models">Modelle &amp; Token-Meter</div>
+            <div class="mockup-tab" data-tab="tab-git">Git-Zentrale &amp; Historie</div>
+            <div class="mockup-tab" data-tab="tab-voice">Spracheingabe &amp; Prompts</div>
+          </div>
+
+          <!-- Tab Content 1: Co-Browser -->
+          <div class="mockup-content active" id="tab-cobrowser">
+            <div class="split-view">
+              <div class="terminal-pane">
+                <div class="pane-header">
+                  <span>Antigravity Agent Session</span>
+                  <span class="badge-live">AKTIV</span>
+                </div>
+                <div class="log-line log-user">user: Analysiere die Login-Struktur und extrahiere Eingabefelder.</div>
+                <div class="log-line log-agent">agent: Starte KI-Co-Browser und erfasse DOM-Elemente...</div>
+                <div class="log-line log-tool">➜ cobrowser_navigate("https://example.com/login")</div>
+                <div class="log-line log-tool">➜ cobrowser_interactive_map()</div>
+                <div class="log-line log-subtle">DOM-Map: 12 interaktive Knoten erfasst (reduziert Bild-Token-Transfer um &gt;95%).</div>
+              </div>
+              <div class="browser-pane">
+                <div class="pane-header">
+                  <span>Chromium Co-Browser</span>
+                  <span style="color: var(--accent-cyan); font-size: 0.72rem; font-family: var(--font-mono);">CDP: 9222 • API: 9223</span>
+                </div>
+                <div style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 8px; font-family: var(--font-mono);">https://example.com/login</div>
+                <div class="dom-map">
+                  <div style="margin-bottom: 6px;"><span class="dom-tag">#1</span> Input [type="email"] #user_email</div>
+                  <div style="margin-bottom: 6px;"><span class="dom-tag">#2</span> Input [type="password"] #user_password</div>
+                  <div style="margin-bottom: 6px;"><span class="dom-tag">#3</span> Button [submit] "Anmelden"</div>
+                </div>
+                <div style="margin-top: 14px; font-size: 0.74rem; color: #10b981; font-family: var(--font-mono);">
+                  Status: Bereit • Menschlicher Eingriff (Takeover) jederzeit möglich
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 2: Multi-LLM -->
+          <div class="mockup-content" id="tab-models">
+            <div style="padding: 16px 8px; font-family: var(--font-sans);">
+              <h3 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Modellverwaltung &amp; Live-Kostenerfassung</h3>
+              <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 18px;">
+                Direkter Wechsel zwischen Spitzenmodellen bei transparenter Erfassung von Latenz und Token-Volumen.
+              </p>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); padding: 12px 16px; border-radius: 6px;">
+                  <div style="font-size: 0.7rem; color: var(--accent-cyan); font-family: var(--font-mono); text-transform: uppercase;">Aktives Modell</div>
+                  <div style="font-weight: 600; font-size: 0.98rem; margin-top: 2px;">Gemini 3.8 Flash</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">Latenz: 28ms • Kontext: 1.000.000 Tokens</div>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); padding: 12px 16px; border-radius: 6px;">
+                  <div style="font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono); text-transform: uppercase;">Session-Verbrauch</div>
+                  <div style="font-weight: 600; font-size: 0.98rem; color: #10b981; margin-top: 2px;">14.280 Tokens</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">Gesamter Chat-Verlauf: &lt; 0,01 $</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 3: Git & Historie -->
+          <div class="mockup-content" id="tab-git">
+            <div style="padding: 16px 8px; font-family: var(--font-sans);">
+              <h3 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">Git-Zentrale &amp; Versionshistorie</h3>
+              <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 14px;">
+                Echtzeit-Tracking von Branches und ungesicherten Änderungen, Commit-Historie mit Zeitstempeln und Auto-Cloud-Backup.
+              </p>
+              <div style="background: #06080d; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; font-family: var(--font-mono); font-size: 0.78rem;">
+                <div style="color: #38bdf8; margin-bottom: 4px;">Branch: master • Status: 2 uncommitted changes</div>
+                <div style="color: #f8fafc;">[18dd9d0] docs(web): add interactive cockpit toolbar guide (10.10.2026 14:43)</div>
+                <div style="color: #10b981; margin-top: 6px;">Auto-Cloud-Backup aktiv (alle 30 Min.) • 1-Klick Hard-Reset bereit</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 4: Spracheingabe & Prompts -->
+          <div class="mockup-content" id="tab-voice">
+            <div style="padding: 16px 8px; font-family: var(--font-sans);">
+              <h3 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);">1-Klick Spracheingabe &amp; Prompt-Bibliothek</h3>
+              <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 16px;">
+                Aktiviere den integrierten Diktatmodus der Antigravity CLI mit einem einzigen Klick oder greife auf vorgefertigte Rollen- und System-Prompts zu.
+              </p>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px;">
+                <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); padding: 10px 14px; border-radius: 6px; display: flex; align-items: center; gap: 10px;">
+                  <img src="assets/mic.svg" width="18" height="18" alt="Mic">
+                  <div>
+                    <div style="font-size: 0.72rem; color: var(--accent-cyan); font-family: var(--font-mono); font-weight: 600;">DIKTATMODUS (/voice)</div>
+                    <div style="font-size: 0.82rem; color: #f8fafc;">1-Klick Start &amp; Stopp • Transkription direkt am Cursor</div>
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <span class="step-snippet">System: Code-Architekt</span>
+                <span class="step-snippet">Rolle: Security-Auditor</span>
+                <span class="step-snippet">Template: Bugfix &amp; Diff</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features Section -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">ARCHITEKTUR &amp; FUNKTIONEN</div>
+        <h2 class="section-title">Konzipiert für produktive Workflows</h2>
+        <p class="section-desc">Konsolidierte Werkzeuge für anspruchsvolle Entwicklungsaufgaben ohne störende Kontextwechsel.</p>
+      </div>
+
+      <div class="grid-3">
+        <!-- Feature 1 -->
+        <div class="feature-card" id="co-browser">
+          <div class="feature-icon-wrapper">
+            <img src="assets/globe.svg" alt="Browser Icon">
+          </div>
+          <h3 class="feature-title">Integrierter KI-Co-Browser</h3>
+          <p class="feature-text">
+            Parallele Webansicht im Split-Screen. Vollständige Steuerung über das Chrome DevTools Protocol (CDP), semantische DOM-Karten mit numerischen Selektoren und direkter Human-Takeover.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <img src="assets/cpu.svg" alt="CPU Icon">
+          </div>
+          <h3 class="feature-title">Multi-LLM &amp; Token-Pegelanzeige</h3>
+          <p class="feature-text">
+            Unterstützung für führende Modellfamilien (Gemini 3.8 Flash, Claude Sonnet 5.5, GPT-6.1 Sol Pro). Reaktive Pegelanzeige warnt vor Kontext-Overflows, inklusive transparenter Latenz- und Kostenmessung.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <img src="assets/shield-check.svg" alt="Shield Icon">
+          </div>
+          <h3 class="feature-title">Subagenten-Schwärme &amp; Audits</h3>
+          <p class="feature-text">
+            Strukturierte Delegation paralleler Recherche- und Review-Aufgaben. Automatisierte Vier-Augen-Prüfungen sichern Codeänderungen vor dem Zusammenführen ab.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <img src="assets/git-commit.svg" alt="Git Icon">
+          </div>
+          <h3 class="feature-title">Git-Zentrale &amp; Dateikontext</h3>
+          <p class="feature-text">
+            Live-Branch-Tracking, Dirty-State-Zähler und Commit-Historie in der Seitenleiste. Ziehe Projektdateien per Drag &amp; Drop direkt als Kontext in den Chat; persistente Ordnersortierung nach Datum.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <img src="assets/mic.svg" alt="Voice Icon">
+          </div>
+          <h3 class="feature-title">1-Klick Spracheingabe</h3>
+          <p class="feature-text">
+            Integrierte Audio-Transkription direkt am Cursor. Klicke auf die Mikrofon-Taste, um das CLI-Diktat (/voice) zu starten, sprich deinen Prompt ein und beende die Aufnahme sauber per Klick.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <img src="assets/terminal.svg" alt="Terminal Icon">
+          </div>
+          <h3 class="feature-title">Native Performance &amp; i18n (DE/EN)</h3>
+          <p class="feature-text">
+            Entwickelt mit .NET 10 und WinUI 3 (kein schwerfälliges Electron). Schnelles ConPTY-Terminal, minimaler RAM-Bedarf und vollständige zweisprachige Benutzeroberfläche (Deutsch &amp; Englisch).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Cockpit Toolbar Guide Section -->
+  <section class="toolbar-guide-section" id="toolbar-guide">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">COCKPIT-STEUERUNG &amp; TASTATUR-SHORTCUTS</div>
+        <h2 class="section-title">Die Aktionsleiste im Detail</h2>
+        <p class="section-desc">Klicke auf ein beliebiges Symbol, um Funktion, Verwendungszweck und den zugehörigen Numpad-Shortcut kennenzulernen.</p>
+      </div>
+
+      <!-- The Interactive Toolbar mimicking the real Dashboard Prompt Toolbar -->
+      <div class="toolbar-interactive-bar" id="cockpit-toolbar">
+        <!-- Left Cluster: Core Toggles & Quality Capsule -->
+        <div class="tb-cluster tb-cluster-left">
+          <button class="tb-btn active" data-id="context" title="Dateikontext anfügen">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+          </button>
+
+          <button class="tb-btn tb-pill" data-id="model" title="KI-Modell wählen (Strg+M / Numpad 0)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg>
+            <span>Modell</span>
+          </button>
+
+          <button class="tb-btn" data-id="deepthink" title="DeepThink Denkmodus (Numpad 1)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13,2 L3,14 h9 L11,22 L21,10 h-9 L13,2 z"/></svg>
+          </button>
+
+          <button class="tb-btn" data-id="docs" title="Projektdokumentation injizieren (Numpad 2)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22,19 A2,2 0 0 1 20,21 H4 A2,2 0 0 1 2,19 V5 A2,2 0 0 1 4,3 h5 L11,6 h9 A2,2 0 0 1 22,8 z M2,9 h20"/></svg>
+          </button>
+
+          <button class="tb-btn" data-id="subagent" title="Subagenten-Schwärme starten (Numpad 3)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12,2 v4 M8,6 h8 M4,10 A2,2 0 0 1 6,8 h12 A2,2 0 0 1 20,10 v8 A2,2 0 0 1 18,20 H6 A2,2 0 0 1 4,18 v-8 z M9,13 h0.01 M15,13 h0.01"/></svg>
+          </button>
+
+          <button class="tb-btn tb-accent-cyan" data-id="cobrowser" title="KI-Co-Browser öffnen (Numpad 5)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12,2 A10,10 0 1 0 22,12 A10,10 0 0 0 12,2 z M2,12 h20 M12,2 A15.3,15.3 0 0 1 16,12 A15.3,15.3 0 0 1 12,22 A15.3,15.3 0 0 1 8,12 A15.3,15.3 0 0 1 12,2 z"/></svg>
+          </button>
+
+          <!-- Quality Suite Capsule (9 Tools) -->
+          <div class="tb-group">
+            <button class="tb-btn" data-id="reflexion" title="Auto-Reflexion (Numpad 4)">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1,12 S5,4 12,4 S23,12 23,12 S19,20 12,20 S1,12 1,12 z M12,15 A3,3 0 1 0 12,9 A3,3 0 0 0 12,15 z"/></svg>
+            </button>
+            <button class="tb-btn" data-id="e2e" title="E2E-Testlauf (Numpad 7)">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12,2 A10,10 0 1 0 22,12 A10,10 0 0 0 12,2 z M10,8 L16,12 L10,16 z"/></svg>
+            </button>
+            <button class="tb-btn" data-id="deadcode" title="Dead-Code-Analyse (Numpad 8)">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5,17 L12,16 L11.5,17 Z M15,22 a1,1 0 0,0 1,-1 v-1 a2,2 0 0,0 1.56,-3.25 a8,8 0 1,0 -11.12,0 A2,2 0 0,0 8,20 v1 a1,1 0 0,0 1,1 Z M14,12 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0 M8,12 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0"/></svg>
+            </button>
+            <button class="tb-btn" data-id="errorsearch" title="Globale Fehlersuche">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M11.5 14.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M14 17l-1.8-1.8"/></svg>
+            </button>
+            <button class="tb-btn" data-id="irrweg" title="Irrweg-Cleanup (Numpad 9)">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3,19 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 M15,5 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 M9,19 h8.5 c0.4,0 0.9,-0.1 1.3,-0.2 M5.2,5.2 A3.5,3.53 0 0 0 6.5,12 H12 M2,2 l20,20 M21,15.3 a3.5,3.5 0 0 0 -3.3,-3.3 M15,5 h-4.3"/></svg>
+            </button>
+            <button class="tb-btn" data-id="simplify" title="Code vereinfachen">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4,14 h6 v6 M20,10 h-6 V4 M14,10 l7,-7 M3,21 l7,-7"/></svg>
+            </button>
+            <button class="tb-btn" data-id="zerobug" title="Zero-Bug Strategie">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12,20 v-9 M14,7 a4,4 0 0 1 4,4 v3 a6,6 0 0 1 -12,0 v-3 a4,4 0 0 1 4,-4 z M14.12,3.88 L16,2 M21,21 a4,4 0 0 0 -3.81,-4 M21,5 a4,4 0 0 1 -3.55,3.97 M22,13 h-4 M3,21 a4,4 0 0 1 3.81,-4 M3,5 a4,4 0 0 0 3.55,3.97 M6,13 H2 M8,2 l1.88,1.88 M9,7.13 V6 a3,3 0 1 1 6,0 v1.13"/></svg>
+            </button>
+            <button class="tb-btn" data-id="robustness" title="Robustheits-Audit">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10,12 a4,4 0 0,0 8,0 a8,8 0 1,0 -16,0 c0,3.584 1.571,6.801 4.063,9 M14,12 a4,4 0 0,0 -8,0 a8,8 0 1,0 16,0 a11.97,11.97 0 0,0 -4,-8.944"/></svg>
+            </button>
+            <button class="tb-btn tb-accent-purple" data-id="customprompt" title="Eigener System-Prompt">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12,2 L15.09,8.26 L22,9.27 L17,14.14 L18.18,21.02 L12,17.77 L5.82,21.02 L7,14.14 L2,9.27 L8.91,8.26 Z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Center Cluster: Meta Badges (Git, Protokoll, Wissen) -->
+        <div class="tb-cluster tb-cluster-center">
+          <button class="tb-btn" data-id="gitstatus" title="Git Repository Status">
+            <svg viewBox="0 0 78 78" width="16" height="16"><path fill="#e2e8f0" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/></svg>
+          </button>
+          <button class="tb-btn" data-id="protocol" title="Protokoll (docs/protocol.md)">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8"/></svg>
+          </button>
+          <button class="tb-btn" data-id="knowledge" title="Wissensdatenbank (docs/knowledge.md)">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V5 M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4 M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5 M17.997 5.125a4 4 0 0 1 2.526 5.77 M18 18a4 4 0 0 0 2-7.464 M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517 M6 18a4 4 0 0 1-2-7.464 M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg>
+          </button>
+        </div>
+
+        <!-- Right Cluster: Shield, Undo & Primary Action Buttons -->
+        <div class="tb-cluster tb-cluster-right">
+          <button class="tb-btn tb-accent-blue" data-id="shield" title="Auto-Reflexion Umschalter">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          </button>
+          <button class="tb-btn" data-id="undo" title="Letzten Prompt rückgängig machen">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+          </button>
+
+          <div class="tb-separator"></div>
+
+          <button class="tb-btn tb-pill-round" data-id="voice" title="1-Klick Spracheingabe (Diktatmodus)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19v3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><rect x="9" y="2" width="6" height="13" rx="3"/></svg>
+          </button>
+          <button class="tb-btn tb-btn-round tb-btn-send" data-id="send" title="Prompt absenden (Enter)">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
+          </button>
+          <button class="tb-btn tb-btn-round tb-btn-cancel" data-id="cancel" title="Agent stoppen (Strg+C)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="5" y="5" rx="2" fill="#ffffff"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Detail Explanation Card -->
+      <div class="tb-detail-card" id="tb-detail-card">
+        <div class="tb-detail-header">
+          <div class="tb-detail-title">
+            <span id="tb-icon" class="tb-detail-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></span>
+            <span id="tb-name">Dateikontext anfügen</span>
+          </div>
+          <div class="tb-detail-badges">
+            <span class="tb-badge-type" id="tb-type">EINGABE &amp; DATEIEN</span>
+            <span class="tb-badge-shortcut" id="tb-shortcut">Klick / Drag &amp; Drop</span>
+          </div>
+        </div>
+        <div class="tb-detail-desc" id="tb-desc">
+          Öffnet den Dateidialog, um beliebige Quellcode-Dateien, Bilder oder Logdateien als Kontext an den aktuellen Prompt anzuhängen. Unterstützt auch direktes Hineinziehen per Drag &amp; Drop.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Governance, Wissens-Management & Selbstheilung Section -->
+  <section class="governance-section" id="governance">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">GOVERNANCE &amp; SELBSTHEILUNG</div>
+        <h2 class="section-title">Warum deine KI mit dem Dashboard bessere Antworten liefert</h2>
+        <p class="section-desc">
+          Reine Terminal-Agenten leiden unter Amnesie, agieren ohne verbindliche Leitplanken und brechen bei Tool-Fehlern stumm ab. Das Cockpit schließt diese Schwachstellen durch eine aktive Governance-, Wissens- und Diagnose-Ebene.
+        </p>
+      </div>
+
+      <div class="governance-grid">
+        <!-- Card 1: Modulare Regel-Steuerung -->
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <div class="gov-icon-badge" style="background: rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.25); color: #38bdf8;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <div class="gov-badge">SINGLE SOURCE OF TRUTH</div>
+          </div>
+          <h3 class="gov-title">Modulare Regel-Steuerung &amp; Leitplanken</h3>
+          <p class="gov-text">
+            Saubere Trennung in globale und projektspezifische Regeln (<code>rule_control.json</code> / <code>project_rules.json</code>). Das Cockpit injiziert verbindliche Coding-Standards, Sprachvorgaben und Sicherheitsregeln vor jedem Prompt automatisch in das Kontextfenster.
+          </p>
+          <div class="gov-footer">
+            <span class="gov-location-tag">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
+              Sidebar: Regel-Steuerung &amp; Wissen
+            </span>
+            <span class="gov-impact">Bis zu 90% weniger Halluzinationen</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Persistentes Projekt-Gedächtnis & Lückenloses Protokoll -->
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <div class="gov-icon-badge" style="background: rgba(129, 140, 248, 0.1); border-color: rgba(129, 140, 248, 0.25); color: #818cf8;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V5"/><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/><path d="M18 18a4 4 0 0 0 2-7.464"/><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/><path d="M6 18a4 4 0 0 1-2-7.464"/><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg>
+            </div>
+            <div class="gov-badge">PERSISTENZ STATT AMNESIE</div>
+          </div>
+          <h3 class="gov-title">Persistentes Gedächtnis &amp; Protokoll</h3>
+          <p class="gov-text">
+            Über <code>docs/knowledge.md</code> vergisst die KI nie wieder entdeckte Framework-Fallen oder Workarounds. Jede Agentenentscheidung wird in <code>docs/protocol.md</code> mit Klick-Verbindung zum Quell-Transkript dokumentiert. Geschützt durch Git-Sicherheitsanker mit 1-Klick-Rollback.
+          </p>
+          <div class="gov-footer">
+            <span class="gov-location-tag">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+              Cockpit-Mitte: Git, Protokoll &amp; Wissen
+            </span>
+            <span class="gov-impact">Null Kontextverlust bei Chat-Resets</span>
+          </div>
+        </div>
+
+        <!-- Card 3: 1-Klick System-Check & Diagnose -->
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <div class="gov-icon-badge" style="background: rgba(52, 211, 153, 0.1); border-color: rgba(52, 211, 153, 0.25); color: #34d399;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="m8 10 2.5 2.5L16 7"/><path d="M12 17v4"/><path d="M8 21h8"/></svg>
+            </div>
+            <div class="gov-badge">AUTOMATISIERTE DIAGNOSE</div>
+          </div>
+          <h3 class="gov-title">1-Klick System-Check &amp; Toolchain-Validierung</h3>
+          <p class="gov-text">
+            Validiert die gesamte Entwicklungs-Toolchain auf Knopfdruck: .NET 10 Windows SDK, WebView2 Evergreen Runtime, ConPTY-Terminal, lokale Antigravity CLI Installation und Umgebungspfade. Inklusive Zeitstempel der letzten erfolgreichen Ausführung.
+          </p>
+          <div class="gov-footer">
+            <span class="gov-location-tag">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
+              Statusleiste: Monitor-Icon
+            </span>
+            <span class="gov-impact">Kein Rätselraten bei Tool-Abbrüchen</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Wissens- & Modell-Synchronisation -->
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <div class="gov-icon-badge" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.25); color: #f59e0b;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"/></svg>
+            </div>
+            <div class="gov-badge">KNOWLEDGE CUTOFF ÜBERWUNDEN</div>
+          </div>
+          <h3 class="gov-title">Wissens-Update &amp; Modell-Synchronisation</h3>
+          <p class="gov-text">
+            Das Wissens-Update-Makro bringt der KI neu erschienene CLI-Features, Flags und MCP-Server selbstständig bei. Parallel liest das Dashboard <code>agy models</code> live aus, gleicht reale Grenzwerte ab und aktualisiert die Token-Meter-Skala im laufenden Betrieb.
+          </p>
+          <div class="gov-footer">
+            <span class="gov-location-tag">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v2"/><path d="M12 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+              Aktionsleiste: Funkantenne &amp; Chip
+            </span>
+            <span class="gov-impact">Stets aktuelle LLMs &amp; Limits</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-Way Architectural Comparison Section -->
+  <section class="comparison-section" id="comparison">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">ARCHITEKTUR &amp; VERGLEICH</div>
+        <h2 class="section-title">Welches Antigravity-Werkzeug für welchen Zweck?</h2>
+        <p class="section-desc">Die offizielle Antigravity-Technologie existiert in drei primären Ausprägungen. Finde auf einen Blick heraus, wo die Stärken und Grenzen liegen.</p>
+      </div>
+
+      <div class="comparison-grid">
+        <!-- 1. Antigravity CLI -->
+        <div class="comparison-card">
+          <div class="comparison-tag">TERMINAL-NATIV</div>
+          <h3 class="comparison-title">Google Antigravity CLI</h3>
+          <p class="comparison-subtitle">Offizielles, minimalistisches Command-Line-Interface (<code>agy</code>) für die Windows-Konsole oder Linux/Mac-Terminals.</p>
+          <ul class="comparison-features">
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span>Ultra-minimalistischer Ressourcen-Fußabdruck im Terminal</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span>Hervorragend geeignet für CI/CD-Pipelines und Skript-Automatisierung</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span>Voller Zugriff auf offizielle Slash-Commands und MCP-Werkzeuge</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span>Keine grafische Benutzeroberfläche; Steuerung ausschließlich über Textbefehle</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span>Kein visueller Split-Screen Co-Browser für Webtests und DOM-Inspektion</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span>Keine grafische Git-Historien-Zentrale oder visuelle Token-Pegelanzeige</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span>Keine 1-Klick-Spracheingabe über ein grafisches Mikrofon-Control</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 2. Antigravity Desktop / IDE -->
+        <div class="comparison-card">
+          <div class="comparison-tag">STANDALONE-IDE</div>
+          <h3 class="comparison-title">Antigravity Desktop (IDE)</h3>
+          <p class="comparison-subtitle">Eigenständige, cloud-gebundene Entwicklungsumgebung basierend auf modernen Web-/Electron-Technologien.</p>
+          <ul class="comparison-features">
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span>Vollständige grafische IDE-Erfahrung mit integriertem Code-Editor</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span>Integrierte Cloud-Synchronisation und Workspace-Verwaltung</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span>Einsteigerfreundliches Chat-Interface für visuelle Entwickler</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span>Spürbar höherer Arbeitsspeicher-Bedarf (Electron-Laufzeitumgebung ca. 500 MB – 1 GB)</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span>Strikte Bindung an die Desktop-IDE; kein leichtgewichtiger Aufsatz auf bestehende CLI-Setups</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span>Kein interaktiver DOM-Split-Browser mit nummeriertem Human-Takeover</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span>Keine 1-Klick-Qualitäts-Makros (Zero-Bug, Dead-Code-Scan, Irrweg-Cleanup per Numpad)</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 3. AGY CLI Dashboard (Featured) -->
+        <div class="comparison-card featured">
+          <div class="comparison-tag">NATIVES WINDOWS-COCKPIT (COMMUNITY)</div>
+          <h3 class="comparison-title">AGY CLI Dashboard</h3>
+          <p class="comparison-subtitle">Natives WinUI 3 &amp; .NET 10 Cockpit als visueller Begleiter, der auf deiner lokalen Antigravity CLI aufsetzt.</p>
+          <ul class="comparison-features">
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span><strong>Echtes natives Windows 11</strong>: WinUI 3 &amp; .NET 10 (unter 100 MB RAM, Startzeit &lt; 0,8 s)</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span><strong>Integrierter KI-Co-Browser</strong>: Split-Screen mit CDP-Protokoll, DOM-Karten &amp; Human-Takeover</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span><strong>Multi-LLM Hot-Switching</strong>: Gemini 3.8 Flash, Claude Sonnet 5.5, GPT-6.1 Sol Pro live wechseln</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span><strong>1-Klick Qualitäts-Suite</strong>: Auto-Reflexion, E2E-Tests, Dead-Code- &amp; Irrweg-Cleanup (Numpad 0–9)</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span><strong>1-Klick Spracheingabe</strong>: Schneller Diktatmodus direkt am Prompt-Cursor über das CLI-Kommando <code>/voice</code></span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span><strong>Zweisprachig (DE/EN)</strong>: Vollständig lokalisierte Oberfläche mit Sprachwechsel im laufenden Betrieb</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con" style="color: var(--accent-cyan); font-weight: bold;">*</span>
+              <span>Erfordert die installierte Antigravity CLI (<code>agy</code>) auf dem Host-System</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Detaillierte 24-Punkte Feature-Matrix -->
+      <div class="matrix-container is-collapsed" id="feature-matrix">
+        <div class="matrix-header-box">
+          <div>
+            <h3>
+              <span class="matrix-title-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><path d="M13,2 L3,14 h9 L11,22 L21,10 h-9 L13,2 z"/></svg></span>
+              <span>Detaillierte Feature-Matrix</span>
+            </h3>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 4px;">
+              Vollständiger Funktions- und Architekturvergleich über alle 24 Kernmerkmale.
+            </p>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: center; font-size: 0.78rem; color: var(--text-muted); flex-wrap: wrap;">
+            <span style="display: flex; align-items: center; gap: 5px;"><span class="badge-status badge-yes">✓</span> Nativ unterstützt</span>
+            <span style="display: flex; align-items: center; gap: 5px;"><span class="badge-status badge-partial">~</span> Eingeschränkt / Config</span>
+            <span style="display: flex; align-items: center; gap: 5px;"><span class="badge-status badge-no">−</span> Nicht vorhanden</span>
+          </div>
+        </div>
+
+        <div class="matrix-scroll-wrapper">
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th class="col-feature">Funktion / Kriterium</th>
+                <th class="col-tool">Google Antigravity CLI</th>
+                <th class="col-tool">Antigravity Desktop (IDE)</th>
+                <th class="col-tool col-featured">AGY CLI Dashboard</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Kategorie 1 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4">1. Architektur, UI-Technologie &amp; Performance</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Technologische Basis</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Text-Terminal / TUI</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">VS-Code / Electron</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">WinUI 3 &amp; .NET 10 (Native)</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Arbeitsspeicher (RAM)</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">&lt; 35 MB</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">500 MB – 1,2 GB</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">&lt; 95 MB (Schlank)</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Kaltstartzeit</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">&lt; 0,2 s (Sofort)</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">3 – 8 s (Träge)</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">&lt; 0,8 s (Blitzschnell)</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Rolle im Setup</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Autonomes CLI-Tool / CI</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">All-in-One Editor-Ersatz</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Visueller IDE-Begleiter</span></div></td>
+              </tr>
+
+              <!-- Kategorie 2 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4">2. Web-Automation &amp; KI-Co-Browser</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Split-Screen Co-Browser</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Nicht vorhanden</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Vorschau-Webviews</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Edge WebView2 nativ</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>CDP- &amp; WebSocket-Server</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Nur extern via MCP</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Nicht vorhanden</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">CDP: 9222 • API: 9223</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Interaktive DOM-Maps</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Reiner HTML-Text</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Nicht vorhanden</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Visuelle Klick-Marker</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Human Takeover (Eingriff)</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Nicht möglich</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Manuell im Webview</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Nahtloser Live-Wechsel</span></div></td>
+              </tr>
+
+              <!-- Kategorie 3 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4">3. KI-Modelle &amp; Reasoning-Steuerung</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Google Gemini Spitzenmodelle</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Gemini 3.8 / 3.7 Flash</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Gemini 3.8 / 3.7 Flash</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Gemini 3.8 Flash nativ</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Multi-LLM Hot-Switching</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Nur per Flag / Config</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Google-fokussiert</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Strg+M / Numpad 0 Pill</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Live-Latenz- &amp; Pegelanzeige</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Nur Log nach Turn</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Einfache Tokenanzeige</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">ms-Ping &amp; Pegelwarnung</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>DeepThink / Reasoning-Budget</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Parameter --thinking</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">In Settings versteckt</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">1-Klick Toggle (Numpad 1)</span></div></td>
+              </tr>
+
+              <!-- Kategorie 4 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4">4. Code-Qualitäts-Suite &amp; 1-Klick-Makros</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Auto-Reflexion vor Abschluss</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Manuell / Prompt</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Regelbasiert</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Numpad 4 &amp; Schutzschild</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>E2E- &amp; Unit-Test Automation</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Manuelle Ausführung</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Task Runner</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">1-Klick Makro (Numpad 7)</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Dead-Code- &amp; Bereinigungs-Scan</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Nicht vorhanden</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Nicht vorhanden</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">1-Klick Makro (Numpad 8)</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Globale Fehlersuche (Root Cause)</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Manuelle Prompting</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Manuelles Prompting</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">1-Klick Diagnose-Makro</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Irrweg-Cleanup &amp; Git-Rollback</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">git reset --hard</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Über Git-Kontextmenü</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">1-Klick Reset (Numpad 9)</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Zero-Bug &amp; Simplify-Audit</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Keine Vorlagen</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Keine Vorlagen</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Makros für Defensiv-Code</span></div></td>
+              </tr>
+
+              <!-- Kategorie 5 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4">5. Bedienung, Voice &amp; Ergonomie</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>1-Klick Spracheingabe (Voice)</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Manuell /voice tippen</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Nicht vorhanden</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Nativer 1-Klick Diktat-Button</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Tastatur-Cockpit (Numpad 0–9)</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Nur Standardtasten</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Klassische VS Hotkeys</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Vollständige Tastenbelegung</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Drag &amp; Drop Dateikontext</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Pfade manuell tippen</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Über Editor-Baum</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Direkt in den Chat ziehen</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Subagenten-Schwärme</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Hintergrund-CLI</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">VS Agent-Panels</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Visuelles Modal (Numpad 3)</span></div></td>
+              </tr>
+
+              <!-- Kategorie 6 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4">6. Git, Diffs &amp; Lokalisierung</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Git-Zentrale &amp; Versionshistorie</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">git log / status</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">VS-Code Git-Integration</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Live-Tracker &amp; Auto-Backup</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Git-Sicherungs-Commit vor Arbeit</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Manuell ausführen</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Manuell ausführen</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">1-Klick &amp; Auto-Regel</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong>Zweisprachig (DE / EN)</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Nur Englisch</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">VS Sprachpakete</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">DE/EN Live-Umschaltung</span></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Progressive Disclosure Toggle -->
+        <div class="matrix-toggle-bar">
+          <button id="btn-toggle-matrix" class="btn btn-secondary matrix-toggle-btn" type="button">
+            <span class="matrix-toggle-icon" id="matrix-toggle-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13,2 L3,14 h9 L11,22 L21,10 h-9 L13,2 z"/></svg></span>
+            <span class="matrix-toggle-text" id="matrix-toggle-text">Alle 24 Kriterien &amp; Detailvergleiche ausklappen</span>
+            <span class="matrix-toggle-count" id="matrix-toggle-count">+17 Kriterien</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quickstart Section -->
+  <section class="quickstart-section" id="quickstart">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">INSTALLATION</div>
+        <h2 class="section-title">Schnellstart in drei Schritten</h2>
+        <p class="section-desc">Die Community Edition läuft als portables Programm ohne langwierige Einrichtung.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-badge">[SCHRITT 01]</span>
+          <h3 class="step-title">Herunterladen</h3>
+          <p class="step-text">Das self-contained ZIP-Archiv von GitHub Releases herunterladen und entpacken (Voraussetzung: Antigravity CLI <code>agy</code> im PATH).</p>
+          <div class="step-snippet">Antigravity-CLI-Dashboard-v1.0.zip</div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">[SCHRITT 02]</span>
+          <h3 class="step-title">Starten</h3>
+          <p class="step-text">Die Datei <code>start.cmd</code> doppelklicken. Systemvoraussetzungen wie .NET 10, WebView2 und agy-Status werden automatisch geprüft.</p>
+          <div class="step-snippet">start.cmd</div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge">[SCHRITT 03]</span>
+          <h3 class="step-title">Arbeitsbereich wählen</h3>
+          <p class="step-text">Projektordner öffnen und Aufgaben an den Agenten übergeben. Das Dashboard koordiniert die Ausführung.</p>
+          <div class="step-snippet">Bereit zur Eingabe</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag">FRAGEN &amp; ANTWORTEN</div>
+        <h2 class="section-title">Häufig gestellte Fragen</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item active">
+          <button class="faq-question">
+            <span>Benötigt das Dashboard die Google Antigravity CLI?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            Ja. Das Dashboard fungiert als visuelle Steuerungsebene für die offizielle Antigravity CLI. Ist das CLI-Werkzeug noch nicht im PATH vorhanden, signalisiert die Statusanzeige dies beim Start und verlinkt direkt auf den System-Check.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Welche Windows-Versionen werden unterstützt?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            Unterstützt werden 64-Bit-Versionen von Windows 10 (ab Build 19041) sowie Windows 11. Die Anwendung nutzt die Windows App SDK (WinUI 3) Laufzeitumgebung.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Unter welcher Lizenz steht das Projekt?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            Das Projekt ist vollständig Open Source und unter der MIT-Lizenz veröffentlicht. Der Quellcode ist auf GitHub frei zugänglich.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Wie ist der Co-Browser technisch realisiert?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer">
+            Die Integration basiert auf Microsoft Edge WebView2. Die Kommunikation zwischen Agent und Browser erfolgt über einen isolierten WebSocket-Endpunkt via Chrome DevTools Protocol (CDP).
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Bereit für strukturierte KI-Entwicklung?</h2>
+      <p>Lade die aktuelle Version herunter oder beteilige dich an der Entwicklung auf GitHub.</p>
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="#download" class="btn btn-primary">
+          <img src="assets/zap.svg" alt="Download" class="btn-icon">
+          <span>Release herunterladen (v1.0)</span>
+        </a>
+        <a href="https://github.com/1YellowMellow1/agy-cli-dashboard-public" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+          <img src="assets/github.svg" alt="GitHub" class="btn-icon">
+          <span>Repository auf GitHub</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="assets/logo.png" alt="Logo" width="32" height="32" style="border-radius: 6px;">
+          <span>AGY CLI Dashboard • Community Edition</span>
+        </div>
+        <div>
+          <span>Open Source unter MIT-Lizenz • WinUI 3 &amp; .NET 10</span>
+        </div>
+      </div>
+      <div class="footer-disclaimer">
+        Hinweis: Dieses Projekt ist ein unabhängiges Open-Source-Community-Werkzeug und steht in keiner geschäftlichen Verbindung zu Google LLC. Antigravity CLI und Gemini sind Marken oder eingetragene Marken von Google LLC. Alle weiteren Marken sind Eigentum ihrer jeweiligen Inhaber.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--
+        ============================================================
+        AGY DESIGN TOKENS (Single Source of Truth fuer Farben, Typo, Radien)
+        ============================================================
+        Aufbau:
+          1. Farb-Tokens (Color)      -> Rohwerte, nur hier definiert
+          2. Pinsel-Tokens (Brush)    -> semantische Rollen, werden in XAML/C# verwendet
+          3. Typografie-Skala (Double)
+          4. Radien (CornerRadius)
+
+        Regel: In XAML/C# nur die Pinsel-Tokens (Agy*) verwenden, keine Hex-Literale.
+        Neue Farben zuerst hier als Color + Brush anlegen.
+    -->
+
+    <!-- ===== 1. FARB-TOKENS ===== -->
+
+    <!-- Flaechen (Modernes Dark Slate: MainBg < SurfaceBg < CardBg) -->
+    <Color x:Key="AgyColorMainBg">#0E1013</Color>
+    <Color x:Key="AgyColorSurfaceBg">#111317</Color>
+    <Color x:Key="AgyColorCardBg">#171A1F</Color>
+    <Color x:Key="AgyColorTerminalBg">#0E1013</Color>
+
+    <!-- Rahmen / Overlays (weiss mit Alpha, passen sich jeder Flaeche an) -->
+    <Color x:Key="AgyColorSurfaceSubtle">#0AFFFFFF</Color>
+    <Color x:Key="AgyColorBorderFaint">#0AFFFFFF</Color>
+    <Color x:Key="AgyColorBorderDefault">#14FFFFFF</Color>
+    <Color x:Key="AgyColorBorderStrong">#26FFFFFF</Color>
+    <Color x:Key="AgyColorHoverOverlay">#14FFFFFF</Color>
+
+    <!-- Text -->
+    <Color x:Key="AgyColorTextPrimary">#F8FAFC</Color>
+    <Color x:Key="AgyColorTextStrong">#E2E8F0</Color>
+    <Color x:Key="AgyColorTextSecondary">#CBD5E1</Color>
+    <Color x:Key="AgyColorTextMuted">#94A3B8</Color>
+    <Color x:Key="AgyColorTextSubtle">#64748B</Color>
+    <Color x:Key="AgyColorTextDisabled">#475569</Color>
+    <Color x:Key="AgyColorTextOnAccent">#FFFFFF</Color>
+    <Color x:Key="AgyColorTextOnPaper">#0F172A</Color>
+
+    <!-- Akzent (Blau) -->
+    <Color x:Key="AgyColorAccent">#3B82F6</Color>
+    <Color x:Key="AgyColorAccentLight">#60A5FA</Color>
+    <Color x:Key="AgyColorAccentPressed">#2563EB</Color>
+    <Color x:Key="AgyColorAccentSubtle">#1A3B82F6</Color>
+
+    <!-- Status-Signale -->
+    <Color x:Key="AgyColorStatusSuccess">#10B981</Color>
+    <Color x:Key="AgyColorStatusSuccessLight">#34D399</Color>
+    <Color x:Key="AgyColorStatusWarning">#F59E0B</Color>
+    <Color x:Key="AgyColorStatusDanger">#EF4444</Color>
+    <Color x:Key="AgyColorStatusInfo">#38BDF8</Color>
+
+    <!-- Kategorien / Sonderfarben -->
+    <Color x:Key="AgyColorCategoryRose">#F43F5E</Color>
+    <Color x:Key="AgyColorCategoryCyan">#06B6D4</Color>
+    <Color x:Key="AgyColorAttachment">#F472B6</Color>
+    <Color x:Key="AgyColorAttachmentBg">#2D1A38</Color>
+    <Color x:Key="AgyColorAttachmentBorder">#50F472B6</Color>
+
+    <!-- ===== 2. PINSEL-TOKENS ===== -->
+
+    <!-- Flaechen -->
+    <SolidColorBrush x:Key="AgyMainBg" Color="{StaticResource AgyColorMainBg}" />
+    <SolidColorBrush x:Key="AgySurfaceBg" Color="{StaticResource AgyColorSurfaceBg}" />
+    <SolidColorBrush x:Key="AgySurfaceSubtle" Color="{StaticResource AgyColorSurfaceSubtle}" />
+    <SolidColorBrush x:Key="AgyCardBg" Color="{StaticResource AgyColorCardBg}" />
+    <SolidColorBrush x:Key="AgySidebarBg" Color="{StaticResource AgyColorSurfaceBg}" />
+    <SolidColorBrush x:Key="AgyHeaderBg" Color="{StaticResource AgyColorMainBg}" />
+    <SolidColorBrush x:Key="AgyTabActiveBg" Color="{StaticResource AgyColorMainBg}" />
+    <SolidColorBrush x:Key="AgyInputBg" Color="{StaticResource AgyColorMainBg}" />
+    <SolidColorBrush x:Key="AgyTerminalBg" Color="{StaticResource AgyColorTerminalBg}" />
+
+    <!-- Rahmen / Overlays -->
+    <SolidColorBrush x:Key="AgyBorderFaint" Color="{StaticResource AgyColorBorderFaint}" />
+    <SolidColorBrush x:Key="AgyBorderDefault" Color="{StaticResource AgyColorBorderDefault}" />
+    <SolidColorBrush x:Key="AgyBorderStrong" Color="{StaticResource AgyColorBorderStrong}" />
+    <SolidColorBrush x:Key="AgyHoverOverlay" Color="{StaticResource AgyColorHoverOverlay}" />
+
+    <!-- Text -->
+    <SolidColorBrush x:Key="AgyTextPrimary" Color="{StaticResource AgyColorTextPrimary}" />
+    <SolidColorBrush x:Key="AgyTextStrong" Color="{StaticResource AgyColorTextStrong}" />
+    <SolidColorBrush x:Key="AgyTextSecondary" Color="{StaticResource AgyColorTextSecondary}" />
+    <SolidColorBrush x:Key="AgyTextMuted" Color="{StaticResource AgyColorTextMuted}" />
+    <SolidColorBrush x:Key="AgyTextSubtle" Color="{StaticResource AgyColorTextSubtle}" />
+    <SolidColorBrush x:Key="AgyTextDisabled" Color="{StaticResource AgyColorTextDisabled}" />
+    <SolidColorBrush x:Key="AgyTextOnAccent" Color="{StaticResource AgyColorTextOnAccent}" />
+    <SolidColorBrush x:Key="AgyTextOnPaper" Color="{StaticResource AgyColorTextOnPaper}" />
+
+    <!-- Akzent -->
+    <SolidColorBrush x:Key="AgyAccent" Color="{StaticResource AgyColorAccent}" />
+    <SolidColorBrush x:Key="AgyAccentLight" Color="{StaticResource AgyColorAccentLight}" />
+    <SolidColorBrush x:Key="AgyAccentSubtle" Color="{StaticResource AgyColorAccentSubtle}" />
+
+    <!-- Status -->
+    <SolidColorBrush x:Key="AgyStatusSuccess" Color="{StaticResource AgyColorStatusSuccess}" />
+    <SolidColorBrush x:Key="AgyStatusSuccessLight" Color="{StaticResource AgyColorStatusSuccessLight}" />
+    <SolidColorBrush x:Key="AgyStatusWarning" Color="{StaticResource AgyColorStatusWarning}" />
+    <SolidColorBrush x:Key="AgyStatusDanger" Color="{StaticResource AgyColorStatusDanger}" />
+    <SolidColorBrush x:Key="AgyStatusInfo" Color="{StaticResource AgyColorStatusInfo}" />
+
+    <!-- Kategorien / Sonderfarben -->
+    <SolidColorBrush x:Key="AgyCategoryRose" Color="{StaticResource AgyColorCategoryRose}" />
+    <SolidColorBrush x:Key="AgyCategoryCyan" Color="{StaticResource AgyColorCategoryCyan}" />
+    <SolidColorBrush x:Key="AgyAttachment" Color="{StaticResource AgyColorAttachment}" />
+    <SolidColorBrush x:Key="AgyAttachmentBg" Color="{StaticResource AgyColorAttachmentBg}" />
+    <SolidColorBrush x:Key="AgyAttachmentBorder" Color="{StaticResource AgyColorAttachmentBorder}" />
+
+    <!-- Antigravity Brand Gradient Brush -->
+    <LinearGradientBrush x:Key="AgyLogoGradientBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+        <GradientStop Color="#FF4D4D" Offset="0.0"/>
+        <GradientStop Color="#FFD600" Offset="0.25"/>
+        <GradientStop Color="#00E676" Offset="0.5"/>
+        <GradientStop Color="#2979FF" Offset="1.0"/>
+    </LinearGradientBrush>
+
+    <!-- ===== 3. TYPOGRAFIE-SKALA =====
+         Micro 11 | Caption 12 | Body 13 | BodyLarge 14 | Subtitle 16 | Title 18 | Headline 24 -->
+    <x:Double x:Key="AgyFontSizeMicro">11</x:Double>
+    <x:Double x:Key="AgyFontSizeCaption">12</x:Double>
+    <x:Double x:Key="AgyFontSizeBody">13</x:Double>
+    <x:Double x:Key="AgyFontSizeBodyLarge">14</x:Double>
+    <x:Double x:Key="AgyFontSizeSubtitle">16</x:Double>
+    <x:Double x:Key="AgyFontSizeTitle">18</x:Double>
+    <x:Double x:Key="AgyFontSizeHeadline">24</x:Double>
+
+    <!-- ===== 4. RADIEN =====
+         Sm 4 (Inline-/Mini-Controls) | Md 6 (Standard-Controls) | Lg 8 (Karten/Panels) | Xl 12 (Kapseln) | Pill 16 (Schwebende Kapseln) -->
+    <CornerRadius x:Key="AgyRadiusSm">4</CornerRadius>
+    <CornerRadius x:Key="AgyRadiusMd">6</CornerRadius>
+    <CornerRadius x:Key="AgyRadiusLg">8</CornerRadius>
+    <CornerRadius x:Key="AgyRadiusXl">12</CornerRadius>
+    <CornerRadius x:Key="AgyRadiusPill">16</CornerRadius>
+
+</ResourceDictionary>

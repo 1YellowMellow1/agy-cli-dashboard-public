@@ -1,0 +1,140 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net10.0-windows10.0.26100.0</TargetFramework>
+        <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+        <RootNamespace>AgyCliDashboard</RootNamespace>
+        <AssemblyName>Antigravity CLI Dashboard</AssemblyName>
+        <ApplicationIcon>Assets\AppIcon.ico</ApplicationIcon>
+        <ApplicationManifest>app.manifest</ApplicationManifest>
+        <Platforms>x86;x64;ARM64</Platforms>
+        <RuntimeIdentifier Condition="'$(RuntimeIdentifier)' == ''">win-$([System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture.ToString().ToLowerInvariant())</RuntimeIdentifier>
+        <PublishProfile Condition="Exists('Properties\PublishProfiles\win-$(Platform).pubxml')">win-$(Platform).pubxml</PublishProfile>
+        <UseWinUI>true</UseWinUI>
+        <WinUISDKReferences>false</WinUISDKReferences>
+        <EnableMsixTooling>true</EnableMsixTooling>
+        <EnableSourceLink>false</EnableSourceLink>
+        <EnableSourceControlManagerQueries>false</EnableSourceControlManagerQueries>
+        <EnableSourceControlManager>false</EnableSourceControlManager>
+        <SourceControlInformationFeatureSupported>false</SourceControlInformationFeatureSupported>
+        <_HasGitRepository>false</_HasGitRepository>
+        <EnableNETAnalyzers>false</EnableNETAnalyzers>
+        <RunAnalyzersDuringBuild>false</RunAnalyzersDuringBuild>
+        <RunAnalyzersDuringLiveAnalysis>false</RunAnalyzersDuringLiveAnalysis>
+        <WindowsPackageType>None</WindowsPackageType>
+        <SelfContained>true</SelfContained>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Version>1.0.0</Version>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+        <Product>Antigravity CLI Dashboard</Product>
+        <Company>Antigravity CLI Dashboard Contributors</Company>
+        <Authors>Antigravity CLI Dashboard Contributors</Authors>
+        <Description>High-Performance Native Windows Cockpit for Google Antigravity CLI</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Content Include="Assets\SplashScreen.scale-200.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Assets\LockScreenLogo.scale-200.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Assets\Square150x150Logo.scale-200.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Assets\Square44x44Logo.scale-200.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Assets\Square44x44Logo.targetsize-48_altform-lightunplated.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Assets\StoreLogo.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Assets\AppIcon.ico">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Assets\Wide310x150Logo.scale-200.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Assets\Icons\*.svg">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="Assets\Locales\*.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+        <Content Include="scripts\co-browser-api.ps1;scripts\co-browser-mcp.js;scripts\co-browser-cdp.ps1;scripts\browser-tool.js">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Manifest Include="$(ApplicationManifest)" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Remove="AgyLauncher\**" />
+        <EmbeddedResource Remove="AgyLauncher\**" />
+        <None Remove="AgyLauncher\**" />
+        <Compile Remove="_archive\**" />
+        <EmbeddedResource Remove="_archive\**" />
+        <None Remove="_archive\**" />
+        <Page Remove="_archive\**" />
+    </ItemGroup>
+
+
+    <!--
+    Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
+    Tools extension to be activated for this project even if the Windows App SDK Nuget
+    package has not yet been restored.
+  -->
+    <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+        <ProjectCapability Include="Msix" />
+    </ItemGroup>
+
+    <!--
+    Microsoft.Windows.SDK.BuildTools.WinApp adds first-class support for
+    `dotnet run` on packaged WinUI apps: it hooks the .NET CLI Run target to
+    register a debug identity via the winapp CLI and launch the app with
+    package identity (AUMID).
+    Set <EnableWinAppRunSupport>false</EnableWinAppRunSupport> in a
+    <PropertyGroup> above to opt out.
+  -->
+    <ItemGroup>
+        <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.7705" />
+        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.8.260317003" />
+        <PackageReference Include="Microsoft.Windows.SDK.BuildTools.WinApp" Version="0.3.1" />
+        <PackageReference Include="EasyWindowsTerminalControl.WinUI" Version="1.0.20-beta.1" />
+        <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.2" />
+        <PackageReference Include="SQLitePCLRaw.bundle_e_sqlite3" Version="3.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
+    </ItemGroup>
+
+    <!--
+    Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution
+    Explorer "Package and Publish" context menu entry to be enabled for this project even if
+    the Windows App SDK Nuget package has not yet been restored.
+  -->
+    <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+        <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+    </PropertyGroup>
+
+    <!-- Publish Properties -->
+    <PropertyGroup>
+        <PublishReadyToRun Condition="'$(Configuration)' == 'Debug'">False</PublishReadyToRun>
+        <PublishReadyToRun Condition="'$(Configuration)' != 'Debug'">True</PublishReadyToRun>
+        <PublishTrimmed Condition="'$(Configuration)' == 'Debug'">False</PublishTrimmed>
+        <PublishTrimmed Condition="'$(Configuration)' != 'Debug'">False</PublishTrimmed>
+    </PropertyGroup>
+
+    <!-- Automated Pre-Build StaticResource Validator to guarantee zero runtime resource crashes -->
+    <Target Name="ValidateXamlStaticResources" BeforeTargets="BeforeBuild;BeforeCompile">
+        <Exec Command="powershell -NoProfile -ExecutionPolicy Bypass -File &quot;$(MSBuildProjectDirectory)\scripts\Validate-XamlResources.ps1&quot; -ProjectDir &quot;$(MSBuildProjectDirectory)&quot;" />
+    </Target>
+</Project>

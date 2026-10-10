@@ -1,0 +1,121 @@
+<Application
+    x:Class="AgyCliDashboard.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AgyCliDashboard">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+                <!-- Design-Tokens (Farben, Typo-Skala, Radien) - Reihenfolge wichtig: Palette vor Styles -->
+                <ResourceDictionary Source="Theme/Palette.xaml" />
+                <!-- Wiederverwendbare Button-Stile -->
+                <ResourceDictionary Source="Theme/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- ====================================================================== -->
+            <!-- WinUI 3 Theme-Overrides (Dark). Farben stammen aus Theme/Palette.xaml;   -->
+            <!-- Zustandswerte ohne passendes Token (Hover/Pressed-Alpha) sind Literale. -->
+            <!-- ====================================================================== -->
+
+            <!-- Overriding WinUI 3 Native TextBox Theme Brushes to prevent white background on focus and make placeholder text light & highly readable -->
+            <SolidColorBrush x:Key="TextControlBackground" Color="{StaticResource AgyColorMainBg}" />
+            <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="{StaticResource AgyColorMainBg}" />
+            <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="{StaticResource AgyColorMainBg}" />
+            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="#1e1f22" />
+
+            <SolidColorBrush x:Key="TextControlForeground" Color="{StaticResource AgyColorTextPrimary}" />
+            <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="{StaticResource AgyColorTextPrimary}" />
+            <SolidColorBrush x:Key="TextControlForegroundFocused" Color="{StaticResource AgyColorTextPrimary}" />
+            <SolidColorBrush x:Key="TextControlForegroundDisabled" Color="{StaticResource AgyColorTextSubtle}" />
+
+            <SolidColorBrush x:Key="TextControlPlaceholderForeground" Color="{StaticResource AgyColorTextMuted}" />
+            <SolidColorBrush x:Key="TextControlPlaceholderForegroundPointerOver" Color="{StaticResource AgyColorTextSecondary}" />
+            <SolidColorBrush x:Key="TextControlPlaceholderForegroundFocused" Color="{StaticResource AgyColorTextMuted}" />
+            <SolidColorBrush x:Key="TextControlPlaceholderForegroundDisabled" Color="{StaticResource AgyColorTextDisabled}" />
+
+            <SolidColorBrush x:Key="TextControlBorderBrush" Color="{StaticResource AgyColorBorderDefault}" />
+            <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="{StaticResource AgyColorAccent}" />
+            <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="{StaticResource AgyColorAccent}" />
+
+            <!-- Overriding WinUI 3 Native TextBox Border Thickness & DeleteButton Width to prevent focus jump and typing flicker -->
+            <Thickness x:Key="TextControlBorderThemeThickness">1,1,1,1</Thickness>
+            <Thickness x:Key="TextControlBorderThemeThicknessPointerOver">1,1,1,1</Thickness>
+            <Thickness x:Key="TextControlBorderThemeThicknessFocused">1,1,1,1</Thickness>
+            <GridLength x:Key="TextBoxDeleteButtonThemeWidth">0</GridLength>
+
+            <!-- Overriding WinUI 3 Native ToggleSwitch Theme Brushes for Dark Theme -->
+            <SolidColorBrush x:Key="ToggleSwitchFillOff" Color="#2A2D34" />
+            <SolidColorBrush x:Key="ToggleSwitchFillOffPointerOver" Color="#333742" />
+            <SolidColorBrush x:Key="ToggleSwitchFillOffPressed" Color="#1E2026" />
+            <SolidColorBrush x:Key="ToggleSwitchFillOffDisabled" Color="#1A1C20" />
+
+            <SolidColorBrush x:Key="ToggleSwitchStrokeOff" Color="{StaticResource AgyColorTextDisabled}" />
+            <SolidColorBrush x:Key="ToggleSwitchStrokeOffPointerOver" Color="{StaticResource AgyColorTextSubtle}" />
+            <SolidColorBrush x:Key="ToggleSwitchStrokeOffPressed" Color="#334155" />
+            <SolidColorBrush x:Key="ToggleSwitchStrokeOffDisabled" Color="#334155" />
+
+            <SolidColorBrush x:Key="ToggleSwitchKnobFillOff" Color="{StaticResource AgyColorTextSecondary}" />
+            <SolidColorBrush x:Key="ToggleSwitchKnobFillOffPointerOver" Color="{StaticResource AgyColorTextPrimary}" />
+            <SolidColorBrush x:Key="ToggleSwitchKnobFillOffPressed" Color="{StaticResource AgyColorTextMuted}" />
+            <SolidColorBrush x:Key="ToggleSwitchKnobFillOffDisabled" Color="{StaticResource AgyColorTextDisabled}" />
+
+            <SolidColorBrush x:Key="ToggleSwitchFillOn" Color="{StaticResource AgyColorAccent}" />
+            <SolidColorBrush x:Key="ToggleSwitchFillOnPointerOver" Color="{StaticResource AgyColorAccentLight}" />
+            <SolidColorBrush x:Key="ToggleSwitchFillOnPressed" Color="{StaticResource AgyColorAccentPressed}" />
+
+            <SolidColorBrush x:Key="ToggleSwitchKnobFillOn" Color="{StaticResource AgyColorTextOnAccent}" />
+            <SolidColorBrush x:Key="ToggleSwitchKnobFillOnPointerOver" Color="{StaticResource AgyColorTextOnAccent}" />
+            <SolidColorBrush x:Key="ToggleSwitchKnobFillOnPressed" Color="{StaticResource AgyColorTextPrimary}" />
+
+            <!-- Overriding WinUI 3 Native Button Theme Brushes for Global Smooth Dark Hover & Press across all UI elements -->
+            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#1FFFFFFF" />
+            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="{StaticResource AgyColorTextPrimary}" />
+            <SolidColorBrush x:Key="ButtonBorderBrushPointerOver" Color="{StaticResource AgyColorBorderStrong}" />
+
+            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#33FFFFFF" />
+            <SolidColorBrush x:Key="ButtonForegroundPressed" Color="{StaticResource AgyColorTextOnAccent}" />
+            <SolidColorBrush x:Key="ButtonBorderBrushPressed" Color="#4DFFFFFF" />
+
+            <SolidColorBrush x:Key="ButtonBackgroundDisabled" Color="{StaticResource AgyColorBorderFaint}" />
+            <SolidColorBrush x:Key="ButtonForegroundDisabled" Color="{StaticResource AgyColorTextDisabled}" />
+            <SolidColorBrush x:Key="ButtonBorderBrushDisabled" Color="{StaticResource AgyColorBorderFaint}" />
+
+            <!-- Overriding WinUI 3 Native CheckBox Theme Brushes: Akzent-gefuellte Haken, dezente Umrandung im Ruhezustand -->
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUnchecked" Color="{StaticResource AgyColorTextMuted}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPointerOver" Color="{StaticResource AgyColorTextSecondary}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPressed" Color="{StaticResource AgyColorTextSubtle}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedDisabled" Color="{StaticResource AgyColorTextDisabled}" />
+
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUnchecked" Color="Transparent" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedPointerOver" Color="{StaticResource AgyColorBorderDefault}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedPressed" Color="{StaticResource AgyColorBorderStrong}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillUncheckedDisabled" Color="Transparent" />
+
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeChecked" Color="{StaticResource AgyColorAccent}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPointerOver" Color="{StaticResource AgyColorAccentLight}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedPressed" Color="{StaticResource AgyColorAccentPressed}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeCheckedDisabled" Color="{StaticResource AgyColorTextDisabled}" />
+
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillChecked" Color="{StaticResource AgyColorAccent}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPointerOver" Color="{StaticResource AgyColorAccentLight}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedPressed" Color="{StaticResource AgyColorAccentPressed}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillCheckedDisabled" Color="{StaticResource AgyColorTextDisabled}" />
+
+            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundChecked" Color="{StaticResource AgyColorTextOnAccent}" />
+            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedPointerOver" Color="{StaticResource AgyColorTextOnAccent}" />
+            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedPressed" Color="{StaticResource AgyColorTextOnAccent}" />
+            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundCheckedDisabled" Color="{StaticResource AgyColorTextSubtle}" />
+
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeIndeterminate" Color="{StaticResource AgyColorAccent}" />
+            <SolidColorBrush x:Key="CheckBoxCheckBackgroundFillIndeterminate" Color="{StaticResource AgyColorAccent}" />
+            <SolidColorBrush x:Key="CheckBoxCheckGlyphForegroundIndeterminate" Color="{StaticResource AgyColorTextOnAccent}" />
+
+            <!-- Overriding WinUI 3 Native ComboBox Theme Brushes: dezenter Rahmen statt reinweiss, Akzent bei Hover/Fokus -->
+            <SolidColorBrush x:Key="ComboBoxBorderBrush" Color="{StaticResource AgyColorBorderStrong}" />
+            <SolidColorBrush x:Key="ComboBoxBorderBrushPointerOver" Color="{StaticResource AgyColorAccent}" />
+            <SolidColorBrush x:Key="ComboBoxBorderBrushFocused" Color="{StaticResource AgyColorAccent}" />
+            <SolidColorBrush x:Key="ComboBoxDropDownGlyphForeground" Color="{StaticResource AgyColorTextSecondary}" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

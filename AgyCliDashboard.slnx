@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="AgyCliDashboard.csproj" />
+  <Project Path="AgyLauncher/AgyLauncher.csproj">
+    <Platform Project="x64" />
+  </Project>
+</Solution>

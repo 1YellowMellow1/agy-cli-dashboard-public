@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none">
+  <defs>
+    <!-- Top Face Gradient (High light reflection) -->
+    <linearGradient id="topFace" x1="6" y1="3.5" x2="18" y2="10.4" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#BAE6FD"/>
+      <stop offset="100%" stop-color="#38BDF8"/>
+    </linearGradient>
+    <!-- Right Face Gradient (Medium illumination) -->
+    <linearGradient id="rightFace" x1="12" y1="7" x2="18" y2="17.4" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0EA5E9"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <!-- Left Face Gradient (Shadow depth) -->
+    <linearGradient id="leftFace" x1="6" y1="7" x2="12" y2="17.4" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0369A1"/>
+      <stop offset="100%" stop-color="#0C4A6E"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Floating Isometric Quantum Cube -->
+  <g id="levitating-cube">
+    <!-- Left Face -->
+    <polygon points="6,6.96 12,10.43 12,17.39 6,13.91" fill="url(#leftFace)"/>
+    <!-- Right Face -->
+    <polygon points="12,10.43 18,6.96 18,13.91 12,17.39" fill="url(#rightFace)"/>
+    <!-- Top Face -->
+    <polygon points="12,3.5 18,6.96 12,10.43 6,6.96" fill="url(#topFace)"/>
+    <!-- Inner Edge Highlights -->
+    <polyline points="6,6.96 12,10.43 18,6.96" stroke="#E0F2FE" stroke-width="0.6" stroke-linejoin="round" opacity="0.6"/>
+    <line x1="12" y1="10.43" x2="12" y2="17.39" stroke="#E0F2FE" stroke-width="0.6" opacity="0.4"/>
+  </g>
+
+  <!-- Anti-Gravity Levitation Cradle & Horizon Base -->
+  <ellipse cx="12" cy="20.8" rx="4.5" ry="1.1" fill="#38BDF8" opacity="0.25"/>
+  <path d="M 5 21.6 C 8.5 20.1 15.5 20.1 19 21.6" stroke="#38BDF8" stroke-width="1.5" stroke-linecap="round" opacity="0.85"/>
+</svg>
