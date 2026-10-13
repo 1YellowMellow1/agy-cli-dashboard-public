@@ -629,7 +629,7 @@ public sealed partial class MainWindow : Window
         {
             bool isActive = string.IsNullOrEmpty(_currentEditingFilePath) && _activeTerminalId == ts.Id;
             bool isCloseable = _terminalSessions.Count > 1;
-            sb.Append($"term:{ts.Id}:{ts.Title}:{isActive}:{isCloseable}:{ts.IsWorking};");
+            sb.Append($"term:{ts.Id}:{ts.Title}:{isActive}:{isCloseable}:{ts.IsWorking}:{ts.HasUnreadCompletion};");
         }
         foreach (var path in _openTabFilePaths)
         {
@@ -651,7 +651,7 @@ public sealed partial class MainWindow : Window
         {
             bool isTerminalActive = _activeTerminalId == ts.Id && (string.IsNullOrEmpty(_currentEditingFilePath) || ts.IsDocumentViewActive);
             bool isCloseable = _terminalSessions.Count > 1;
-            var termBorder = CreateWorkspaceTabBorder(ts.Title, isTerminalActive, isCloseable, tag: "terminal:" + ts.Id, agentType: ts.AgentType, isDocActive: ts.IsDocumentViewActive && isTerminalActive, isWorking: ts.IsWorking);
+            var termBorder = CreateWorkspaceTabBorder(ts.Title, isTerminalActive, isCloseable, tag: "terminal:" + ts.Id, agentType: ts.AgentType, isDocActive: ts.IsDocumentViewActive && isTerminalActive, isWorking: ts.IsWorking, hasUnreadCompletion: ts.HasUnreadCompletion);
             PnlWorkspaceTabs.Children.Add(termBorder);
             if (isTerminalActive) activeBorder = termBorder;
         }
@@ -697,21 +697,49 @@ public sealed partial class MainWindow : Window
             string.Equals(t.Id, idOrConvId, StringComparison.OrdinalIgnoreCase) ||
             (!string.IsNullOrEmpty(t.ConversationId) && string.Equals(t.ConversationId, idOrConvId, StringComparison.OrdinalIgnoreCase)));
 
-        if (session == null || session.IsWorking == isWorking) return;
+        if (session == null) return;
+
+        bool wasWorking = session.IsWorking;
+        if (wasWorking == isWorking)
+        {
+            if (isWorking && session.HasUnreadCompletion)
+            {
+                session.HasUnreadCompletion = false;
+                RenderWorkspaceTabs();
+            }
+            return;
+        }
 
         session.IsWorking = isWorking;
         session.LastWorkingStateChangedUtc = DateTime.UtcNow;
+
+        if (isWorking)
+        {
+            session.HasUnreadCompletion = false;
+        }
+        else if (wasWorking)
+        {
+            bool isCurrentlyVisibleTerminalTab = string.IsNullOrEmpty(_currentEditingFilePath) &&
+                                                 string.Equals(_activeTerminalId, session.Id, StringComparison.OrdinalIgnoreCase);
+            if (!isCurrentlyVisibleTerminalTab)
+            {
+                session.HasUnreadCompletion = true;
+            }
+        }
+
         RenderWorkspaceTabs();
     }
 
-    private Border CreateWorkspaceTabBorder(string title, bool isActive, bool isCloseable, string tag, string agentType = "agy", bool isDocActive = false, bool isWorking = false)
+    private Border CreateWorkspaceTabBorder(string title, bool isActive, bool isCloseable, string tag, string agentType = "agy", bool isDocActive = false, bool isWorking = false, bool hasUnreadCompletion = false)
     {
+        bool showUnreadHighlight = hasUnreadCompletion && !isActive && !isWorking;
+
         var border = new Border
         {
-            Background = (Brush)Application.Current.Resources[isActive ? "AgyTabActiveBg" : "AgySurfaceBg"],
+            Background = (Brush)Application.Current.Resources[isActive ? "AgyTabActiveBg" : (showUnreadHighlight ? "AgyAccentSubtle" : "AgySurfaceBg")],
             BorderBrush = isDocActive
                 ? (Brush)Application.Current.Resources["AgyDocAccent"]
-                : (Brush)Application.Current.Resources[isActive ? "AgyAccent" : "AgyBorderFaint"],
+                : (Brush)Application.Current.Resources[isActive ? "AgyAccent" : (showUnreadHighlight ? "AgyBorderStrong" : "AgyBorderFaint")],
             BorderThickness = new Thickness(1, isActive ? 2 : 1, 1, 0),
             CornerRadius = new CornerRadius(6, 6, 0, 0),
             MinWidth = 100,
@@ -724,6 +752,10 @@ public sealed partial class MainWindow : Window
         var grid = new Grid();
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
         grid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+        if (showUnreadHighlight)
+        {
+            grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+        }
         if (isCloseable)
         {
             grid.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
@@ -753,7 +785,7 @@ public sealed partial class MainWindow : Window
                 Width = 13,
                 Height = 13,
                 Margin = new Thickness(0, 0, 6, 0),
-                Opacity = isActive ? 1.0 : 0.75
+                Opacity = (isActive || showUnreadHighlight) ? 1.0 : 0.75
             };
         }
         Grid.SetColumn(iconElement, 0);
@@ -786,8 +818,8 @@ public sealed partial class MainWindow : Window
         {
             Text = displayTitle,
             FontSize = 12.5,
-            FontWeight = isActive ? Microsoft.UI.Text.FontWeights.SemiBold : Microsoft.UI.Text.FontWeights.Normal,
-            Foreground = (Brush)Application.Current.Resources[isActive ? "AgyTextPrimary" : "AgyTextSecondary"],
+            FontWeight = (isActive || showUnreadHighlight) ? Microsoft.UI.Text.FontWeights.SemiBold : Microsoft.UI.Text.FontWeights.Normal,
+            Foreground = (Brush)Application.Current.Resources[(isActive || showUnreadHighlight) ? "AgyTextPrimary" : "AgyTextSecondary"],
             TextTrimming = TextTrimming.CharacterEllipsis,
             VerticalAlignment = VerticalAlignment.Center
         };
@@ -795,10 +827,21 @@ public sealed partial class MainWindow : Window
 
         grid.Children.Add(iconElement);
         grid.Children.Add(txt);
-        string tooltipText = isTerminal
-            ? (isWorking ? $"Terminal-Sitzung: {displayTitle} (🤖 KI arbeitet...)" : $"Terminal-Sitzung: {displayTitle} (Klick zum Aktivieren)")
-            : $"Datei im Editor: {tag} (Klick zum Öffnen)";
-        ToolTipService.SetToolTip(border, tooltipText);
+
+        int nextColIndex = 2;
+        if (showUnreadHighlight)
+        {
+            var unreadDot = new Microsoft.UI.Xaml.Shapes.Ellipse
+            {
+                Width = 6,
+                Height = 6,
+                Fill = (Brush)Application.Current.Resources["AgyStatusInfo"],
+                Margin = new Thickness(6, 0, 2, 0),
+                VerticalAlignment = VerticalAlignment.Center
+            };
+            Grid.SetColumn(unreadDot, nextColIndex++);
+            grid.Children.Add(unreadDot);
+        }
 
         if (isCloseable)
         {
@@ -827,7 +870,7 @@ public sealed partial class MainWindow : Window
                     CloseFileTab(tag);
                 }
             };
-            Grid.SetColumn(closeBtn, 2);
+            Grid.SetColumn(closeBtn, nextColIndex);
             grid.Children.Add(closeBtn);
         }
 
@@ -1030,9 +1073,12 @@ public sealed partial class MainWindow : Window
         string tabTooltip;
         if (isTerminal)
         {
+            string statePrefix = isWorking
+                ? "🤖 KI arbeitet... · "
+                : (showUnreadHighlight ? "● KI fertig (Neue Antwort) · " : string.Empty);
             tabTooltip = isDocActive
-                ? $"{title}\n(Dokumentenmodus aktiv · Rechtsklick: Zurück zum Terminal · Strg+D)"
-                : $"{title}\n(Terminalmodus · Rechtsklick: In formatiertes RTF-Dokument wechseln · Strg+D)";
+                ? $"{title}\n({statePrefix}Dokumentenmodus aktiv · Rechtsklick: Zurück zum Terminal · Strg+D)"
+                : $"{title}\n({statePrefix}Terminalmodus · Rechtsklick: In formatiertes RTF-Dokument wechseln · Strg+D)";
         }
         else
         {
@@ -1109,14 +1155,16 @@ public sealed partial class MainWindow : Window
             foreach (var ts in _terminalSessions)
             {
                 bool isActive = string.IsNullOrEmpty(_currentEditingFilePath) && _activeTerminalId == ts.Id;
+                bool hasUnread = ts.HasUnreadCompletion && !isActive && !ts.IsWorking;
                 string iconPath = string.Equals(ts.AgentType, "clawcode", StringComparison.OrdinalIgnoreCase)
                     ? "ms-appx:///Assets/Icons/clawcode-logo.svg"
                     : "ms-appx:///Assets/Icons/antigravity-logo.svg";
 
+                string prefix = isActive ? "●  " : (hasUnread ? "◆  " : "    ");
                 var item = new MenuFlyoutItem
                 {
-                    Text = (isActive ? "●  " : "    ") + (ts.Title ?? "Terminal"),
-                    FontWeight = isActive ? Microsoft.UI.Text.FontWeights.SemiBold : Microsoft.UI.Text.FontWeights.Normal,
+                    Text = prefix + (ts.Title ?? "Terminal"),
+                    FontWeight = (isActive || hasUnread) ? Microsoft.UI.Text.FontWeights.SemiBold : Microsoft.UI.Text.FontWeights.Normal,
                     Icon = new ImageIcon { Source = CreateHighResSvg(iconPath), Width = 14, Height = 14 }
                 };
                 string termId = ts.Id;
@@ -1239,6 +1287,10 @@ public sealed partial class MainWindow : Window
         }
 
         var activeSession = _terminalSessions.FirstOrDefault(t => t.Id == _activeTerminalId);
+        if (activeSession != null && activeSession.HasUnreadCompletion)
+        {
+            activeSession.HasUnreadCompletion = false;
+        }
         bool isDocView = activeSession != null && activeSession.IsDocumentViewActive;
 
         foreach (var ts in _terminalSessions)

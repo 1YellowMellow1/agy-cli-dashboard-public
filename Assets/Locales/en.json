@@ -15,7 +15,7 @@
   },
   "Chat": {
     "Placeholder": "Message Antigravity... (Enter to send, Shift+Enter for newline, drag files here)",
-    "SendTooltip": "Send command to Antigravity (Enter · Hold: send with quick action)",
+    "SendTooltip": "Send command to Antigravity (Enter · Right-click: Send one-shot with Gemini 3.8 Flash · Hold: send with quick action)",
     "CancelTooltip": "Cancel active AI action (Ctrl+C / Esc)",
     "VoiceTooltip": "Start / stop voice dictation",
     "DeepThinkTooltip": "Deep Think (Numpad 1 · Click: Send now · Shift+Click: Toggle · Right-click: Set as quick action)",

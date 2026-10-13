@@ -280,20 +280,9 @@ public sealed partial class MainWindow : Window
                                 continue;
                             }
 
-                            // Notanker gegen verwaiste Zombie-Tabs (z. B. CLI-Absturz während aktiver Phase oder korrupte DB):
-                            // Wenn das Terminal seit über 15 Sekunden kontinuierlich am Idle-Prompt (❯) verweilt
-                            // und seit 15s kein Prompt gesendet wurde, übersteuert der Notanker den verwaisten DB-Zustand.
-                            bool isZombieAtIdle = (DateTime.UtcNow - ts.LastPromptDispatchedUtc).TotalSeconds > 15 &&
-                                                  (DateTime.UtcNow - ts.LastWorkingStateChangedUtc).TotalSeconds > 15 &&
-                                                  Helpers.TerminalBufferManager.IsTerminalAtIdlePrompt(ts.Control.ConPTYTerm);
-
-                            if (isZombieAtIdle)
+                            // Karenzzeit direkt nach dem Absenden eines Prompts (bevor agy.exe den neuen Schritt in SQLite persistiert):
+                            if (!native.IsWorking && (DateTime.UtcNow - ts.LastPromptDispatchedUtc).TotalMilliseconds <= 3000)
                             {
-                                if (ts.IsWorking)
-                                {
-                                    TelemetryLogger.Log($"[WorkingStateWatchdog] Emergency fallback: Idle prompt detected for >15s on session {ts.Id} ('{ts.Title}') despite native IsWorking=true. Resetting to idle.");
-                                    SetTerminalWorkingState(ts.Id, false);
-                                }
                                 continue;
                             }
 

@@ -23,6 +23,7 @@ public class TerminalTabSession
     public bool IsAutoReflexionEnabled { get; set; } = true;
     public bool IsDocumentViewActive { get; set; } = false;
     public bool IsWorking { get; set; } = false;
+    public bool HasUnreadCompletion { get; set; } = false;
     public DateTime LastWorkingStateChangedUtc { get; set; } = DateTime.MinValue;
     public DateTime LastPromptDispatchedUtc { get; set; } = DateTime.MinValue;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

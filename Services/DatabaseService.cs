@@ -1242,7 +1242,7 @@ public class DatabaseService : IDatabaseService
             // Versuche die Datei exklusiv zu öffnen.
             // Hält agy.exe die Datei gesperrt (store.acquirePresenceLock via FileShare.None),
             // schlägt Open mit einer IOException fehl -> Prozess läuft aktiv!
-            using var fs = new FileStream(lockFilePath, FileMode.Open, FileAccess.ReadWrite, FileShare.None);
+            using var fs = new FileStream(lockFilePath, FileMode.Open, FileAccess.Read, FileShare.None);
             return false; // Konnte exklusiv geöffnet werden -> agy.exe läuft NICHT mehr!
         }
         catch (IOException)
@@ -1294,37 +1294,84 @@ public class DatabaseService : IDatabaseService
             {
                 using var conn = new SqliteConnection($"Data Source={sessionDbPath};Mode=ReadOnly;Default Timeout=2;");
                 conn.Open();
-                using var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT idx, step_type, status FROM steps ORDER BY idx DESC LIMIT 1;";
-                using var reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    int idx = reader.IsDBNull(0) ? 0 : reader.GetInt32(0);
-                    int stepType = reader.IsDBNull(1) ? 0 : reader.GetInt32(1);
-                    int status = reader.IsDBNull(2) ? 0 : reader.GetInt32(2);
 
+                int idx = -1;
+                int stepType = 0;
+                int status = 0;
+                bool hasStep = false;
+
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "SELECT idx, step_type, status FROM steps ORDER BY idx DESC LIMIT 1;";
+                    using var reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        hasStep = true;
+                        idx = reader.IsDBNull(0) ? 0 : reader.GetInt32(0);
+                        stepType = reader.IsDBNull(1) ? 0 : reader.GetInt32(1);
+                        status = reader.IsDBNull(2) ? 0 : reader.GetInt32(2);
+                    }
+                }
+
+                if (hasStep)
+                {
                     result.Evaluated = true;
                     result.Source = "conversations.steps";
                     result.Details = $"step={idx}, type={stepType}, status={status}";
 
-                    // Status != 3: 2 = Running, 8 = Streaming => sofort aktiv
+                    // 1a. Status 2 = Running (Tool), 8 = Streaming (Model) => sofort aktiv
                     if (status == 2 || status == 8)
                     {
                         result.IsWorking = true;
                         return result;
                     }
-                    else if (status != 3)
+
+                    // 1b. Prüfe executor_metadata auf den letzten abgeschlossenen/abgebrochenen Turn-Index (Protobuf Feld 3):
+                    // Solange idx > lastCompletedStepIdx ist, befindet sich die KI mitten im Turn (z. B. 10-60s Deep-Think-Pause
+                    // in der Cloud nach User-Input 14, Tool-Aufruf 132 oder Task-Notification 101), auch wenn sich auf der
+                    // Festplatte sekundenlang keine Datei ändert und conversation_summaries.db noch auf IDLE steht!
+                    int lastCompletedStepIdx = -1;
+                    try
                     {
-                        // Anderer Status (z. B. 6 = Background / Cancel) => vorläufig aktiv,
-                        // Summary-Tabelle hat aber bei not_fully_idle=0 Vorrang!
-                        result.IsWorking = true;
+                        using var execCmd = conn.CreateCommand();
+                        execCmd.CommandText = "SELECT substr(data, 1, 24) FROM executor_metadata ORDER BY idx DESC LIMIT 1;";
+                        if (execCmd.ExecuteScalar() is byte[] execBytes && execBytes.Length > 0)
+                        {
+                            lastCompletedStepIdx = TryParseExecutorLastStepIdx(execBytes);
+                        }
+                    }
+                    catch
+                    {
+                        // Falls executor_metadata nicht existiert, bleibt lastCompletedStepIdx = -1
+                    }
+
+                    DateTime lastDbWriteUtc = File.GetLastWriteTimeUtc(sessionDbPath);
+                    string walPath = sessionDbPath + "-wal";
+                    if (File.Exists(walPath))
+                    {
+                        DateTime walWriteUtc = File.GetLastWriteTimeUtc(walPath);
+                        if (walWriteUtc > lastDbWriteUtc) lastDbWriteUtc = walWriteUtc;
+                    }
+                    bool isRecentStepActivity = (DateTime.UtcNow - lastDbWriteUtc).TotalMinutes < 10;
+
+                    if (stepType != 15 && status != 6 && !(idx == 0 && stepType == 101))
+                    {
+                        if (idx > lastCompletedStepIdx && isRecentStepActivity)
+                        {
+                            result.IsWorking = true;
+                            result.Details = $"step={idx}, type={stepType}, status={status}, exec_last={lastCompletedStepIdx} (thinking)";
+                            return result;
+                        }
+                        else
+                        {
+                            result.IsWorking = false;
+                        }
                     }
                     else
                     {
-                        // Status == 3 (DONE): Wenn stepType == 15 (Model-Turn beendet) => Ruhezustand (false).
-                        // Wenn stepType == 132 (Tool beendet) => vorläufig aktiv (true),
-                        // aber Summary-Tabelle entscheidet final, ob der Turn vorbei ist.
-                        result.IsWorking = (stepType != 15);
+                        // stepType == 15 (Model-Response abgeschlossen) oder status == 6 (Hintergrund/Abbruch):
+                        // Vordergrund-Schritt ist fertig; Teil 2 (conversation_summaries) prüft, ob noch Subagents/Tasks laufen.
+                        result.IsWorking = false;
                     }
                 }
             }
@@ -1372,16 +1419,6 @@ public class DatabaseService : IDatabaseService
                         result.Details = $"not_fully_idle={notFullyIdle}, status={status}";
                         return result;
                     }
-                    // Wenn not_fully_idle == 0 und Status IDLE (oder leer), hat die Summary-Tabelle autoritären Vorrang für Ruhezustand!
-                    // Dies fängt zuverlässig Tool-Steps (132) und Abbrüche (6) ab, wenn die CLI am Idle-Prompt wartet.
-                    else if (notFullyIdle == 0 && (string.IsNullOrEmpty(status) || string.Equals(status, "CASCADE_RUN_STATUS_IDLE", StringComparison.OrdinalIgnoreCase)))
-                    {
-                        result.Evaluated = true;
-                        result.IsWorking = false;
-                        result.Source = "conversation_summaries";
-                        result.Details = $"not_fully_idle=0, status={status}";
-                        return result;
-                    }
                     else if (!result.Evaluated)
                     {
                         result.Evaluated = true;
@@ -1411,5 +1448,50 @@ public class DatabaseService : IDatabaseService
         }
 
         return result;
+    }
+
+    private static int TryParseExecutorLastStepIdx(ReadOnlySpan<byte> buf)
+    {
+        int pos = 0;
+        while (pos < buf.Length)
+        {
+            if (!TryReadProtobufVarint(buf, ref pos, out ulong tag)) break;
+            int fieldNumber = (int)(tag >> 3);
+            int wireType = (int)(tag & 0x07);
+
+            if (wireType == 0)
+            {
+                if (!TryReadProtobufVarint(buf, ref pos, out ulong val)) break;
+                if (fieldNumber == 3)
+                {
+                    return (int)val;
+                }
+            }
+            else if (wireType == 2)
+            {
+                if (!TryReadProtobufVarint(buf, ref pos, out ulong len)) break;
+                if (len > (ulong)(buf.Length - pos)) break;
+                pos += (int)len;
+            }
+            else
+            {
+                break;
+            }
+        }
+        return -1;
+    }
+
+    private static bool TryReadProtobufVarint(ReadOnlySpan<byte> buf, ref int pos, out ulong value)
+    {
+        value = 0;
+        int shift = 0;
+        while (pos < buf.Length && shift < 64)
+        {
+            byte b = buf[pos++];
+            value |= (ulong)(b & 0x7F) << shift;
+            if ((b & 0x80) == 0) return true;
+            shift += 7;
+        }
+        return false;
     }
 }

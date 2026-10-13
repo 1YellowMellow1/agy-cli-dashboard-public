@@ -70,6 +70,7 @@ public sealed partial class PromptEditorView : UserControl
 
     public event RoutedEventHandler? VoiceClick;
     public event RoutedEventHandler? SendMessageClick;
+    public event RightTappedEventHandler? SendMessageRightTapped;
     public event PointerEventHandler? SendMessagePointerPressed;
     public event PointerEventHandler? SendMessagePointerReleased;
     public event PointerEventHandler? SendMessagePointerExited;
@@ -194,6 +195,7 @@ public sealed partial class PromptEditorView : UserControl
 
     private void BtnVoice_Click(object sender, RoutedEventArgs e) => VoiceClick?.Invoke(sender, e);
     private void BtnSendMessage_Click(object sender, RoutedEventArgs e) => SendMessageClick?.Invoke(sender, e);
+    private void BtnSendMessage_RightTapped(object sender, RightTappedRoutedEventArgs e) => SendMessageRightTapped?.Invoke(sender, e);
     private void BtnSendMessage_PointerPressed(object sender, PointerRoutedEventArgs e) => SendMessagePointerPressed?.Invoke(sender, e);
     private void BtnSendMessage_PointerReleased(object sender, PointerRoutedEventArgs e) => SendMessagePointerReleased?.Invoke(sender, e);
     private void BtnSendMessage_PointerExited(object sender, PointerRoutedEventArgs e) => SendMessagePointerExited?.Invoke(sender, e);

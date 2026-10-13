@@ -243,7 +243,7 @@
                                     <ImageIcon x:Name="IconVoice" x:FieldModifier="public" Source="ms-appx:///Assets/Icons/mic.svg" Width="16" Height="16" UseLayoutRounding="True" />
                                 </Button>
 
-                                <Button Style="{StaticResource AgyPrimaryButtonStyle}" x:Name="BtnSendMessage" x:FieldModifier="public" Click="BtnSendMessage_Click" PointerPressed="BtnSendMessage_PointerPressed" PointerReleased="BtnSendMessage_PointerReleased" PointerExited="BtnSendMessage_PointerExited" Width="34" Height="34" Padding="0" CornerRadius="{StaticResource AgyRadiusPill}" ToolTipService.ToolTip="Prompt senden (Eingabetaste · Gedrückthalten: Führt den Prompt zusammen mit der per Rechtsklick konfigurierten Schnellaktion aus)">
+                                <Button Style="{StaticResource AgyPrimaryButtonStyle}" x:Name="BtnSendMessage" x:FieldModifier="public" Click="BtnSendMessage_Click" RightTapped="BtnSendMessage_RightTapped" PointerPressed="BtnSendMessage_PointerPressed" PointerReleased="BtnSendMessage_PointerReleased" PointerExited="BtnSendMessage_PointerExited" Width="34" Height="34" Padding="0" CornerRadius="{StaticResource AgyRadiusPill}" ToolTipService.ToolTip="Prompt senden (Eingabetaste · Rechtsklick: Einmalig mit Gemini 3.8 Flash senden · Gedrückthalten: Mit Schnellaktion senden)">
                                     <ImageIcon Source="ms-appx:///Assets/Icons/send-white.svg" Width="16" Height="16" UseLayoutRounding="True" />
                                 </Button>
 

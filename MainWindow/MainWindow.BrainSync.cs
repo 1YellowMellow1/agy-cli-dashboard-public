@@ -104,9 +104,12 @@ public sealed partial class MainWindow : Window
                 DispatcherQueue?.TryEnqueue(() => 
                 {
                     UpdateTokenPeakMeter(false);
-                    SetTerminalWorkingState(convId, isWorking);
-
                     var matchingSession = _terminalSessions.FirstOrDefault(t => string.Equals(t.ConversationId, convId, StringComparison.OrdinalIgnoreCase));
+                    if (matchingSession == null || isWorking || (DateTime.UtcNow - matchingSession.LastPromptDispatchedUtc).TotalMilliseconds > 3000)
+                    {
+                        SetTerminalWorkingState(convId, isWorking);
+                    }
+
                     if (matchingSession != null)
                     {
                         // Falls in _allMasterChats bereits ein echter KI-Titel vorliegt, synchronisiere ihn direkt
@@ -385,6 +388,11 @@ public sealed partial class MainWindow : Window
                         {
                             DispatcherQueue?.TryEnqueue(() =>
                             {
+                                var sess = _terminalSessions.FirstOrDefault(t => string.Equals(t.ConversationId, id, StringComparison.OrdinalIgnoreCase));
+                                if (sess != null && !native.IsWorking && (DateTime.UtcNow - sess.LastPromptDispatchedUtc).TotalMilliseconds <= 3000)
+                                {
+                                    return;
+                                }
                                 SetTerminalWorkingState(id, native.IsWorking);
                             });
                         }
@@ -632,9 +640,9 @@ public sealed partial class MainWindow : Window
                     string source = root.TryGetProperty("source", out var sProp) && sProp.ValueKind == JsonValueKind.String ? sProp.GetString() ?? "" : "";
                     string status = root.TryGetProperty("status", out var stProp) && stProp.ValueKind == JsonValueKind.String ? stProp.GetString() ?? "" : "";
 
-                    // Fehler- und Abbruchschritte sofort als Inaktivität werten
+                    // Fehler- und Abbruchschritte sofort als Inaktivität werten (außer Tool-Fehler vom Typ GENERIC, nach denen die KI weiterarbeitet)
                     if (string.Equals(type, "ERROR_MESSAGE", StringComparison.OrdinalIgnoreCase) ||
-                        string.Equals(status, "ERROR", StringComparison.OrdinalIgnoreCase) ||
+                        (!string.Equals(type, "GENERIC", StringComparison.OrdinalIgnoreCase) && string.Equals(status, "ERROR", StringComparison.OrdinalIgnoreCase)) ||
                         string.Equals(status, "INTERRUPTED", StringComparison.OrdinalIgnoreCase) ||
                         line.Contains("\"The stream was interrupted") ||
                         line.Contains("\"status\":\"INTERRUPTED\""))

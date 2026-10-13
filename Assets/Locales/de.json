@@ -15,7 +15,7 @@
   },
   "Chat": {
     "Placeholder": "Nachricht an Antigravity eingeben... (Eingabe zum Senden, Umschalt+Eingabe für Zeilenumbruch, Dateien hierher ziehen)",
-    "SendTooltip": "Befehl an Antigravity senden (Eingabetaste · Gedrückthalten: mit Schnellaktion senden)",
+    "SendTooltip": "Befehl an Antigravity senden (Eingabetaste · Rechtsklick: Einmalig mit Gemini 3.8 Flash senden · Gedrückthalten: mit Schnellaktion senden)",
     "CancelTooltip": "Laufende KI-Aktion abbrechen (Strg+C / Esc)",
     "VoiceTooltip": "Spracheingabe starten / stoppen (Diktatmodus)",
     "DeepThinkTooltip": "Deep Think (Numpad 1 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",

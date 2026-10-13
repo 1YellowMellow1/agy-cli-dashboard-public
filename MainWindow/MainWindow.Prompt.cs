@@ -220,7 +220,7 @@ public sealed partial class MainWindow : Window
         return dir;
     }
 
-    private async void SendPromptToTerminal(bool isLongPress = false)
+    private async void SendPromptToTerminal(bool isLongPress = false, string? oneShotModelId = null)
     {
         if (_isPromptDispatching) return;
         _isPromptDispatching = true;
@@ -439,6 +439,18 @@ public sealed partial class MainWindow : Window
         }
 
         text = sb.ToString().Trim();
+
+        // One-Shot-Modellausführung (z. B. Rechtsklick auf Senden -> /model gemini-3.8-flash-high <prompt>):
+        // Führt exakt diesen einen Turn mit dem angegebenen Modell aus und stellt danach automatisch das vorherige Session-Modell wieder her.
+        if (!string.IsNullOrWhiteSpace(oneShotModelId) &&
+            !string.IsNullOrWhiteSpace(text) &&
+            !isVoicePending &&
+            activeSession?.AgentType != "clawcode" &&
+            !text.StartsWith("/model ", StringComparison.OrdinalIgnoreCase))
+        {
+            text = $"/model {oneShotModelId} {text}";
+            TelemetryLogger.Log($"[SendPromptToTerminal] One-shot model prefix applied: /model {oneShotModelId}");
+        }
 
         var targetControl = activeSession?.Control ?? ActiveTerminal;
         bool isFreshSessionBooting = isFirstDispatch && activeSession != null && (DateTime.UtcNow - activeSession.CreatedAt).TotalMilliseconds < 3500;
@@ -3242,6 +3254,10 @@ public sealed partial class MainWindow : Window
 
     private void BtnSendMessage_PointerPressed(object sender, PointerRoutedEventArgs e)
     {
+        if (sender is UIElement el && !e.GetCurrentPoint(el).Properties.IsLeftButtonPressed)
+        {
+            return;
+        }
         _sendBtnPointerDownTime = DateTime.Now;
         StartLongPressTimer();
     }
@@ -3381,6 +3397,15 @@ public sealed partial class MainWindow : Window
         bool isLongPress = elapsedMs >= 600 || _isLongPressThresholdReached;
         StopLongPressTimer();
         SendPromptToTerminal(isLongPress);
+    }
+
+    private void BtnSendMessage_RightTapped(object sender, RightTappedRoutedEventArgs e)
+    {
+        TelemetryLogger.Log($"[Click Trace] {nameof(BtnSendMessage_RightTapped)} triggered (One-Shot Gemini 3.8 Flash).");
+        e.Handled = true;
+        _sendBtnPointerDownTime = DateTime.MinValue;
+        StopLongPressTimer();
+        SendPromptToTerminal(isLongPress: false, oneShotModelId: "gemini-3.8-flash-high");
     }
 
     private void StartLongPressTimer()

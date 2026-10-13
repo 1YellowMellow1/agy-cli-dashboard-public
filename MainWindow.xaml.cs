@@ -371,6 +371,7 @@ public sealed partial class MainWindow : Window
             UcPromptEditor.ChatInputLoaded += TxtChatInput_Loaded;
             UcPromptEditor.VoiceClick += BtnVoice_Click;
             UcPromptEditor.SendMessageClick += BtnSendMessage_Click;
+            UcPromptEditor.SendMessageRightTapped += BtnSendMessage_RightTapped;
             UcPromptEditor.SendMessagePointerPressed += BtnSendMessage_PointerPressed;
             UcPromptEditor.SendMessagePointerReleased += BtnSendMessage_PointerReleased;
             UcPromptEditor.SendMessagePointerExited += BtnSendMessage_PointerExited;
@@ -646,6 +647,7 @@ public sealed partial class MainWindow : Window
             UcPromptEditor.ChatInputLoaded -= TxtChatInput_Loaded;
             UcPromptEditor.VoiceClick -= BtnVoice_Click;
             UcPromptEditor.SendMessageClick -= BtnSendMessage_Click;
+            UcPromptEditor.SendMessageRightTapped -= BtnSendMessage_RightTapped;
             UcPromptEditor.SendMessagePointerPressed -= BtnSendMessage_PointerPressed;
             UcPromptEditor.SendMessagePointerReleased -= BtnSendMessage_PointerReleased;
             UcPromptEditor.SendMessagePointerExited -= BtnSendMessage_PointerExited;
