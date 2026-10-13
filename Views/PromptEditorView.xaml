@@ -1,0 +1,263 @@
+<UserControl
+    x:Class="AgyCliDashboard.Views.PromptEditorView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <!-- AUSSEN-CONTAINER MIT MODERNEM FLOATING-PADDING -->
+    <Grid Background="{StaticResource AgyInputBg}" Padding="16,2,16,8">
+
+        <!-- FLOATING PROMPT CAPSULE (Einheitliche Kapsel nach modernem Dev-Tool-Standard) -->
+        <Grid>
+            <!-- Pulse Glow Border bei aktiver KI-Generierung -->
+            <Border x:Name="ChatInputPulseBorder" x:FieldModifier="public"
+                    Margin="-2" 
+                    CornerRadius="18" 
+                    BorderThickness="2" 
+                    Background="#0A3B82F6"
+                    Visibility="Collapsed">
+                <Border.Resources>
+                    <Storyboard x:Name="ChatInputPulseStoryboard" x:FieldModifier="public" RepeatBehavior="Forever" AutoReverse="True">
+                        <ColorAnimation Storyboard.TargetName="ChatInputPulseBrush"
+                                        Storyboard.TargetProperty="Color"
+                                        From="#003B82F6" To="#803B82F6"
+                                        Duration="0:0:1.5">
+                            <ColorAnimation.EasingFunction>
+                                <SineEase EasingMode="EaseInOut" />
+                            </ColorAnimation.EasingFunction>
+                        </ColorAnimation>
+                    </Storyboard>
+                </Border.Resources>
+                <Border.BorderBrush>
+                    <SolidColorBrush x:Name="ChatInputPulseBrush" x:FieldModifier="public" Color="#003B82F6" />
+                </Border.BorderBrush>
+            </Border>
+
+            <!-- Kapsel-Körper -->
+            <Border Background="{StaticResource AgyCardBg}" BorderBrush="{StaticResource AgyBorderDefault}" BorderThickness="1" CornerRadius="16"
+                    AllowDrop="True" DragOver="BdrPromptCapsule_DragOver" Drop="BdrPromptCapsule_Drop">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" /> <!-- Staged Attachments -->
+                        <RowDefinition Height="*" />    <!-- Input TextBox -->
+                        <RowDefinition Height="Auto" /> <!-- Integrierte Aktionsleiste -->
+                    </Grid.RowDefinitions>
+
+                    <!-- Row 0: Staged Attachments -->
+                    <ItemsControl x:Name="AttachmentStagingControl" x:FieldModifier="public" Grid.Row="0" Margin="14,10,14,0" Visibility="Collapsed">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" Spacing="8" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="{StaticResource AgySurfaceSubtle}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="4,4,8,4">
+                                    <StackPanel Orientation="Horizontal" Spacing="6">
+                                        <Button Style="{StaticResource AgyBorderlessButtonStyle}" Width="18" Height="18" Click="BtnRemoveAttachment_Click" Tag="{Binding FilePath}" ToolTipService.ToolTip="Datei-Anhang entfernen">
+                                            <ImageIcon Source="ms-appx:///Assets/Icons/x.svg" Width="10" Height="10" Foreground="{StaticResource AgyTextSecondary}" />
+                                        </Button>
+                                        <TextBlock Text="{Binding FileName}" FontSize="{StaticResource AgyFontSizeCaption}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" MaxWidth="150" TextTrimming="CharacterEllipsis" />
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Row 1: Chat Input TextBox -->
+                    <TextBox x:Name="TxtChatInput" x:FieldModifier="public" Grid.Row="1"
+                             Height="68" MinHeight="68" MaxHeight="68"
+                             PlaceholderText="Nachricht an Antigravity eingeben... (Eingabe zum Senden, Umschalt+Eingabe für Zeilenumbruch, Dateien hierher ziehen)"
+                             AllowDrop="True" DragOver="TxtChatInput_DragOver" Drop="TxtChatInput_Drop"
+                             Paste="TxtChatInput_Paste" KeyDown="TxtChatInput_KeyDown" KeyUp="TxtChatInput_KeyUp" TextChanged="TxtChatInput_TextChanged"
+                             TextWrapping="Wrap" AcceptsReturn="False"
+                             ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollMode="Enabled" ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                             UseLayoutRounding="True"
+                             Background="Transparent" BorderThickness="0"
+                             FontSize="{StaticResource AgyFontSizeSubtitle}" Foreground="{StaticResource AgyTextPrimary}"
+                             Padding="16,12,16,8"
+                             Loaded="TxtChatInput_Loaded" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" MaxLength="20000">
+                        <TextBox.Resources>
+                            <SolidColorBrush x:Key="TextControlBackground" Color="Transparent" />
+                            <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent" />
+                            <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent" />
+                            <SolidColorBrush x:Key="TextControlBorderBrush" Color="Transparent" />
+                            <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent" />
+                            <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="Transparent" />
+                            <Thickness x:Key="TextControlBorderThemeThickness">0</Thickness>
+                            <Thickness x:Key="TextControlBorderThemeThicknessFocused">0</Thickness>
+                        </TextBox.Resources>
+                    </TextBox>
+
+                    <!-- Row 2: Integrierte Aktionsleiste innerhalb der Kapsel -->
+                    <Border Grid.Row="2" Padding="12,6,12,8" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="0,1,0,0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Left Section: Attach + Model Pill + Quick Toggles -->
+                            <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                                <!-- 1. Attach File -->
+                                <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnAttachFiles" x:FieldModifier="public" Click="BtnAttachFiles_Click" Tag="Dateien Anheften" Width="32" Height="32" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Dateien als KI-Kontext anheften (Bilder, Dokumente, Code per Auswahldialog oder direktem Drag &amp; Drop in den Chat einfügen)">
+                                    <ImageIcon Source="ms-appx:///Assets/Icons/paperclip.svg" Width="16" Height="16" UseLayoutRounding="True" />
+                                </Button>
+
+                                <!-- 2. Model Selector Pill -->
+                                <Button Style="{StaticResource AgyGhostButtonStyle}" Click="BtnModelSelect_Click" Tag="KI-Modell Wählen" Height="32" Padding="10,0" CornerRadius="{StaticResource AgyRadiusPill}" Background="{StaticResource AgySurfaceSubtle}" BorderBrush="{StaticResource AgyBorderFaint}" ToolTipService.ToolTip="KI-Modell wählen (Strg+M · Numpad 0 · Schneller Modellwechsel im laufenden Betrieb zwischen Gemini 3.8 Flash, Claude Sonnet 5.5 und GPT-6.1 Sol Pro)">
+                                    <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                        <ImageIcon Source="ms-appx:///Assets/Icons/cpu-indigo.svg" Width="16" Height="16" UseLayoutRounding="True" />
+                                        <TextBlock x:Name="TxtModelName" x:FieldModifier="public" Text="Modell" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Medium" Foreground="{StaticResource AgyTextSecondary}" />
+                                    </StackPanel>
+                                </Button>
+
+                                <!-- 3. Zap (Deep Think) -->
+                                <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnDeepThink" x:FieldModifier="public" Click="BtnDeepThink_Click" RightTapped="BtnDeepThink_RightTapped" Tag="Deep Think Umschalten" Width="32" Height="32" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Deep Think / Tiefes Nachdenken (Numpad 1 · Aktiviert maximales Reasoning-Budget für komplexe Architektur- und Refactoring-Aufgaben · Rechtsklick: Als Schnellaktion)">
+                                    <Viewbox Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path x:Name="IconDeepThink" x:FieldModifier="public" Data="M13,2 L3,14 h9 L11,22 L21,10 h-9 L13,2 z" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                    </Viewbox>
+                                								</Button>
+
+                                <!-- 4. FolderOpen (Wissen / Docs) -->
+                                <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnProjectDocs" x:FieldModifier="public" Click="BtnProjectDocs_Click" RightTapped="BtnProjectDocs_RightTapped" Tag="Projekt-Wissen Nutzen" Width="32" Height="32" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Projekt-Wissen &amp; Systemregeln (Numpad 2 · Injiziert GEMINI.md, Architekturentscheidungen und projektspezifische Richtlinien in den Chat · Rechtsklick: Als Schnellaktion)">
+                                    <Viewbox Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path x:Name="IconProjectDocs" x:FieldModifier="public" Data="M22,19 A2,2 0 0 1 20,21 H4 A2,2 0 0 1 2,19 V5 A2,2 0 0 1 4,3 h5 L11,6 h9 A2,2 0 0 1 22,8 z M2,9 h20" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                    </Viewbox>
+                                </Button>
+
+                                <!-- 5. Bot (Subagenten-Modus) -->
+                                <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnSubagent" x:FieldModifier="public" Click="BtnSubagent_Click" RightTapped="BtnSubagent_RightTapped" Tag="Subagenten-Modus Umschalten" Width="32" Height="32" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Subagenten-Schwärme (Numpad 3 · Öffnet das Schwarm-Modal zur parallelen Delegation von Recherche-, Review- oder Implementierungsaufgaben · Rechtsklick: Als Schnellaktion)">
+                                    <Viewbox Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path x:Name="IconSubagent" x:FieldModifier="public" Data="M12,2 v4 M8,6 h8 M4,10 A2,2 0 0 1 6,8 h12 A2,2 0 0 1 20,10 v8 A2,2 0 0 1 18,20 H6 A2,2 0 0 1 4,18 v-8 z M9,13 h0.01 M15,13 h0.01" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                    </Viewbox>
+                                </Button>
+
+                                <!-- 6. Globe (Web-Recherche) -->
+                                <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnWebResearch" x:FieldModifier="public" Click="BtnWebResearch_Click" RightTapped="BtnWebResearch_RightTapped" Tag="Web-Recherche Umschalten" Width="32" Height="32" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="KI-Co-Browser &amp; Web-Recherche (Numpad 5 · Öffnet den integrierten Edge-WebView2-Browser im Split-Screen für interaktive Webtests &amp; CDP-Automatisierung · Rechtsklick: Als Schnellaktion)">
+                                    <Viewbox Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path x:Name="IconWebResearch" x:FieldModifier="public" Data="M12,2 A10,10 0 1 0 22,12 A10,10 0 0 0 12,2 z M2,12 h20 M12,2 A15.3,15.3 0 0 1 16,12 A15.3,15.3 0 0 1 12,22 A15.3,15.3 0 0 1 8,12 A15.3,15.3 0 0 1 12,2 z" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                    </Viewbox>
+                                </Button>
+
+                                <!-- QUALITÄTS- & TEST-SUITE GRUPPE (Dezente Kapsel) -->
+                                <Border Background="{StaticResource AgySurfaceSubtle}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="3">
+                                    <StackPanel Orientation="Horizontal" Spacing="2">
+                                        <!-- 7. Eye (Reflexion) -->
+                                        <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnReflection" x:FieldModifier="public" Click="BtnReflection_Click" RightTapped="BtnReflection_RightTapped" Tag="Reflexion Ausführen" Width="30" Height="30" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Auto-Reflexion &amp; Code-Audit (Numpad 4 · Weist den Agenten zur selbstkritischen Code- und Syntaxprüfung vor Arbeitsabschluss an · Shift+Klick: Modus umschalten · Rechtsklick: Als Schnellaktion)">
+                                            <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Path x:Name="IconReflection" x:FieldModifier="public" Data="M1,12 S5,4 12,4 S23,12 23,12 S19,20 12,20 S1,12 1,12 z M12,15 A3,3 0 1 0 12,9 A3,3 0 0 0 12,15 z" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                            </Viewbox>
+                                        </Button>
+                                        <!-- 9. E2E Test -->
+                                        <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnE2ETest" x:FieldModifier="public" Click="BtnE2ETest_Click" RightTapped="BtnE2ETest_RightTapped" Tag="E2E-Test Ausführen / Anfügen" Width="30" Height="30" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="E2E- &amp; Integrations-Testlauf (Numpad 7 · Testet Webseiten live im Co-Browser oder führt automatisierte Test-Suites wie dotnet test oder npm test aus · Text vorhanden: Anhängen · Rechtsklick: Als Schnellaktion)">
+                                            <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Path x:Name="IconE2ETest" x:FieldModifier="public" Data="M12,2 A10,10 0 1 0 22,12 A10,10 0 0 0 12,2 z M10,8 L16,12 L10,16 z" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                            </Viewbox>
+                                        </Button>
+                                        <!-- 10. Dead Code Check -->
+                                        <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnDeadCodeCheck" x:FieldModifier="public" Click="BtnDeadCodeCheck_Click" RightTapped="BtnDeadCodeCheck_RightTapped" Tag="Dead Code Check Ausführen / Anfügen" Width="30" Height="30" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Dead-Code- &amp; Bereinigungs-Scan (Numpad 8 · Weist den Agenten an, ungenutzte Funktionen, tote Variablen und verwaiste Imports aufzuspüren und zu entfernen · Text vorhanden: Anhängen · Rechtsklick: Als Schnellaktion)">
+                                            <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Path x:Name="IconDeadCodeCheck" x:FieldModifier="public" Data="M12.5,17 L12,16 L11.5,17 Z M15,22 a1,1 0 0,0 1,-1 v-1 a2,2 0 0,0 1.56,-3.25 a8,8 0 1,0 -11.12,0 A2,2 0 0,0 8,20 v1 a1,1 0 0,0 1,1 Z M14,12 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0 M8,12 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                            </Viewbox>
+                                        </Button>
+                                        <!-- 11. Fehler Woanders Prüfen -->
+                                        <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnGlobalErrorCheck" x:FieldModifier="public" Click="BtnGlobalErrorCheck_Click" RightTapped="BtnGlobalErrorCheck_RightTapped" Tag="Fehler Woanders Auch Prüfen" Width="30" Height="30" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Globale Fehlersuche &amp; Root Cause (Klick: Untersucht, ob das behobene Problem auch an anderen Stellen im Projekt auftritt, um Folgefehler im Keim zu ersticken · Rechtsklick: Als Schnellaktion)">
+                                            <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Path x:Name="IconGlobalErrorCheck" x:FieldModifier="public" Data="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M11.5 14.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M14 17l-1.8-1.8" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                            </Viewbox>
+                                        </Button>
+                                        <!-- 12. Irrweg Cleanup -->
+                                        <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnIrrwegCleanup" x:FieldModifier="public" Click="BtnIrrwegCleanup_Click" RightTapped="BtnIrrwegCleanup_RightTapped" Tag="Irrweg-Cleanup / Obsolente Fixes prüfen" Width="30" Height="30" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Irrweg- &amp; Workaround-Cleanup (Numpad 9 · Weist den Agenten an, veraltete temporäre Fixes und Code-Ballast früherer Lösungsversuche aufzuräumen, sobald die echte Ursache behoben ist · Rechtsklick: Als Schnellaktion)">
+                                            <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Path x:Name="IconIrrwegCleanup" x:FieldModifier="public" Data="M3,19 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 M15,5 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 M9,19 h8.5 c0.4,0 0.9,-0.1 1.3,-0.2 M5.2,5.2 A3.5,3.53 0 0 0 6.5,12 H12 M2,2 l20,20 M21,15.3 a3.5,3.5 0 0 0 -3.3,-3.3 M15,5 h-4.3" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                            </Viewbox>
+                                        </Button>
+                                        <!-- 12b. Simplify -->
+                                        <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnSimplify" x:FieldModifier="public" Click="BtnSimplify_Click" RightTapped="BtnSimplify_RightTapped" Tag="Simplify &amp; KISS-Audit" Width="30" Height="30" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Simplify &amp; KISS-Audit (Vereinfacht überkomplizierten Code, reduziert Verschachtelungstiefe und entfernt unnötiges Overengineering nach dem KISS-Prinzip · Rechtsklick: Als Schnellaktion)">
+                                            <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Path x:Name="IconSimplify" x:FieldModifier="public" Data="M4,14 h6 v6 M20,10 h-6 V4 M14,10 l7,-7 M3,21 l7,-7" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                            </Viewbox>
+                                        </Button>
+                                        <!-- 12c. ZeroBug -->
+                                        <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnZeroBug" x:FieldModifier="public" Click="BtnZeroBug_Click" RightTapped="BtnZeroBug_RightTapped" Tag="Zero-Bug-Audit &amp; Exterminator" Width="30" Height="30" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Zero-Bug-Audit &amp; Exterminator (Strikte Defensiv-Prüfung auf Null-Pointer, Grenzwerte, Validierungen, Memory-Leaks und unerwartete Randfälle · Rechtsklick: Als Schnellaktion)">
+                                            <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Path x:Name="IconZeroBug" x:FieldModifier="public" Data="M12,20 v-9 M14,7 a4,4 0 0 1 4,4 v3 a6,6 0 0 1 -12,0 v-3 a4,4 0 0 1 4,-4 z M14.12,3.88 L16,2 M21,21 a4,4 0 0 0 -3.81,-4 M21,5 a4,4 0 0 1 -3.55,3.97 M22,13 h-4 M3,21 a4,4 0 0 1 3.81,-4 M3,5 a4,4 0 0 0 3.55,3.97 M6,13 H2 M8,2 l1.88,1.88 M9,7.13 V6 a3,3 0 1 1 6,0 v1.13" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                            </Viewbox>
+                                        </Button>
+                                        <!-- 12d. Robustheits-Audit -->
+                                        <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnDauTest" x:FieldModifier="public" Click="BtnDauTest_Click" RightTapped="BtnDauTest_RightTapped" Tag="Robustheits-Audit Ausführen / Anfügen" Width="30" Height="30" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="DAU- &amp; Real-User Chaos-Test (Multi-Agenten-Simulation diverser Nutzerarchetypen, Stresstests mit fehlerhaften Payloads und Co-Browser Rage-Clicks · Rechtsklick: Als Schnellaktion)">
+                                            <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Path x:Name="IconDauTest" x:FieldModifier="public" Data="M10,12 a4,4 0 0,0 8,0 a8,8 0 1,0 -16,0 c0,3.584 1.571,6.801 4.063,9 M14,12 a4,4 0 0,0 -8,0 a8,8 0 1,0 16,0 a11.97,11.97 0 0,0 -4,-8.944" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                            </Viewbox>
+                                        </Button>
+                                        <!-- 13. Custom -->
+                                        <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnCustomPrompt" x:FieldModifier="public" Click="BtnCustomPrompt_Click" RightTapped="BtnCustomPrompt_RightTapped" Tag="Custom Prompt Ausführen / Anfügen" Width="30" Height="30" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Eigener System-Prompt (Injiziert gespeicherte Rollen, Direktiven und Experten-Prompts direkt an die Cursor-Position · Rechtsklick: Als Schnellaktion)">
+                                            <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                                <Path x:Name="IconCustomPrompt" x:FieldModifier="public" Data="M12,2 L15.09,8.26 L22,9.27 L17,14.14 L18.18,21.02 L12,17.77 L5.82,21.02 L7,14.14 L2,9.27 L8.91,8.26 Z" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                            </Viewbox>
+                                        </Button>
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+
+                            <!-- Center Section: Meta Badges -->
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnGitStatusBadge" x:FieldModifier="public" Click="BtnGitStatusBadge_Click" Width="30" Height="30" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Git-Zentrale (Klick: Öffnet die Git-Seitenleiste mit Branch-Anzeige, ungesicherten Änderungen, Commit-Historie und Rollback-Optionen)">
+                                    <ImageIcon Source="ms-appx:///Assets/Icons/git-icon-black.svg" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True" />
+                                </Button>
+                                <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnProtocolBadge" x:FieldModifier="public" Click="BtnProtocolBadge_Click" Width="30" Height="30" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Projekt-Protokoll (Klick: Öffnet docs/protocol.md – lückenlose Dokumentation jeder Agenten-Entscheidung mit Klick-Link zum Quell-Transkript)">
+                                    <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path x:Name="IconProtocolBadge" x:FieldModifier="public" Data="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                    </Viewbox>
+                                </Button>
+                                <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnKnowledgeBadge" x:FieldModifier="public" Click="BtnKnowledgeBadge_Click" Width="30" Height="30" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Wissensdatenbank (Klick: Öffnet docs/knowledge.md – persistenter Langzeitspeicher für Framework-Fallen, Architekturentscheidungen und Best Practices)">
+                                    <Viewbox Width="15" Height="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                        <Path x:Name="IconKnowledgeBadge" x:FieldModifier="public" Data="M12 18V5 M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4 M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5 M17.997 5.125a4 4 0 0 1 2.526 5.77 M18 18a4 4 0 0 0 2-7.464 M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517 M6 18a4 4 0 0 1-2-7.464 M6.003 5.125a4 4 0 0 0-2.526 5.77" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                    </Viewbox>
+                                </Button>
+                            </StackPanel>
+
+                            <!-- Right Section: Auto-Reflexion + Undo + Action Buttons (Voice, Send, Cancel) -->
+                            <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                                <ToggleButton x:Name="TglAutoReflexion" x:FieldModifier="public" Click="TglAutoReflexion_Click" RightTapped="TglAutoReflexion_RightTapped" IsChecked="True" Tag="Auto-Reflexion" AllowFocusOnInteraction="False" Width="32" Height="32" Padding="0" Background="Transparent" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Auto-Reflexion Schutzschild (Aktiviert/deaktiviert die automatische Build-, Syntax- und Qualitätsprüfung nach jedem vom Agenten durchgeführten Prompt)">
+                                    <ToggleButton.Resources>
+                                        <SolidColorBrush x:Key="ToggleButtonBackgroundChecked" Color="#3B82F6" Opacity="0.2" />
+                                        <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPointerOver" Color="#3B82F6" Opacity="0.3" />
+                                        <SolidColorBrush x:Key="ToggleButtonBackgroundCheckedPressed" Color="#3B82F6" Opacity="0.1" />
+                                        <SolidColorBrush x:Key="ToggleButtonBorderBrushChecked" Color="#3B82F6" Opacity="0.4" />
+                                    </ToggleButton.Resources>
+                                    <ImageIcon Source="ms-appx:///Assets/Icons/shield-check.svg" Width="16" Height="16" UseLayoutRounding="True" />
+                                </ToggleButton>
+
+                                <Button Style="{StaticResource AgyBorderlessButtonStyle}" x:Name="BtnUndo" x:FieldModifier="public" Click="BtnUndo_Click" Tag="Eingabe Rückgängig" Width="32" Height="32" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Rückgängig (/undo · Setzt den letzten CLI-Turn im Terminal zurück)">
+                                    <ImageIcon Source="ms-appx:///Assets/Icons/history.svg" Width="16" Height="16" UseLayoutRounding="True" />
+                                </Button>
+
+                                <Border Width="1" Height="18" Background="{StaticResource AgyBorderFaint}" Margin="3,0" />
+
+                                <Button x:Name="BtnVoice" x:FieldModifier="public" Click="BtnVoice_Click" AllowFocusOnInteraction="False" Width="34" Height="34" Padding="0" Background="{StaticResource AgySurfaceSubtle}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusPill}" ToolTipService.ToolTip="1-Klick Spracheingabe (F5 oder /voice · Startet die Audio-Transkription direkt am Cursor; erneuter Klick beendet die Aufnahme)">
+                                    <ImageIcon x:Name="IconVoice" x:FieldModifier="public" Source="ms-appx:///Assets/Icons/mic.svg" Width="16" Height="16" UseLayoutRounding="True" />
+                                </Button>
+
+                                <Button Style="{StaticResource AgyPrimaryButtonStyle}" x:Name="BtnSendMessage" x:FieldModifier="public" Click="BtnSendMessage_Click" PointerPressed="BtnSendMessage_PointerPressed" PointerReleased="BtnSendMessage_PointerReleased" PointerExited="BtnSendMessage_PointerExited" Width="34" Height="34" Padding="0" CornerRadius="{StaticResource AgyRadiusPill}" ToolTipService.ToolTip="Prompt senden (Eingabetaste · Gedrückthalten: Führt den Prompt zusammen mit der per Rechtsklick konfigurierten Schnellaktion aus)">
+                                    <ImageIcon Source="ms-appx:///Assets/Icons/send-white.svg" Width="16" Height="16" UseLayoutRounding="True" />
+                                </Button>
+
+                                <Button Style="{StaticResource AgyDangerButtonStyle}" x:Name="BtnCancelCommand" x:FieldModifier="public" Click="BtnCancelCommand_Click" Tag="Aktion Abbrechen" Width="34" Height="34" Padding="0" CornerRadius="{StaticResource AgyRadiusPill}" ToolTipService.ToolTip="Aktion abbrechen (Strg+C / Esc · Bricht laufende Hintergrundprozesse, Subagenten oder CLI-Ausführungen sofort ab)">
+                                    <ImageIcon Source="ms-appx:///Assets/Icons/square-white.svg" Width="14" Height="14" UseLayoutRounding="True" />
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+
+                    <!-- Fortschrittsbalken am unteren Kapselrand -->
+                    <Border x:Name="ActionBarProgressBar" x:FieldModifier="public" Height="2" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="0" Background="{StaticResource AgyAccent}" Grid.Row="2" Margin="16,0,16,0" CornerRadius="1" />
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

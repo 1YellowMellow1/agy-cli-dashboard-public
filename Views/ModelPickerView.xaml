@@ -1,0 +1,143 @@
+<UserControl
+    x:Class="AgyCliDashboard.Views.ModelPickerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AgyCliDashboard.Views"
+    xmlns:root="using:AgyCliDashboard"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="HeaderTemplate" x:DataType="root:ModelPickerHeaderViewModel">
+            <StackPanel Margin="0,4,0,4">
+                <Rectangle Height="1" Fill="{StaticResource AgyBorderDefault}" Margin="0,4,0,8" Visibility="{x:Bind DividerVisibility, Mode=OneWay}" />
+                <TextBlock Text="{x:Bind Title, Mode=OneWay}" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" Foreground="{x:Bind HeaderBrush, Mode=OneWay}" Margin="4,4,0,4" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="RowTemplate" x:DataType="root:ModelPickerRowViewModel">
+            <Border Background="{x:Bind ActiveRowBgBrush, Mode=OneWay}"
+                    BorderBrush="{x:Bind ActiveRowBorderBrush, Mode=OneWay}"
+                    BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="10,8" Margin="0,2">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Click="BtnStar_Click" Tapped="BtnStar_Tapped" Tag="{x:Bind Id}" Padding="2,0,8,0" Background="Transparent" BorderThickness="0" VerticalAlignment="Top" Margin="0,1,0,0" AllowFocusOnInteraction="False" ToolTipService.ToolTip="Als Favorit markieren / entfernen">
+                        <FontIcon Glyph="{x:Bind FavoriteGlyph, Mode=OneWay}" FontSize="{StaticResource AgyFontSizeBodyLarge}" Foreground="{x:Bind FavoriteBrush, Mode=OneWay}" />
+                    </Button>
+
+                    <StackPanel Grid.Column="1" Spacing="3">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{x:Bind DisplayName, Mode=OneWay}" FontSize="{StaticResource AgyFontSizeBodyLarge}" FontWeight="Bold" Foreground="{StaticResource AgyTextPrimary}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                            
+                            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                                <Border Background="{StaticResource AgyCardBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="5,1">
+                                    <TextBlock Text="{x:Bind ContextFormatted, Mode=OneWay}" FontSize="{StaticResource AgyFontSizeCaption}" Foreground="{StaticResource AgyTextMuted}" />
+                                </Border>
+                                <Border Background="#102E29" BorderBrush="{StaticResource AgyStatusSuccess}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="5,1" Visibility="{x:Bind ActiveBadgeVisibility, Mode=OneWay}">
+                                    <TextBlock Text="Aktiv" FontSize="{StaticResource AgyFontSizeCaption}" FontWeight="Bold" Foreground="{StaticResource AgyStatusSuccess}" />
+                                </Border>
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock Text="{x:Bind Id, Mode=OneWay}" FontSize="{StaticResource AgyFontSizeBody}" FontFamily="Consolas" Foreground="{StaticResource AgyTextMuted}" TextTrimming="CharacterEllipsis" />
+                        
+                        <TextBlock Text="{x:Bind PriceDisplay, Mode=OneWay}" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Medium" Foreground="{StaticResource AgyStatusSuccess}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </DataTemplate>
+
+        <local:ModelPickerTemplateSelector x:Key="ModelPickerTemplateSelector"
+                                          HeaderTemplate="{StaticResource HeaderTemplate}"
+                                          RowTemplate="{StaticResource RowTemplate}" />
+    </UserControl.Resources>
+
+    <Grid x:Name="PnlModelPicker" x:FieldModifier="public" Background="{StaticResource AgySidebarBg}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header with Back Button -->
+        <Grid Grid.Row="0" Margin="12,10,12,6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="BtnModelPickerBack" AllowFocusOnInteraction="False" Click="BtnModelPickerBack_Click" Padding="4,2" Background="Transparent" BorderThickness="0" ToolTipService.ToolTip="Zurück zur Sidebar" VerticalAlignment="Center">
+                <FontIcon Glyph="&#xE72B;" FontSize="{StaticResource AgyFontSizeSubtitle}" Foreground="{StaticResource AgyTextMuted}" />
+            </Button>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center" Margin="6,0,0,0">
+                <ImageIcon Source="ms-appx:///Assets/Icons/cpu-indigo.svg" Width="16" Height="16" UseLayoutRounding="True" />
+                <TextBlock x:Name="TxtModelPickerTitle" Text="OpenRouter Modell" FontSize="{StaticResource AgyFontSizeTitle}" FontWeight="Bold" Foreground="{StaticResource AgyTextPrimary}" />
+                <TextBlock x:Name="TxtModelCount" x:FieldModifier="public" Text="" FontSize="{StaticResource AgyFontSizeBodyLarge}" Foreground="{StaticResource AgyTextMuted}" VerticalAlignment="Center" />
+            </StackPanel>
+            <Button x:Name="BtnRefreshModels" AllowFocusOnInteraction="False" Click="BtnRefreshModels_Click" Grid.Column="2" Padding="4,2" Background="Transparent" BorderThickness="0" ToolTipService.ToolTip="Modelle von OpenRouter neu laden">
+                <FontIcon Glyph="&#xE72C;" FontSize="{StaticResource AgyFontSizeSubtitle}" Foreground="{StaticResource AgyTextMuted}" />
+            </Button>
+        </Grid>
+
+        <!-- Search Input -->
+        <TextBox x:Name="TxtModelSearch" x:FieldModifier="public" Grid.Row="1" TextChanged="TxtModelSearch_TextChanged" PlaceholderText="Modell suchen..." Margin="12,0,12,6" Background="{StaticResource AgyMainBg}" Foreground="{StaticResource AgyTextPrimary}" BorderBrush="{StaticResource AgyBorderStrong}" CornerRadius="{StaticResource AgyRadiusMd}" Padding="10,6" FontSize="{StaticResource AgyFontSizeSubtitle}" />
+
+        <!-- Filter Dropdowns & Toggle Switch -->
+        <Grid Grid.Row="2" Margin="12,0,12,8">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <ComboBox x:Name="CboModelProvider" x:FieldModifier="public" Grid.Column="0" SelectionChanged="CboModelProvider_SelectionChanged" HorizontalAlignment="Stretch" CornerRadius="{StaticResource AgyRadiusMd}" Background="{StaticResource AgyMainBg}" Foreground="{StaticResource AgyTextPrimary}" BorderBrush="{StaticResource AgyBorderStrong}" FontSize="{StaticResource AgyFontSizeSubtitle}" Padding="8,4" />
+
+            <ComboBox x:Name="CboModelSort" x:FieldModifier="public" Grid.Column="2" SelectionChanged="CboModelSort_SelectionChanged" HorizontalAlignment="Stretch" CornerRadius="{StaticResource AgyRadiusMd}" Background="{StaticResource AgyMainBg}" Foreground="{StaticResource AgyTextPrimary}" BorderBrush="{StaticResource AgyBorderStrong}" FontSize="{StaticResource AgyFontSizeSubtitle}" Padding="8,4">
+                <ComboBoxItem x:Name="CbiSortName" Content="Name (A → Z)" Tag="name" IsSelected="True" />
+                <ComboBoxItem x:Name="CbiSortPriceAsc" Content="Günstigste ($ ↑)" Tag="price_asc" />
+                <ComboBoxItem x:Name="CbiSortPriceDesc" Content="Teuerste ($ ↓)" Tag="price_desc" />
+                <ComboBoxItem x:Name="CbiSortCtxDesc" Content="Max. Kontext (Groß → Klein)" Tag="ctx_desc" />
+            </ComboBox>
+
+            <ToggleButton x:Name="BtnTogglePriceScore" x:FieldModifier="public" Grid.Column="4" Click="BtnTogglePriceScore_Click" Content="Score" CornerRadius="{StaticResource AgyRadiusMd}" Background="{StaticResource AgyMainBg}" Foreground="{StaticResource AgyTextMuted}" BorderBrush="{StaticResource AgyBorderStrong}" FontSize="{StaticResource AgyFontSizeBodyLarge}" Padding="8,4" Height="32" ToolTipService.ToolTip="Kostenanzeige umschalten: Relativer Score (0-100) vs. Exakter Preis ($ pro 1 Mio. Tokens)" />
+        </Grid>
+
+        <!-- Scrollable Virtualized Model ListView -->
+        <ListView x:Name="ListModels"
+                  x:FieldModifier="public"
+                  Grid.Row="3"
+                  ItemsSource="{x:Bind VisibleModels, Mode=OneWay}"
+                  ItemTemplateSelector="{StaticResource ModelPickerTemplateSelector}"
+                  SelectionMode="None"
+                  IsItemClickEnabled="True"
+                  ItemClick="ListModels_ItemClick"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  Padding="12,0,12,64">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel Orientation="Vertical" ItemsUpdatingScrollMode="KeepScrollOffset" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Padding" Value="0,1" />
+                    <Setter Property="Margin" Value="0" />
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
+    </Grid>
+</UserControl>

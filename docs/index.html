@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="page_title">AGY CLI Dashboard • Native Windows Cockpit for AI-Assisted Development</title>
+  <meta name="description" data-i18n-attr="content" content="The native Windows 11 desktop cockpit for Google Antigravity CLI. Featuring split-screen AI Co-Browser, multi-LLM orchestration, Git history control, and token telemetry.">
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Subtle Ambient Glow -->
+  <div class="ambient-glow"></div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="nav-brand">
+        <img src="assets/antigravity-logo.svg" alt="AGY Logo" class="nav-logo">
+        <span>AGY CLI Dashboard</span>
+        <span class="nav-badge">v1.0 Community</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#features" data-i18n="nav_features">Features</a></li>
+        <li><a href="#toolbar-guide" data-i18n="nav_toolbar">Action Bar</a></li>
+        <li><a href="#governance" data-i18n="nav_governance">Governance</a></li>
+        <li><a href="#comparison" data-i18n="nav_architecture">Architecture</a></li>
+        <li><a href="#knowledge-pack" data-i18n="nav_knowledge">Knowledge Pack</a></li>
+        <li><a href="#quickstart" data-i18n="nav_quickstart">Quickstart</a></li>
+        <li><a href="#faq" data-i18n="nav_faq">FAQ</a></li>
+      </ul>
+      <div class="nav-cta">
+        <!-- Bilingual Language Switcher -->
+        <div class="lang-switch" id="lang-switch" title="Language / Sprache: Switch between English and Deutsch">
+          <button type="button" class="lang-btn active" data-lang="en">EN</button>
+          <span class="lang-sep">/</span>
+          <button type="button" class="lang-btn" data-lang="de">DE</button>
+        </div>
+        <a href="https://github.com/1YellowMellow1/agy-cli-dashboard-public" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-github-nav">
+          <img src="assets/github.svg" alt="GitHub" class="btn-icon">
+          <span>GitHub</span>
+          <span class="github-star-pill">★ Star</span>
+        </a>
+        <a href="https://github.com/1YellowMellow1/agy-cli-dashboard-public" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          <img src="assets/zap.svg" alt="Code" class="btn-icon">
+          <span data-i18n="nav_source">Source Code</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-pill">
+        <span class="hero-pill-dot"></span>
+        <span data-i18n="hero_pill">WINDOWS 11 NATIVE • WINUI 3 &amp; .NET 10 • DE / EN BILINGUAL • 1-CLICK VOICE MODE</span>
+      </div>
+      <h1 class="hero-title" data-i18n="hero_title">
+        The Native Desktop Cockpit for<br>
+        <span class="title-sub">AI-Assisted Software Development</span>
+      </h1>
+      <p class="hero-desc" data-i18n="hero_desc">
+        Supercharge the Antigravity CLI, orchestrate subagents, inspect live DOM structures in the split-screen Co-Browser, and keep total clarity over Git history and token telemetry – all in a blazing-fast, native Windows app.
+      </p>
+
+      <!-- Companion GUI Cockpit Clarification Pill -->
+      <div class="hero-companion-pill">
+        <span class="companion-pulse"></span>
+        <span class="companion-text" data-i18n="hero_companion"><strong>Companion GUI Cockpit:</strong> Augments your installed Google Antigravity CLI (<code>agy</code>) with native WinUI 3 control – your terminal remains the heart of your workflow.</span>
+      </div>
+
+      <div class="hero-actions">
+        <a href="https://github.com/1YellowMellow1/agy-cli-dashboard-public" class="btn btn-primary btn-github-hero" target="_blank" rel="noopener noreferrer" id="btn-main-repo">
+          <img src="assets/github.svg" alt="Repository" class="btn-icon">
+          <span data-i18n="hero_btn_repo">Source Code on GitHub</span>
+          <span class="github-star-pill">★ Star</span>
+        </a>
+        <a href="#quickstart" class="btn btn-secondary">
+          <img src="assets/zap.svg" alt="Quickstart" class="btn-icon">
+          <span data-i18n="hero_btn_quickstart">Quickstart (Clone &amp; Run)</span>
+        </a>
+      </div>
+
+      <!-- Terminal Clone Quick-Box -->
+      <div class="terminal-box">
+        <span>$</span>
+        <code>git clone https://github.com/1YellowMellow1/agy-cli-dashboard-public.git</code>
+        <button class="btn-copy" data-copy="git clone https://github.com/1YellowMellow1/agy-cli-dashboard-public.git" data-i18n-title="hero_copy_title" title="Copy command to clipboard: Copies 'git clone ...' directly into your terminal">
+          <img src="assets/copy.svg" alt="Copy" width="14" height="14">
+          <span data-i18n="hero_copy">Copy</span>
+        </button>
+      </div>
+
+      <!-- Interactive App Mockup -->
+      <div class="mockup-wrapper">
+        <div class="mockup-window">
+          <!-- Windows 11 Titlebar -->
+          <div class="mockup-titlebar">
+            <div class="mockup-title">
+              <img src="assets/antigravity-logo.svg" width="20" height="20" alt="logo" style="vertical-align: middle;">
+              <span data-i18n="mockup_window_title">Antigravity CLI Dashboard — Community Edition</span>
+            </div>
+            <div class="win-controls">
+              <div class="win-btn" title="Minimize">
+                <svg width="10" height="1" viewBox="0 0 10 1"><rect width="10" height="1" fill="currentColor"/></svg>
+              </div>
+              <div class="win-btn" title="Maximize">
+                <svg width="10" height="10" viewBox="0 0 10 10"><rect x="0.5" y="0.5" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1"/></svg>
+              </div>
+              <div class="win-btn win-btn-close" title="Close">
+                <svg width="10" height="10" viewBox="0 0 10 10"><path d="M1,1 L9,9 M9,1 L1,9" stroke="currentColor" stroke-width="1.2"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Feature View Tabs -->
+          <div class="mockup-tabs">
+            <div class="mockup-tab active" data-tab="tab-cobrowser" data-i18n="tab_cobrowser" data-i18n-title="tab_cobrowser_title" title="Co-Browser Split-Screen View: Web browser with AI automation and DOM inspection right next to the terminal">Split-Screen Co-Browser</div>
+            <div class="mockup-tab" data-tab="tab-models" data-i18n="tab_models" data-i18n-title="tab_models_title" title="Model Selection &amp; Token Meter: Multi-provider choices (Gemini, Claude, GPT, DeepSeek) and live cost metrics">Models &amp; Token Meter</div>
+            <div class="mockup-tab" data-tab="tab-git" data-i18n="tab_git" data-i18n-title="tab_git_title" title="Git Control &amp; History: Version control, branch tracking, commit diffs, and automatic checkpoints">Git Control &amp; History</div>
+            <div class="mockup-tab" data-tab="tab-voice" data-i18n="tab_voice" data-i18n-title="tab_voice_title" title="Voice Input &amp; Prompts: 1-click microphone for hands-free dictation and reusable engineering prompts">Voice Input &amp; Prompts</div>
+          </div>
+
+          <!-- Tab Content 1: Co-Browser -->
+          <div class="mockup-content active" id="tab-cobrowser">
+            <div class="split-view">
+              <div class="terminal-pane">
+                <div class="pane-header">
+                  <span data-i18n="mockup_agent_session">Antigravity Agent Session</span>
+                  <span class="badge-live" data-i18n="mockup_badge_active">ACTIVE</span>
+                </div>
+                <div class="log-line log-user" data-i18n="mockup_log_user">user: Analyze the login structure and extract input fields.</div>
+                <div class="log-line log-agent" data-i18n="mockup_log_agent">agent: Launching AI Co-Browser and capturing DOM elements...</div>
+                <div class="log-line log-tool">➜ cobrowser_navigate("https://example.com/login")</div>
+                <div class="log-line log-tool">➜ cobrowser_interactive_map()</div>
+                <div class="log-line log-subtle" data-i18n="mockup_log_subtle">DOM Map: 12 interactive nodes captured (reduces image token transfer by &gt;95%).</div>
+              </div>
+              <div class="browser-pane">
+                <div class="pane-header">
+                  <span data-i18n="mockup_browser_title">Chromium Co-Browser</span>
+                  <span style="color: var(--accent-cyan); font-size: 0.72rem; font-family: var(--font-mono);">CDP: 9222 • API: 9223</span>
+                </div>
+                <div style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 8px; font-family: var(--font-mono);">https://example.com/login</div>
+                <div class="dom-map">
+                  <div style="margin-bottom: 6px;"><span class="dom-tag">#1</span> Input [type="email"] #user_email</div>
+                  <div style="margin-bottom: 6px;"><span class="dom-tag">#2</span> Input [type="password"] #user_password</div>
+                  <div style="margin-bottom: 6px;"><span class="dom-tag">#3</span> Button [submit] <span data-i18n="mockup_btn_login">Sign In</span></div>
+                </div>
+                <div style="margin-top: 14px; font-size: 0.74rem; color: #10b981; font-family: var(--font-mono);" data-i18n="mockup_browser_status">
+                  Status: Ready • Human takeover available anytime
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 2: Multi-LLM -->
+          <div class="mockup-content" id="tab-models">
+            <div style="padding: 16px 8px; font-family: var(--font-sans);">
+              <h3 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);" data-i18n="mockup_models_heading">Model Management &amp; Live Cost Telemetry</h3>
+              <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 18px;" data-i18n="mockup_models_desc">
+                Seamlessly switch between frontier models with transparent latency and token volume metrics.
+              </p>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); padding: 12px 16px; border-radius: 6px;">
+                  <div style="font-size: 0.7rem; color: var(--accent-cyan); font-family: var(--font-mono); text-transform: uppercase;" data-i18n="mockup_lbl_active_model">Active Model</div>
+                  <div style="font-weight: 600; font-size: 0.98rem; margin-top: 2px;">Gemini 3.8 Flash</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);" data-i18n="mockup_lbl_model_stats">Latency: 28ms • Context: 1,000,000 Tokens</div>
+                </div>
+                <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-subtle); padding: 12px 16px; border-radius: 6px;">
+                  <div style="font-size: 0.7rem; color: var(--text-muted); font-family: var(--font-mono); text-transform: uppercase;" data-i18n="mockup_lbl_session_burn">Session Consumption</div>
+                  <div style="font-weight: 600; font-size: 0.98rem; color: #10b981; margin-top: 2px;">14,280 Tokens</div>
+                  <div style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);" data-i18n="mockup_lbl_session_cost">Total chat trajectory: &lt; $0.01</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 3: Git & Historie -->
+          <div class="mockup-content" id="tab-git">
+            <div style="padding: 16px 8px; font-family: var(--font-sans);">
+              <h3 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);" data-i18n="mockup_git_heading">Git Control &amp; Version History</h3>
+              <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 14px;" data-i18n="mockup_git_desc">
+                Real-time branch tracking, dirty-state counter, commit timeline with timestamps, and auto cloud backup.
+              </p>
+              <div style="background: #06080d; border: 1px solid var(--border-subtle); border-radius: 6px; padding: 12px; font-family: var(--font-mono); font-size: 0.78rem;">
+                <div style="color: #38bdf8; margin-bottom: 4px;" data-i18n="mockup_git_branch_status">Branch: main • Status: 2 uncommitted changes</div>
+                <div style="color: #f8fafc;" data-i18n="mockup_git_commit_sample">[18dd9d0] docs(web): add interactive cockpit toolbar guide (10.10.2026 14:43)</div>
+                <div style="color: #10b981; margin-top: 6px;" data-i18n="mockup_git_backup_status">Auto-Cloud Backup active (every 30 min) • 1-Click Hard Reset ready</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tab Content 4: Spracheingabe & Prompts -->
+          <div class="mockup-content" id="tab-voice">
+            <div style="padding: 16px 8px; font-family: var(--font-sans);">
+              <h3 style="font-size: 1.05rem; font-weight: 600; margin-bottom: 8px; color: var(--text-primary);" data-i18n="mockup_voice_heading">1-Click Voice Input &amp; Prompt Library</h3>
+              <p style="color: var(--text-secondary); font-size: 0.88rem; margin-bottom: 16px;" data-i18n="mockup_voice_desc">
+                Activate the built-in Antigravity CLI dictation mode with a single click, or access specialized roles and system prompts.
+              </p>
+              <div style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px;">
+                <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); padding: 10px 14px; border-radius: 6px; display: flex; align-items: center; gap: 10px;">
+                  <img src="assets/mic.svg" width="18" height="18" alt="Mic">
+                  <div>
+                    <div style="font-size: 0.72rem; color: var(--accent-cyan); font-family: var(--font-mono); font-weight: 600;" data-i18n="mockup_voice_pill_title">VOICE DICTATION (/voice)</div>
+                    <div style="font-size: 0.82rem; color: #f8fafc;" data-i18n="mockup_voice_pill_desc">1-Click Start &amp; Stop • Transcription typed directly at cursor</div>
+                  </div>
+                </div>
+              </div>
+              <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <span class="step-snippet" data-i18n="mockup_tag_arch">System: Code Architect</span>
+                <span class="step-snippet" data-i18n="mockup_tag_sec">Role: Security Auditor</span>
+                <span class="step-snippet" data-i18n="mockup_tag_diff">Template: Bugfix &amp; Diff</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features Section -->
+  <section class="features-section" id="features">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="feat_section_tag">ARCHITECTURE &amp; CAPABILITIES</div>
+        <h2 class="section-title" data-i18n="feat_section_title">Engineered for High-Velocity Workflows</h2>
+        <p class="section-desc" data-i18n="feat_section_desc">Consolidated tooling for demanding software engineering tasks without disruptive context switches.</p>
+      </div>
+
+      <div class="grid-3">
+        <!-- Feature 1 -->
+        <div class="feature-card" id="co-browser">
+          <div class="feature-icon-wrapper">
+            <img src="assets/globe.svg" alt="Browser Icon">
+          </div>
+          <h3 class="feature-title" data-i18n="feat_1_title">Integrated AI Co-Browser</h3>
+          <p class="feature-text" data-i18n="feat_1_desc">
+            Side-by-side split-screen web inspection. Full Chrome DevTools Protocol (CDP) control, semantic DOM maps with numeric selectors, and instant human takeover.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <img src="assets/cpu.svg" alt="CPU Icon">
+          </div>
+          <h3 class="feature-title" data-i18n="feat_2_title">Multi-LLM &amp; Token Level Meter</h3>
+          <p class="feature-text" data-i18n="feat_2_desc">
+            Support for leading model families (Gemini 3.8 Flash, Claude Sonnet 5.5, GPT-6.1 Sol Pro). Reactive level meter warns of context overflow, complete with transparent latency and cost tracking.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <img src="assets/shield-check.svg" alt="Shield Icon">
+          </div>
+          <h3 class="feature-title" data-i18n="feat_3_title">Subagent Swarms &amp; Audits</h3>
+          <p class="feature-text" data-i18n="feat_3_desc">
+            Structured delegation of parallel research and code review tasks. Automated four-eyes checks verify modifications before merging.
+          </p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <img src="assets/git-commit.svg" alt="Git Icon">
+          </div>
+          <h3 class="feature-title" data-i18n="feat_4_title">Git Control &amp; File Context</h3>
+          <p class="feature-text" data-i18n="feat_4_desc">
+            Live branch tracking, dirty-state counters, and commit timeline right in the sidebar. Drag &amp; drop project files directly into the prompt; persistent date-ordered folder navigation.
+          </p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <img src="assets/mic.svg" alt="Voice Icon">
+          </div>
+          <h3 class="feature-title" data-i18n="feat_5_title">1-Click Voice Input</h3>
+          <p class="feature-text" data-i18n="feat_5_desc">
+            Native audio transcription typed directly at the cursor. Click the microphone button to start CLI dictation (/voice), speak your instructions, and click again to submit cleanly.
+          </p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">
+            <img src="assets/terminal.svg" alt="Terminal Icon">
+          </div>
+          <h3 class="feature-title" data-i18n="feat_6_title">Native Performance &amp; i18n (EN/DE)</h3>
+          <p class="feature-text" data-i18n="feat_6_desc">
+            Crafted with .NET 10 and WinUI 3 (no heavy Electron overhead). Blazing-fast ConPTY terminal, minimal RAM footprint, and full bilingual user interface (English &amp; German).
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Cockpit Toolbar Guide Section -->
+  <section class="toolbar-guide-section" id="toolbar-guide">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="tb_section_tag">COCKPIT CONTROLS &amp; SHORTCUTS</div>
+        <h2 class="section-title" data-i18n="tb_section_title">The Action Bar in Detail</h2>
+        <p class="section-desc" data-i18n="tb_section_desc">Click any icon to discover its function, practical engineering purpose, and corresponding Numpad shortcut.</p>
+      </div>
+
+      <!-- The Interactive Toolbar mimicking the real Dashboard Prompt Toolbar -->
+      <div class="toolbar-interactive-bar" id="cockpit-toolbar">
+        <!-- Left Cluster: Core Toggles & Quality Capsule -->
+        <div class="tb-cluster tb-cluster-left">
+          <button class="tb-btn active" data-id="context" title="Attach File Context">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg>
+          </button>
+
+          <button class="tb-btn tb-pill" data-id="model" title="Model Selection (Ctrl+M / Numpad 0)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#818cf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v2"/><path d="M12 2v2"/><path d="M17 20v2"/><path d="M17 2v2"/><path d="M2 12h2"/><path d="M2 17h2"/><path d="M2 7h2"/><path d="M20 12h2"/><path d="M20 17h2"/><path d="M20 7h2"/><path d="M7 20v2"/><path d="M7 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg>
+            <span data-i18n="tb_btn_model_label">Model</span>
+          </button>
+
+          <button class="tb-btn" data-id="deepthink" title="DeepThink Reasoning (Numpad 1)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13,2 L3,14 h9 L11,22 L21,10 h-9 L13,2 z"/></svg>
+          </button>
+
+          <button class="tb-btn" data-id="docs" title="Inject Docs (Numpad 2)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22,19 A2,2 0 0 1 20,21 H4 A2,2 0 0 1 2,19 V5 A2,2 0 0 1 4,3 h5 L11,6 h9 A2,2 0 0 1 22,8 z M2,9 h20"/></svg>
+          </button>
+
+          <button class="tb-btn" data-id="subagent" title="Subagent Swarms (Numpad 3)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12,2 v4 M8,6 h8 M4,10 A2,2 0 0 1 6,8 h12 A2,2 0 0 1 20,10 v8 A2,2 0 0 1 18,20 H6 A2,2 0 0 1 4,18 v-8 z M9,13 h0.01 M15,13 h0.01"/></svg>
+          </button>
+
+          <button class="tb-btn tb-accent-cyan" data-id="cobrowser" title="AI Co-Browser Split-Screen (Numpad 5)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12,2 A10,10 0 1 0 22,12 A10,10 0 0 0 12,2 z M2,12 h20 M12,2 A15.3,15.3 0 0 1 16,12 A15.3,15.3 0 0 1 12,22 A15.3,15.3 0 0 1 8,12 A15.3,15.3 0 0 1 12,2 z"/></svg>
+          </button>
+
+          <!-- Quality Suite Capsule (9 Tools) -->
+          <div class="tb-group">
+            <button class="tb-btn" data-id="reflexion" title="Auto-Reflection (Numpad 4)">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1,12 S5,4 12,4 S23,12 23,12 S19,20 12,20 S1,12 1,12 z M12,15 A3,3 0 1 0 12,9 A3,3 0 0 0 12,15 z"/></svg>
+            </button>
+            <button class="tb-btn" data-id="e2e" title="E2E &amp; Integration Tests (Numpad 7)">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12,2 A10,10 0 1 0 22,12 A10,10 0 0 0 12,2 z M10,8 L16,12 L10,16 z"/></svg>
+            </button>
+            <button class="tb-btn" data-id="deadcode" title="Dead-Code Scan (Numpad 8)">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5,17 L12,16 L11.5,17 Z M15,22 a1,1 0 0,0 1,-1 v-1 a2,2 0 0,0 1.56,-3.25 a8,8 0 1,0 -11.12,0 A2,2 0 0,0 8,20 v1 a1,1 0 0,0 1,1 Z M14,12 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0 M8,12 a1,1 0 1,0 2,0 a1,1 0 1,0 -2,0"/></svg>
+            </button>
+            <button class="tb-btn" data-id="errorsearch" title="Root-Cause Analysis">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M11.5 14.5a3 3 0 1 0 0-6 3 3 0 0 0 0 6z M14 17l-1.8-1.8"/></svg>
+            </button>
+            <button class="tb-btn" data-id="irrweg" title="Dead-End &amp; Workaround Cleanup (Numpad 9)">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3,19 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 M15,5 a3,3 0 1,0 6,0 a3,3 0 1,0 -6,0 M9,19 h8.5 c0.4,0 0.9,-0.1 1.3,-0.2 M5.2,5.2 A3.5,3.53 0 0 0 6.5,12 H12 M2,2 l20,20 M21,15.3 a3.5,3.5 0 0 0 -3.3,-3.3 M15,5 h-4.3"/></svg>
+            </button>
+            <button class="tb-btn" data-id="simplify" title="Code Simplify">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4,14 h6 v6 M20,10 h-6 V4 M14,10 l7,-7 M3,21 l7,-7"/></svg>
+            </button>
+            <button class="tb-btn" data-id="zerobug" title="Zero-Bug Defensive Audit">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12,20 v-9 M14,7 a4,4 0 0 1 4,4 v3 a6,6 0 0 1 -12,0 v-3 a4,4 0 0 1 4,-4 z M14.12,3.88 L16,2 M21,21 a4,4 0 0 0 -3.81,-4 M21,5 a4,4 0 0 1 -3.55,3.97 M22,13 h-4 M3,21 a4,4 0 0 1 3.81,-4 M3,5 a4,4 0 0 0 3.55,3.97 M6,13 H2 M8,2 l1.88,1.88 M9,7.13 V6 a3,3 0 1 1 6,0 v1.13"/></svg>
+            </button>
+            <button class="tb-btn" data-id="robustness" title="Chaos Stress Test">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10,12 a4,4 0 0,0 8,0 a8,8 0 1,0 -16,0 c0,3.584 1.571,6.801 4.063,9 M14,12 a4,4 0 0,0 -8,0 a8,8 0 1,0 16,0 a11.97,11.97 0 0,0 -4,-8.944"/></svg>
+            </button>
+            <button class="tb-btn tb-accent-purple" data-id="customprompt" title="Custom Prompts &amp; Roles">
+              <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12,2 L15.09,8.26 L22,9.27 L17,14.14 L18.18,21.02 L12,17.77 L5.82,21.02 L7,14.14 L2,9.27 L8.91,8.26 Z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Center Cluster: Meta Badges (Git, Protocol, Knowledge) -->
+        <div class="tb-cluster tb-cluster-center">
+          <button class="tb-btn" data-id="gitstatus" title="Git Repository Status">
+            <svg viewBox="0 0 78 78" width="16" height="16"><path fill="#e2e8f0" transform="translate(10 10) rotate(-45 29 29)" d="M5,58c-2.76142,0 -5,-2.23858 -5,-5v-48c0,-2.76142 2.23858,-5 5,-5h33v12.54404c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,0.73514 0.13221,1.43941 0.37415,2.09031l-15.28384,15.28384c-0.6509,-0.24194 -1.35517,-0.37415 -2.09031,-0.37415c-3.31371,0 -6,2.68629 -6,6c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-0.73514 -0.13221,-1.43941 -0.37415,-2.09031l14.87415,-14.87415l0,11.50851c-2.06553,0.94801 -3.5,3.03446 -3.5,5.45596c0,3.31371 2.68629,6 6,6c3.31371,0 6,-2.68629 6,-6c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.08808c2.06553,-0.94801 3.5,-3.03446 3.5,-5.45596c0,-2.42149 -1.43447,-4.50795 -3.5,-5.45596l0,-12.54404h10c2.76142,0 5,2.23858 5,5v48c0,2.76142 -2.23858,5 -5,5z"/></svg>
+          </button>
+          <button class="tb-btn" data-id="protocol" title="Project Protocol (docs/protocol.md)">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8"/></svg>
+          </button>
+          <button class="tb-btn" data-id="knowledge" title="Knowledge Base (docs/knowledge.md)">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V5 M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4 M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5 M17.997 5.125a4 4 0 0 1 2.526 5.77 M18 18a4 4 0 0 0 2-7.464 M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517 M6 18a4 4 0 0 1-2-7.464 M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg>
+          </button>
+        </div>
+
+        <!-- Right Cluster: Shield, Undo & Primary Action Buttons -->
+        <div class="tb-cluster tb-cluster-right">
+          <button class="tb-btn tb-accent-blue" data-id="shield" title="Auto-Reflection Global Shield Toggle">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          </button>
+          <button class="tb-btn" data-id="undo" title="Prompt History &amp; Undo (/undo)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+          </button>
+
+          <div class="tb-separator"></div>
+
+          <button class="tb-btn tb-pill-round" data-id="voice" title="1-Click Voice Dictation (/voice)">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19v3"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><rect x="9" y="2" width="6" height="13" rx="3"/></svg>
+          </button>
+          <button class="tb-btn tb-btn-round tb-btn-send" data-id="send" title="Submit Prompt (Enter / Ctrl+Enter)">
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>
+          </button>
+          <button class="tb-btn tb-btn-round tb-btn-cancel" data-id="cancel" title="Emergency Stop (Ctrl+C / Esc)">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="14" x="5" y="5" rx="2" fill="#ffffff"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Detail Explanation Card -->
+      <div class="tb-detail-card" id="tb-detail-card">
+        <div class="tb-detail-header">
+          <div class="tb-detail-title">
+            <span id="tb-icon" class="tb-detail-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></span>
+            <span id="tb-name">Attach File Context</span>
+          </div>
+          <div class="tb-detail-badges">
+            <span class="tb-badge-type" id="tb-type">FILE DIALOG &amp; DROP</span>
+            <span class="tb-badge-shortcut" id="tb-shortcut">Click / Drag &amp; Drop</span>
+          </div>
+        </div>
+        <div class="tb-detail-desc" id="tb-desc">
+          Opens the native Windows file picker to attach source code files, logs, PDFs, or screenshots directly as prompt reference context. Also supports direct drag &amp; drop.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Governance, Knowledge Management & Self-Healing Section -->
+  <section class="governance-section" id="governance">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="gov_section_tag">GOVERNANCE &amp; SELF-HEALING</div>
+        <h2 class="section-title" data-i18n="gov_section_title">Why Your AI Agent Ships Better Code With the Dashboard</h2>
+        <p class="section-desc" data-i18n="gov_section_desc">
+          Plain terminal agents suffer from session amnesia, operate without deterministic guardrails, and fail silently when tools crash. The Cockpit closes these vulnerabilities through active governance, persistent memory, and live diagnostics.
+        </p>
+      </div>
+
+      <div class="governance-grid">
+        <!-- Card 1: Modular Rule Governance -->
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <div class="gov-icon-badge" style="background: rgba(56, 189, 248, 0.1); border-color: rgba(56, 189, 248, 0.25); color: #38bdf8;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+            </div>
+            <div class="gov-badge" data-i18n="gov_card1_badge">SINGLE SOURCE OF TRUTH</div>
+          </div>
+          <h3 class="gov-title" data-i18n="gov_card1_title">Modular Rule Governance &amp; Guardrails</h3>
+          <p class="gov-text" data-i18n="gov_card1_text">
+            Clean separation into global and project-specific rules (<code>rule_control.json</code> / <code>project_rules.json</code>). The Cockpit automatically injects binding coding standards, language directives, and safety guardrails into the context window before every prompt.
+          </p>
+          <div class="gov-footer">
+            <span class="gov-location-tag">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
+              <span data-i18n="gov_card1_location">Sidebar: Rule Governance &amp; Knowledge</span>
+            </span>
+            <span class="gov-impact" data-i18n="gov_card1_impact">Up to 90% fewer hallucinations</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Persistent Project Memory & Protocol -->
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <div class="gov-icon-badge" style="background: rgba(129, 140, 248, 0.1); border-color: rgba(129, 140, 248, 0.25); color: #818cf8;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V5"/><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/><path d="M18 18a4 4 0 0 0 2-7.464"/><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/><path d="M6 18a4 4 0 0 1-2-7.464"/><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg>
+            </div>
+            <div class="gov-badge" data-i18n="gov_card2_badge">PERSISTENCE OVER AMNESIA</div>
+          </div>
+          <h3 class="gov-title" data-i18n="gov_card2_title">Persistent Memory &amp; Audit Protocol</h3>
+          <p class="gov-text" data-i18n="gov_card2_text">
+            Through <code>docs/knowledge.md</code>, the agent never forgets discovered framework traps or workarounds. Every agent decision is documented chronologically in <code>docs/protocol.md</code> with clickable links to the source transcript. Backed by automatic Git safety commits prior to code edits and 1-click dead-end cleanup.
+          </p>
+          <div class="gov-footer">
+            <span class="gov-location-tag">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/></svg>
+              <span data-i18n="gov_card2_location">Cockpit Center: Git, Protocol &amp; Knowledge</span>
+            </span>
+            <span class="gov-impact" data-i18n="gov_card2_impact">Zero context loss on chat resets</span>
+          </div>
+        </div>
+
+        <!-- Card 3: 1-Click System Check & Diagnostics -->
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <div class="gov-icon-badge" style="background: rgba(52, 211, 153, 0.1); border-color: rgba(52, 211, 153, 0.25); color: #34d399;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="3" rx="2"/><path d="m8 10 2.5 2.5L16 7"/><path d="M12 17v4"/><path d="M8 21h8"/></svg>
+            </div>
+            <div class="gov-badge" data-i18n="gov_card3_badge">AUTOMATED DIAGNOSTICS</div>
+          </div>
+          <h3 class="gov-title" data-i18n="gov_card3_title">1-Click System Check &amp; Toolchain Validation</h3>
+          <p class="gov-text" data-i18n="gov_card3_text">
+            Validates your entire engineering toolchain with one click: .NET 10 Windows SDK, WebView2 Evergreen Runtime, ConPTY terminal, local Antigravity CLI installation, and environment paths. Includes timestamp of the last successful run.
+          </p>
+          <div class="gov-footer">
+            <span class="gov-location-tag">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/></svg>
+              <span data-i18n="gov_card3_location">Status Bar: Monitor Icon</span>
+            </span>
+            <span class="gov-impact" data-i18n="gov_card3_impact">Zero guesswork when tool calls fail</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Knowledge Updates & Model Sync -->
+        <div class="gov-card">
+          <div class="gov-card-header">
+            <div class="gov-icon-badge" style="background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.25); color: #f59e0b;">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.2 19.1 19.1"/></svg>
+            </div>
+            <div class="gov-badge" data-i18n="gov_card4_badge">OVERCOMING KNOWLEDGE CUTOFF</div>
+          </div>
+          <h3 class="gov-title" data-i18n="gov_card4_title">Knowledge Updates &amp; Model Sync</h3>
+          <p class="gov-text" data-i18n="gov_card4_text">
+            The Knowledge Update macro teaches the AI freshly released CLI features, flags, and MCP servers autonomously. Simultaneously, the dashboard reads <code>agy models</code> live, aligns real context boundaries, and updates the token meter scale on the fly.
+          </p>
+          <div class="gov-footer">
+            <span class="gov-location-tag">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20v2"/><path d="M12 2v2"/><rect x="4" y="4" width="16" height="16" rx="2"/></svg>
+              <span data-i18n="gov_card4_location">Action Bar: Antenna &amp; Chip</span>
+            </span>
+            <span class="gov-impact" data-i18n="gov_card4_impact">Always up-to-date LLMs &amp; limits</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-Way Architectural Comparison Section -->
+  <section class="comparison-section" id="comparison">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="comp_section_tag">ARCHITECTURE &amp; COMPARISON</div>
+        <h2 class="section-title" data-i18n="comp_section_title">Which Antigravity Tool for Which Purpose?</h2>
+        <p class="section-desc" data-i18n="comp_section_desc">The official Antigravity technology stack exists in three main flavors. Compare strengths and tradeoffs at a glance.</p>
+      </div>
+
+      <div class="comparison-grid">
+        <!-- 1. Antigravity CLI -->
+        <div class="comparison-card">
+          <div class="comparison-tag" data-i18n="comp_cli_tag">TERMINAL NATIVE</div>
+          <h3 class="comparison-title" data-i18n="comp_cli_title">Google Antigravity CLI</h3>
+          <p class="comparison-subtitle" data-i18n="comp_cli_sub">Official, minimalist command-line interface (<code>agy</code>) for the Windows console or Linux/Mac terminals.</p>
+          <ul class="comparison-features">
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span data-i18n="comp_cli_pro1">Ultra-minimalist resource footprint in terminal (&lt; 35 MB RAM)</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span data-i18n="comp_cli_pro2">Ideal for CI/CD pipelines and headless script automation</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span data-i18n="comp_cli_pro3">Full access to official slash commands and MCP tools</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span data-i18n="comp_cli_con1">Completely blind: No AI Co-Browser for web apps, DOM maps, or UI tests</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span data-i18n="comp_cli_con2">Session amnesia: No cognitive long-term memory for learned lessons</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span data-i18n="comp_cli_con3">No automatic safety guardrails ('go' approval gate / auto-reflection)</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span data-i18n="comp_cli_con4">No automated ignore triad to protect against token waste</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 2. Antigravity Desktop / IDE -->
+        <div class="comparison-card">
+          <div class="comparison-tag" data-i18n="comp_ide_tag">STANDALONE IDE</div>
+          <h3 class="comparison-title" data-i18n="comp_ide_title">Antigravity Desktop (IDE)</h3>
+          <p class="comparison-subtitle" data-i18n="comp_ide_sub">Standalone, cloud-bound development environment based on modern web/Electron technologies.</p>
+          <ul class="comparison-features">
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span data-i18n="comp_ide_pro1">Full graphical IDE experience with integrated code editor</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span data-i18n="comp_ide_pro2">Integrated cloud synchronization and workspace management</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span data-i18n="comp_ide_pro3">Beginner-friendly chat interface for visual developers</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span data-i18n="comp_ide_con1">Noticeably higher RAM footprint (Electron runtime ~500 MB – 1.2 GB RAM)</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span data-i18n="comp_ide_con2">No interactive Co-Browser with CDP control and accessibility tree</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span data-i18n="comp_ide_con3">No programmatic 'go' safety gates or 21 one-click toolbar macros</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con">−</span>
+              <span data-i18n="comp_ide_con4">Strict editor replacement rather than a lightweight companion for your setup</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 3. AGY CLI Dashboard (Featured) -->
+        <div class="comparison-card featured">
+          <div class="comparison-tag" data-i18n="comp_dash_tag">NATIVE WINDOWS COCKPIT (COMMUNITY)</div>
+          <h3 class="comparison-title" data-i18n="comp_dash_title">AGY CLI Dashboard</h3>
+          <p class="comparison-subtitle" data-i18n="comp_dash_sub">Native WinUI 3 &amp; .NET 10 cockpit designed as a visual companion on top of your local Antigravity CLI.</p>
+          <ul class="comparison-features">
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span data-i18n="comp_dash_pro1"><strong>True Native Windows 11</strong>: WinUI 3 &amp; .NET 10 (&lt; 100 MB RAM, cold start &lt; 0.8s, ConPTY DirectX)</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span data-i18n="comp_dash_pro2"><strong>Integrated AI Co-Browser</strong>: Split-screen with CDP (Port 9222), Accessibility Tree &amp; Human Takeover</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span data-i18n="comp_dash_pro3"><strong>Cognitive Long-Term Memory</strong>: Automated 2-tier knowledge base eliminates session amnesia</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span data-i18n="comp_dash_pro4"><strong>Strict Safety Guardrails</strong>: Approval gate ('go'), deployment gate ('deploy') &amp; Auto-Reflection</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span data-i18n="comp_dash_pro5"><strong>Context Hygiene</strong>: Automated ignore triad saves up to 80% context tokens</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-pro">+</span>
+              <span data-i18n="comp_dash_pro6"><strong>21 One-Click Quick Actions</strong>: Toolbar macros for audits, Git safety, cleanups &amp; DE/EN toggle</span>
+            </li>
+            <li class="comparison-item">
+              <span class="comparison-icon-con" style="color: var(--accent-cyan); font-weight: bold;">*</span>
+              <span data-i18n="comp_dash_note">Requires the installed Antigravity CLI (<code>agy</code>) on the host system</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Detailed 28-Point Feature Matrix -->
+      <div class="matrix-container is-collapsed" id="feature-matrix">
+        <div class="matrix-header-box">
+          <div>
+            <h3>
+              <span class="matrix-title-icon"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><path d="M13,2 L3,14 h9 L11,22 L21,10 h-9 L13,2 z"/></svg></span>
+              <span data-i18n="matrix_heading">Detailed Feature Matrix</span>
+            </h3>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 4px;" data-i18n="matrix_desc">
+              Comprehensive feature and architecture comparison across all 28 core engineering capabilities.
+            </p>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: center; font-size: 0.78rem; color: var(--text-muted); flex-wrap: wrap;">
+            <span style="display: flex; align-items: center; gap: 5px;"><span class="badge-status badge-yes">✓</span> <span data-i18n="matrix_legend_yes">Natively Supported</span></span>
+            <span style="display: flex; align-items: center; gap: 5px;"><span class="badge-status badge-partial">~</span> <span data-i18n="matrix_legend_partial">Limited / Config Required</span></span>
+            <span style="display: flex; align-items: center; gap: 5px;"><span class="badge-status badge-no">−</span> <span data-i18n="matrix_legend_no">Not Available</span></span>
+          </div>
+        </div>
+
+        <div class="matrix-scroll-wrapper">
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th class="col-feature" data-i18n="matrix_th_feature">Feature / Capability</th>
+                <th class="col-tool" data-i18n="matrix_th_cli">Google Antigravity CLI</th>
+                <th class="col-tool" data-i18n="matrix_th_ide">Antigravity Desktop (IDE)</th>
+                <th class="col-tool col-featured" data-i18n="matrix_th_dash">AGY CLI Dashboard</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Category 1 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4" data-i18n="matrix_cat_1">1. Architecture, UI Technology &amp; Performance</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f1">Technological Foundation</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Text-Terminal / TUI</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">VS-Code / Electron</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">WinUI 3 &amp; .NET 10 (Native)</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f2">Memory Footprint (RAM)</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">&lt; 35 MB</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">500 MB – 1.2 GB</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">&lt; 95 MB (Lean)</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f3">Cold Start Time</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">&lt; 0.2s (Instant)</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">3 – 8s (Sluggish)</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">&lt; 0.8s (Blazing)</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f4">Role in Developer Setup</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Autonomous CLI / CI</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">All-in-One Editor Swap</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Visual Companion</span></div></td>
+              </tr>
+
+              <!-- Category 2 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4" data-i18n="matrix_cat_2">2. Web Automation &amp; AI Co-Browser</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f5">Split-Screen Co-Browser</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Not Available</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Preview Webviews</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Edge WebView2 Native</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f6">CDP &amp; WebSocket Server</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">External MCP only</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Not Available</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">CDP: 9222 • API: 9223</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f7">Interactive DOM Maps</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Raw HTML Text</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Not Available</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Visual Click Markers</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f8">Human Takeover Support</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Not Possible</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Manual in Webview</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Seamless Live Switch</span></div></td>
+              </tr>
+
+              <!-- Category 3 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4" data-i18n="matrix_cat_3">3. AI Models &amp; Reasoning Control</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f9">Google Gemini Frontier Models</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Gemini 3.8 / 3.7 Flash</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Gemini 3.8 / 3.7 Flash</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Gemini 3.8 Flash Native</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f10">Multi-LLM Hot-Switching</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">CLI flags / config</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Google-focused</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Ctrl+M / Numpad 0 Pill</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f11">Live Latency &amp; Level Meter</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Post-turn log only</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Basic token counter</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">ms ping &amp; overflow alert</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f12">DeepThink / Reasoning Budget</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">--thinking flag</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Buried in settings</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">1-Click Toggle (Numpad 1)</span></div></td>
+              </tr>
+
+              <!-- Category 4 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4" data-i18n="matrix_cat_4">4. Code Quality Suite &amp; 1-Click Macros</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f13">Auto-Reflection Pre-Audit</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Manual prompt</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Rule-based</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Numpad 4 &amp; Active Shield</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f14">E2E &amp; Test Automation</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Manual command</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Task Runner</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">1-Click Macro (Numpad 7)</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f15">Dead-Code &amp; Cleanup Scan</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Not Available</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Not Available</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">1-Click Macro (Numpad 8)</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f16">Global Root-Cause Analysis</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Manual Prompting</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Manual Prompting</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">1-Click Diagnostic Macro</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f17">Dead-End &amp; Workaround Cleanup</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Manual Prompting</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Manual Prompting</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">1-Click Macro (Numpad 9)</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f18">Zero-Bug &amp; Simplify Audit</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">No Templates</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">No Templates</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Defensive Code Macros</span></div></td>
+              </tr>
+
+              <!-- Category 5 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4" data-i18n="matrix_cat_5">5. Usability, Voice &amp; Ergonomics</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f19">1-Click Voice Input</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Type /voice command</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Not Available</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Native 1-Click Mic Button</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f20">Keyboard Cockpit (Numpad 0–9)</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Standard Keys only</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Classic VS Hotkeys</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Complete Numpad Mapping</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f21">Drag &amp; Drop File Context</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Type file paths</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Via Explorer Tree</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Drag directly into chat</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f22">Subagent Swarm Orchestration</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Background CLI only</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">VS Agent Panels</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Visual Modal (Numpad 3)</span></div></td>
+              </tr>
+
+              <!-- Category 6 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4" data-i18n="matrix_cat_6">6. Git, Diffs &amp; Localization</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f23">Git Control &amp; Version History</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">git log / status</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">VS Code Git Tab</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">Live Tracker &amp; Backup</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f24">Git Safety Commit Pre-Edit</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Manual execution</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Manual execution</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">1-Click &amp; Auto-Rule</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f25">Bilingual Localization (EN / DE)</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">English only</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">VS Language Packs</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">EN/DE Live Switching</span></div></td>
+              </tr>
+
+              <!-- Category 7 -->
+              <tr class="matrix-cat-row">
+                <th colspan="4" data-i18n="matrix_cat_7">7. Cognition, Governance &amp; Guardrails</th>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f26">Cognitive Long-Term Memory</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-no">−</span><span class="matrix-cell-desc">Session Amnesia</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Editor History</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">2-Tier Knowledge Base</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f27">Strict Safety Guardrails</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">No Locks</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">Manual Diffs</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">'go' &amp; 'deploy' Gates</span></div></td>
+              </tr>
+              <tr class="matrix-row">
+                <td><strong data-i18n="m_f28">Context Hygiene (Ignore Triad)</strong></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">.gitignore only</span></div></td>
+                <td><div class="matrix-cell-content"><span class="badge-status badge-partial">~</span><span class="matrix-cell-desc">.gitignore only</span></div></td>
+                <td class="cell-featured"><div class="matrix-cell-content"><span class="badge-status badge-yes">✓</span><span class="matrix-cell-desc">.git, .gemini &amp; .reflection</span></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Progressive Disclosure Toggle -->
+        <div class="matrix-toggle-bar">
+          <button id="btn-toggle-matrix" class="btn btn-secondary matrix-toggle-btn" type="button" title="Expand or collapse comparison matrix">
+            <span class="matrix-toggle-icon" id="matrix-toggle-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13,2 L3,14 h9 L11,22 L21,10 h-9 L13,2 z"/></svg></span>
+            <span class="matrix-toggle-text" id="matrix-toggle-text" data-i18n="matrix_btn_expand">Expand all 28 criteria &amp; detailed comparisons</span>
+            <span class="matrix-toggle-count" id="matrix-toggle-count" data-i18n="matrix_count_expand">+21 Criteria</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Battle-Tested AI Knowledge Pack Section -->
+  <section class="knowledge-section" id="knowledge-pack">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="kp_section_tag">CURATED AI KNOWLEDGE</div>
+        <h2 class="section-title" data-i18n="kp_section_title">Battle-Tested AI Engineering Knowledge Pack</h2>
+        <p class="section-desc" data-i18n="kp_section_desc">5 modular, leak-audited knowledge files extracted from hundreds of hours of autonomous coding sessions. Drop them into your agent's custom-knowledge directory to instantly eliminate hallucinations and recurring framework pitfalls.</p>
+      </div>
+
+      <div class="knowledge-grid">
+        <!-- Card 1: WinUI 3 -->
+        <div class="kp-card">
+          <div class="kp-card-header">
+            <div class="kp-card-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>
+            </div>
+            <div class="kp-card-title" data-i18n="kp_c1_title">WinUI 3 &amp; XAML Desktop Core</div>
+          </div>
+          <p class="kp-card-desc" data-i18n="kp_c1_desc">DispatcherQueue thread safety, unmanaged ConPTY pseudoconsole hosting, ContentDialog lifecycle, and WinUI 3 XAML theme styling.</p>
+          <span class="kp-card-tag" data-i18n="kp_c1_tag">winui3-patterns-and-airspace.md</span>
+        </div>
+
+        <!-- Card 2: C# .NET 10 -->
+        <div class="kp-card">
+          <div class="kp-card-header">
+            <div class="kp-card-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
+            </div>
+            <div class="kp-card-title" data-i18n="kp_c2_title">C# .NET 10 &amp; Win32 Interop</div>
+          </div>
+          <p class="kp-card-desc" data-i18n="kp_c2_desc">AOT compatibility, high-DPI PerMonitorV2 scaling, memory-safe P/Invoke bindings, and clean async task orchestration.</p>
+          <span class="kp-card-tag" data-i18n="kp_c2_tag">csharp-dotnet10-high-performance.md</span>
+        </div>
+
+        <!-- Card 3: JS/TS Web -->
+        <div class="kp-card">
+          <div class="kp-card-header">
+            <div class="kp-card-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/><path d="M12 12h8"/><path d="M12 2v10"/></svg>
+            </div>
+            <div class="kp-card-title" data-i18n="kp_c3_title">JavaScript &amp; TypeScript Web Core</div>
+          </div>
+          <p class="kp-card-desc" data-i18n="kp_c3_desc">Modern reactive DOM manipulation, CDP WebSocket bridges, zero-dependency client state, and robust DOM map generation.</p>
+          <span class="kp-card-tag" data-i18n="kp_c3_tag">javascript-safari-storage-and-unicode.md</span>
+        </div>
+
+        <!-- Card 4: Edge Cases -->
+        <div class="kp-card">
+          <div class="kp-card-header">
+            <div class="kp-card-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="kp-card-title" data-i18n="kp_c4_title">Co-Browser &amp; Automation Stability</div>
+          </div>
+          <p class="kp-card-desc" data-i18n="kp_c4_desc">Deep-DOM throttling, CDP protocol timeouts, Shadow-DOM traversal, and resilient error recovery patterns.</p>
+          <span class="kp-card-tag" data-i18n="kp_c4_tag">browser-dom-and-network-stability.md</span>
+        </div>
+
+        <!-- Card 5: Windows Performance -->
+        <div class="kp-card">
+          <div class="kp-card-header">
+            <div class="kp-card-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div class="kp-card-title" data-i18n="kp_c5_title">PowerShell &amp; System Interop</div>
+          </div>
+          <p class="kp-card-desc" data-i18n="kp_c5_desc">Process tree isolation, Job Object memory quotas, ConPTY clean shutdowns, and low-latency UI rendering.</p>
+          <span class="kp-card-tag" data-i18n="kp_c5_tag">powershell-async-interop.md</span>
+        </div>
+      </div>
+
+      <!-- Crowdsourcing & Call To Action Box -->
+      <div class="knowledge-cta-box">
+        <div class="knowledge-cta-content">
+          <h3 data-i18n="kp_cta_title">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>Share Your AI Knowledge — Let's Build the Open Collective</span>
+          </h3>
+          <p data-i18n="kp_cta_desc">Did your agent discover valuable edge cases or framework quirks? Cleanse private project details from your markdown notes and open a Pull Request. Every contribution makes the community's agents smarter.</p>
+        </div>
+        <div class="knowledge-cta-actions">
+          <a href="knowledge-pack.zip" class="btn btn-primary" download="knowledge-pack.zip">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="btn-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span data-i18n="kp_cta_btn_download">Download Knowledge Pack (.zip)</span>
+          </a>
+          <a href="https://github.com/1YellowMellow1/agy-cli-dashboard-public/tree/main/docs/knowledge-pack" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+            <img src="assets/zap.svg" alt="Browse" class="btn-icon">
+            <span data-i18n="kp_cta_btn_view">Browse Knowledge Pack</span>
+          </a>
+          <a href="https://github.com/1YellowMellow1/agy-cli-dashboard-public" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+            <img src="assets/github.svg" alt="GitHub" class="btn-icon">
+            <span data-i18n="kp_cta_btn_contribute">Contribute on GitHub</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- 3-Step Guide Box -->
+      <div class="kp-guide-box" style="margin-top: 24px; padding: 20px; background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 12px;">
+        <h4 style="font-size: 1rem; font-weight: 600; color: #f8fafc; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+          <span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: rgba(56, 189, 248, 0.2); color: var(--accent-cyan); font-size: 0.75rem;">i</span>
+          <span data-i18n="kp_guide_title">How to Use the Knowledge Pack in 3 Simple Steps</span>
+        </h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+          <div style="background: rgba(30, 41, 59, 0.5); padding: 14px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05);">
+            <div style="font-size: 0.75rem; color: var(--accent-cyan); font-weight: 700; margin-bottom: 4px;" data-i18n="kp_step1_badge">STEP 1 • DOWNLOAD</div>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin: 0;" data-i18n="kp_step1_desc">Download the ZIP package above, or click the 1-Click Starter-Pack button directly inside the app under 'Knowledge'.</p>
+          </div>
+          <div style="background: rgba(30, 41, 59, 0.5); padding: 14px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05);">
+            <div style="font-size: 0.75rem; color: #10b981; font-weight: 700; margin-bottom: 4px;" data-i18n="kp_step2_badge">STEP 2 • IMPORT</div>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin: 0;" data-i18n="kp_step2_desc">Open the 'Knowledge' tab in your Dashboard and click the Import icon (arrow down) under 'Custom Knowledge' to load the .md files.</p>
+          </div>
+          <div style="background: rgba(30, 41, 59, 0.5); padding: 14px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05);">
+            <div style="font-size: 0.75rem; color: #a855f7; font-weight: 700; margin-bottom: 4px;" data-i18n="kp_step3_badge">STEP 3 • EXPORT &amp; SHARE</div>
+            <p style="font-size: 0.85rem; color: #94a3b8; margin: 0;" data-i18n="kp_step3_desc">Click the Export icon (cloud) to backup your own accumulated knowledge or submit valuable insights to the community via GitHub PR.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quickstart Section -->
+  <section class="quickstart-section" id="quickstart">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="qs_section_tag">OPEN SOURCE</div>
+        <h2 class="section-title" data-i18n="qs_section_title">Quickstart in Three Steps</h2>
+        <p class="section-desc" data-i18n="qs_section_desc">The Community Edition runs 100% open source directly from code – transparent, auditable, and without installation baggage.</p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <span class="step-badge" data-i18n="qs_step1_badge">[STEP 01]</span>
+          <h3 class="step-title" data-i18n="qs_step1_title">Clone</h3>
+          <p class="step-text" data-i18n="qs_step1_desc">Clone the repository to your machine using Git (Prerequisites: .NET 10 SDK &amp; Antigravity CLI <code>agy</code> in PATH).</p>
+          <div class="step-snippet">git clone https://github.com/1YellowMellow1/agy-cli-dashboard-public.git</div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge" data-i18n="qs_step2_badge">[STEP 02]</span>
+          <h3 class="step-title" data-i18n="qs_step2_title">Launch</h3>
+          <p class="step-text" data-i18n="qs_step2_desc">Navigate to the folder and run <code>start.cmd</code>. The script validates prerequisites (.NET 10, WebView2, agy) and launches the app automatically.</p>
+          <div class="step-snippet">start.cmd</div>
+        </div>
+
+        <div class="step-card">
+          <span class="step-badge" data-i18n="qs_step3_badge">[STEP 03]</span>
+          <h3 class="step-title" data-i18n="qs_step3_title">Build</h3>
+          <p class="step-text" data-i18n="qs_step3_desc">Open your project workspace and delegate tasks to the agent. The dashboard coordinates execution inside the native ConPTY terminal.</p>
+          <div class="step-snippet" data-i18n="qs_step3_snippet">Ready for input</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="faq-section" id="faq">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag" data-i18n="faq_section_tag">QUESTIONS &amp; ANSWERS</div>
+        <h2 class="section-title" data-i18n="faq_section_title">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item active">
+          <button class="faq-question" title="Toggle answer">
+            <span data-i18n="faq_q1">Does the Dashboard require the Google Antigravity CLI?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer" data-i18n="faq_a1">
+            Yes. The dashboard acts as a visual control cockpit for the official Antigravity CLI. If the CLI tool is not yet found in PATH, the status bar alerts you on startup with a direct link to the System Check.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" title="Toggle answer">
+            <span data-i18n="faq_q2">Which Windows versions are supported?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer" data-i18n="faq_a2">
+            Supported on 64-bit versions of Windows 10 (Build 19041 and newer) and Windows 11. The application leverages the official Windows App SDK (WinUI 3) runtime.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" title="Toggle answer">
+            <span data-i18n="faq_q3">Under what license is the project published?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer" data-i18n="faq_a3">
+            The project is completely open source and published under the permissive MIT License. The source code is freely available on GitHub.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" title="Toggle answer">
+            <span data-i18n="faq_q4">How is the AI Co-Browser technically implemented?</span>
+            <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+          <div class="faq-answer" data-i18n="faq_a4">
+            The integration is powered by Microsoft Edge WebView2. Communication between the agent and browser runs over an isolated WebSocket endpoint via the Chrome DevTools Protocol (CDP).
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <div class="container">
+    <div class="cta-banner">
+      <h2 data-i18n="cta_title">Ready for Transparent AI Engineering?</h2>
+      <p data-i18n="cta_desc">Clone the repository on GitHub or contribute to the open-source community.</p>
+      <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+        <a href="https://github.com/1YellowMellow1/agy-cli-dashboard-public" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+          <img src="assets/github.svg" alt="GitHub" class="btn-icon">
+          <span data-i18n="cta_btn_repo">View Repository on GitHub</span>
+          <span class="github-star-pill">★ Star</span>
+        </a>
+        <a href="#quickstart" class="btn btn-secondary">
+          <img src="assets/zap.svg" alt="Quickstart" class="btn-icon">
+          <span data-i18n="cta_btn_qs">Go to Quickstart</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <img src="assets/antigravity-logo.svg" alt="Logo" width="28" height="28" style="vertical-align: middle;">
+          <span data-i18n="footer_brand">AGY CLI Dashboard • Community Edition</span>
+        </div>
+        <div>
+          <span data-i18n="footer_tech">Open Source under MIT License • WinUI 3 &amp; .NET 10</span>
+        </div>
+      </div>
+      <div class="footer-disclaimer" data-i18n="footer_disclaimer">
+        Notice: This project is an independent open-source community tool and is not affiliated with Google LLC. Antigravity CLI and Gemini are trademarks or registered trademarks of Google LLC. All other trademarks belong to their respective owners.
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/i18n.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

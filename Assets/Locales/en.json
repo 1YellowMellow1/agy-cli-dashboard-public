@@ -1,0 +1,150 @@
+{
+  "Nav": {
+    "Chats": "Chats",
+    "ChatsTooltip": "Chats & Sessions (Ctrl+1 · New Chat, History & Subagents)",
+    "Prompts": "Prompts",
+    "PromptsTooltip": "Prompt Templates (Ctrl+2 · Quick Commands & Automations)",
+    "Files": "Files",
+    "FilesTab": "Files",
+    "FilesTooltip": "Project Files & Context (Ctrl+3 · Browse & Stage Files)",
+    "Docs": "Docs",
+    "DocsTab": "Docs",
+    "DocsTooltip": "Project Knowledge & MCP (Ctrl+4 · Rules, Skills & Docs)",
+    "Git": "Git",
+    "GitTooltip": "Git Repository & Commits (Ctrl+5 · Diff Viewer & History)"
+  },
+  "Chat": {
+    "Placeholder": "Message Antigravity... (Enter to send, Shift+Enter for newline, drag files here)",
+    "SendTooltip": "Send command to Antigravity (Enter · Hold: send with quick action)",
+    "CancelTooltip": "Cancel active AI action (Ctrl+C / Esc)",
+    "VoiceTooltip": "Start / stop voice dictation",
+    "DeepThinkTooltip": "Deep Think (Numpad 1 · Click: Send now · Shift+Click: Toggle · Right-click: Set as quick action)",
+    "DocsTooltip": "Project Knowledge & Docs (Numpad 2 · Click: Send now · Shift+Click: Toggle · Right-click: Set as quick action)",
+    "SubagentTooltip": "Autonomous Subagents (Numpad 3 · Click: Send now · Shift+Click: Toggle · Right-click: Set as quick action)",
+    "ReflectionTooltip": "Auto-Reflection & Code Audit (Numpad 4 · Click: Send now · Shift+Click: Toggle · Right-click: Quick action)",
+    "WebResearchTooltip": "Web Research via Co-Browser (Numpad 5 · Click: Send now · Shift+Click: Toggle · Right-click: Set as quick action)",
+    "E2ETestTooltip": "Run E2E Tests (Numpad 7 · Click: Send now · Shift+Click: Toggle · Right-click: Set as quick action)",
+    "DeadCodeTooltip": "Run Dead Code Analysis (Numpad 8 · Click: Send now · Shift+Click: Toggle · Right-click: Set as quick action)",
+    "LanguageToggled": "Language switched to: {0}"
+  },
+  "Toolbar": {
+    "ProjectsHeader": "PROJECTS",
+    "NewChatTooltip": "Start new chat (/clear · Resets conversation and clears prompt history)",
+    "RefreshWorkspaceTooltip": "Refresh workspace (Reloads chats, project files, Git status and rules)",
+    "MoreChatActionsTooltip": "More chat actions (Unpin all, multi-select and delete chats)",
+    "UnpinAll": "Unpin all chats",
+    "UnpinAllTooltip": "Unpins all pinned chats to restore chronological order",
+    "SelectAndDeleteChats": "Select & delete chats",
+    "SelectAndDeleteChatsTooltip": "Enables checkboxes to select multiple chats for batch deletion",
+    "LanguageToggleTooltip": "Switch language (DE / EN)",
+    "ProjectSettingsTooltip": "Show / hide projects",
+    "OpenRepoTooltip": "Open repository in browser (or link remote)",
+    "EditRemoteTooltip": "Add / edit repository link",
+    "AutoPushTooltip": "Auto backup: Automatically creates a Git commit and pushes every 30 min"
+  },
+  "Sidebars": {
+    "Files": {
+      "Header": "PROJECT FILES",
+      "SearchPlaceholder": "Search files... (Esc)",
+      "ClearSearchTooltip": "Clear search (Esc)",
+      "EmptySelection": "Please select a specific project above to display its files.",
+      "CollapseAll": "Collapse",
+      "CollapseAllTooltip": "Collapse all expanded folders",
+      "NewFolderTooltip": "Create new folder",
+      "OpenExplorerTooltip": "Open project folder in Windows Explorer",
+      "HiddenFilesTooltip": "Toggle hidden files"
+    },
+    "Chats": {
+      "Header": "CHATS & SESSIONS",
+      "SelectAll": "All",
+      "SelectAllTooltip": "Select all displayed chats: Selects all chat sessions in the list for batch actions.",
+      "SelectNone": "None",
+      "SelectNoneTooltip": "Clear selection: Clears all currently selected chat sessions.",
+      "DeleteBatch": "Delete ({0})",
+      "DeleteBatchTooltip": "Delete selected chats: Opens confirmation to permanently delete all selected chats.",
+      "CancelSelectTooltip": "Exit selection mode (Esc): Closes multi-select and clears all selections.",
+      "SingleDeleteTitle": "Permanently delete chat?",
+      "SingleDeleteConfirm": "Delete",
+      "SingleDeleteCancel": "Cancel",
+      "SingleDeleteCancelTooltip": "Cancel (Esc): Discard deletion and keep the chat.",
+      "SingleDeleteConfirmTooltip": "Permanently delete: Remove this chat and its transcript permanently from disk.",
+      "MultiDeleteTitle": "Delete selected chats?",
+      "MultiDeleteConfirmDetail": "Are you sure you want to permanently delete the selected chats?",
+      "EmptyChats": "No chats available yet"
+    },
+    "Docs": {
+      "Header": "RULES & KNOWLEDGE",
+      "AddRuleTitle": "ADD NEW RULE",
+      "RuleNameLabel": "Name (e.g. TypeScript Strict)",
+      "RuleNamePlaceholder": "Short name...",
+      "RuleContentLabel": "Rule instruction",
+      "RuleContentPlaceholder": "Instruction for the AI...",
+      "Cancel": "Cancel",
+      "Save": "Save",
+      "CancelTooltip": "Cancel rule creation (Esc)",
+      "SaveTooltip": "Save rule (Ctrl+Enter)",
+      "ProjectResourcesHeader": "PROJECT RESOURCES",
+      "ProjectDocsHeader": "KNOWLEDGE & DOCS",
+      "ToggleProjectResourcesTooltip": "Toggle project resources (knowledge files, rules, protocol)",
+      "AddProjectDocTooltip": "Create new knowledge file (.md) in docs/",
+      "ImportGlobalKnowledgeTooltip": "Import knowledge (.md)",
+      "ExportGlobalKnowledgeTooltip": "Export knowledge (backup / sharing)"
+    },
+    "Prompts": {
+      "Header": "PROMPT TEMPLATES",
+      "ActiveChat": "Active Chat",
+      "SearchPlaceholder": "Search prompts...",
+      "RefreshTooltip": "Reload prompts"
+    },
+    "Git": {
+      "Header": "GIT REPOSITORY & HISTORY",
+      "EmptySelection": "Please select a specific project above to display its Git status."
+    }
+  },
+  "CoBrowser": {
+    "UrlPlaceholder": "Enter URL (e.g. https://google.com)...",
+    "StatusReady": "Status: Ready (Click: Info bubble)",
+    "MoreActionsTooltip": "Co-Browser menu: Navigation (Back, Forward, Reload), Auto-Fit zoom, scale levels and window controls",
+    "MenuBack": "Back",
+    "MenuForward": "Forward",
+    "MenuReload": "Reload",
+    "MenuHome": "Home",
+    "MenuAutoFit": "Auto-Fit (Fit width)",
+    "MenuZoomIn": "Zoom in (+10%)",
+    "MenuZoomOut": "Zoom out (-10%)",
+    "MenuZoomReset": "Reset zoom (Auto-Fit)",
+    "MenuClose": "Close Co-Browser"
+  },
+  "ModelPicker": {
+    "Title": "OpenRouter Model",
+    "SearchPlaceholder": "Search models...",
+    "RefreshTooltip": "Reload models from OpenRouter",
+    "BackTooltip": "Back to sidebar",
+    "SortName": "Name (A → Z)",
+    "SortPriceAsc": "Cheapest ($ ↑)",
+    "SortPriceDesc": "Most expensive ($ ↓)",
+    "SortCtxDesc": "Max Context (Large → Small)",
+    "ScoreTooltip": "Toggle cost display: Relative score (0-100) vs. exact price ($ per 1M tokens)",
+    "StarTooltip": "Toggle favorite",
+    "Active": "Active"
+  },
+  "Settings": {
+    "Title": "Project Settings",
+    "MasterFolder": "Master Project Folder:",
+    "ProjectsVisible": "Projects (Visible):",
+    "DefaultReflection": "Default Reflection:",
+    "RestoreSessions": "Restore open chats on startup",
+    "LanguageLabel": "Language / Sprache:",
+    "LanguageAuto": "Automatic (System)",
+    "LanguageDe": "Deutsch (DE)",
+    "LanguageEn": "English (EN)",
+    "Done": "Done"
+  },
+  "Common": {
+    "Ready": "Ready",
+    "Copied": "Copied",
+    "Active": "Active",
+    "Inactive": "Inactive",
+    "CommunityEdition": "AGY CLI Dashboard • Community Edition"
+  }
+}

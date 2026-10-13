@@ -1,0 +1,91 @@
+<UserControl
+    x:Class="AgyCliDashboard.Views.NotesSidebarView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid RowSpacing="8">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- 1. Two-Row Header: Title & Project Badge on Row 0, Stats & Actions on Row 1 -->
+        <Grid Grid.Row="0" RowSpacing="6">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Line 1: Section Title & Project Focus Badge -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                <TextBlock x:Name="TxtNotesHeader" Style="{StaticResource AgySidebarSectionHeaderStyle}" Text="NOTIZEN" VerticalAlignment="Center" />
+                <Border x:Name="BdrProjectBadge" Background="{StaticResource AgySurfaceSubtle}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="7,2" VerticalAlignment="Center">
+                    <TextBlock x:Name="TxtProjectBadge" Text="Projekt" FontSize="{StaticResource AgyFontSizeMicro}" FontWeight="SemiBold" Foreground="{StaticResource AgyTextSecondary}" TextTrimming="CharacterEllipsis" MaxWidth="150" />
+                </Border>
+            </StackPanel>
+
+            <!-- Line 2: Stats Badge (Left) & Action Toolbar Buttons (Right) -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Border HorizontalAlignment="Left" Background="{StaticResource AgyAccentSubtle}" CornerRadius="10" Padding="8,2" VerticalAlignment="Center">
+                    <TextBlock x:Name="TxtNotesStats" Text="0 Zeilen" FontSize="{StaticResource AgyFontSizeMicro}" FontWeight="SemiBold" Foreground="{StaticResource AgyAccent}" />
+                </Border>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="4" VerticalAlignment="Center">
+                    <Button x:Name="BtnCleanTerminalText" Style="{StaticResource AgyGhostButtonStyle}" Click="BtnCleanTerminalText_Click" Width="26" Height="26" BorderThickness="0" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Markdown &amp; Terminal-Text bereinigen (Doc-Format)">
+                        <ImageIcon Source="ms-appx:///Assets/Icons/zap.svg" Width="12" Height="12" />
+                    </Button>
+                    <Button x:Name="BtnClearAllNotes" Style="{StaticResource AgyGhostButtonStyle}" Width="26" Height="26" BorderThickness="0" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Notizen leeren">
+                        <ImageIcon Source="ms-appx:///Assets/Icons/trash-2.svg" Width="12" Height="12" />
+                        <Button.Flyout>
+                            <Flyout x:Name="FlyoutConfirmClear">
+                                <StackPanel Spacing="10" Padding="4" MaxWidth="240">
+                                    <TextBlock Text="Möchtest du die Notizen für dieses Projekt wirklich leeren?" TextWrapping="Wrap" FontSize="{StaticResource AgyFontSizeCaption}" Foreground="{StaticResource AgyTextPrimary}" />
+                                    <StackPanel Orientation="Horizontal" Spacing="8" HorizontalAlignment="Right">
+                                        <Button x:Name="BtnCancelClear" Style="{StaticResource AgyGhostButtonStyle}" Click="BtnCancelClear_Click" Content="Abbrechen" FontSize="11" Height="26" Padding="8,0" CornerRadius="{StaticResource AgyRadiusSm}" />
+                                        <Button x:Name="BtnConfirmClear" Style="{StaticResource AgyDangerButtonStyle}" Click="BtnConfirmClear_Click" Content="Löschen" FontSize="11" Height="26" Padding="8,0" CornerRadius="{StaticResource AgyRadiusSm}" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                    <Button x:Name="BtnOpenInEditor" Style="{StaticResource AgyGhostButtonStyle}" Click="BtnOpenInEditor_Click" Width="26" Height="26" BorderThickness="0" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="In Code-Editor öffnen">
+                        <ImageIcon Source="ms-appx:///Assets/Icons/edit-3.svg" Width="13" Height="13" />
+                    </Button>
+                    <Button x:Name="BtnRefreshNotes" Style="{StaticResource AgyGhostButtonStyle}" Click="BtnRefreshNotes_Click" Width="26" Height="26" BorderThickness="0" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Aus Notizdatei neu laden">
+                        <ImageIcon Source="ms-appx:///Assets/Icons/refresh-cw.svg" Width="12" Height="12" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+
+        <!-- 2. Pure Notes & Terminal-to-Doc Text Editor -->
+        <Grid Grid.Row="1">
+            <TextBox x:Name="TxtNotesContent"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     FontFamily="Cascadia Code, Consolas, Segoe UI Variable Text, Segoe UI, sans-serif"
+                     FontSize="{StaticResource AgyFontSizeBody}"
+                     Background="{StaticResource AgyMainBg}"
+                     Foreground="{StaticResource AgyTextPrimary}"
+                     BorderBrush="{StaticResource AgyBorderDefault}"
+                     BorderThickness="1"
+                     CornerRadius="{StaticResource AgyRadiusMd}"
+                     Padding="12,10"
+                     VerticalAlignment="Stretch"
+                     HorizontalAlignment="Stretch"
+                     ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                     TextChanged="TxtNotesContent_TextChanged"
+                     PreviewKeyDown="TxtNotesContent_PreviewKeyDown"
+                     PlaceholderText="Hier Notizen, Arbeitsstände oder kopierten Terminal-Text erfassen...&#x0a;&#x0a;Eingefügter Terminal-Text (ANSI-Farbcodes, ConPTY-Wraps, Prompts) wird beim Einfügen automatisch in sauberen Dokumenten-Text umgewandelt.&#x0a;&#x0a;Wird automatisch gespeichert und steht der KI zur Verfügung." />
+        </Grid>
+    </Grid>
+</UserControl>

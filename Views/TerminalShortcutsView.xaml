@@ -1,0 +1,299 @@
+<UserControl
+    x:Class="AgyCliDashboard.Views.TerminalShortcutsView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource AgyMainBg}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header Bar -->
+        <Border Grid.Row="0" Background="{StaticResource AgyHeaderBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="0,0,0,1" Padding="16,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10" VerticalAlignment="Center">
+                    <ImageIcon Source="ms-appx:///Assets/Icons/keyboard.svg" Width="18" Height="18" VerticalAlignment="Center" />
+                    <TextBlock Text="Terminal Tastenkombinationen (Shortcuts)" FontSize="{StaticResource AgyFontSizeSubtitle}" FontWeight="Bold" Foreground="{StaticResource AgyTextPrimary}" VerticalAlignment="Center" />
+                </StackPanel>
+
+                <Button Style="{StaticResource AgyGhostButtonStyle}" Grid.Column="1" Click="BtnCloseShortcuts_Click" Width="30" Height="30" BorderThickness="0" ToolTipService.ToolTip="Schließen (Esc)">
+                    <ImageIcon Source="ms-appx:///Assets/Icons/x.svg" Width="14" Height="14" />
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- Subtitle & Quick Search -->
+        <Border Grid.Row="1" Background="{StaticResource AgySurfaceBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="0,0,0,1" Padding="16,10">
+            <Grid ColumnSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="260" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Die wichtigsten Tastenkombinationen für das Terminal helfen beim schnellen Navigieren, Suchen und Steuern von Befehlen." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextMuted}" TextWrapping="Wrap" VerticalAlignment="Center" />
+
+                <TextBox Grid.Column="1" x:Name="TxtShortcutSearch" TextChanged="TxtShortcutSearch_TextChanged" PlaceholderText="Shortcuts suchen..." FontSize="{StaticResource AgyFontSizeBody}" Background="{StaticResource AgyInputBg}" Foreground="{StaticResource AgyTextPrimary}" BorderBrush="{StaticResource AgyBorderDefault}" CornerRadius="{StaticResource AgyRadiusMd}" Padding="8,4" VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+
+        <!-- Scrollable Content Area -->
+        <ScrollViewer Grid.Row="2" Padding="16">
+            <StackPanel Spacing="16">
+
+                <!-- KATEGORIE 1: Steuerung & Prozesse -->
+                <Border x:Name="CardCategoryControl" Background="{StaticResource AgySurfaceBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusLg}" Padding="14">
+                    <StackPanel Spacing="10">
+                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                            <TextBlock Text="⚡ STEUERUNG UND PROZESSE" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" Foreground="{StaticResource AgyStatusInfo}" CharacterSpacing="6" />
+                        </StackPanel>
+
+                        <!-- Shortcut 1: Strg + C -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Strg + C" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusInfo}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Kopiert markierten Text. Wenn nichts markiert ist: bricht den aktuellen Befehl ab (SIGINT)." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Shortcut 1b: Strg + Shift + C -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Strg+Shift+C" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusInfo}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Kopiert markierten Text (oder gesamten Terminal-Inhalt, falls keine Auswahl besteht)." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Shortcut 2 -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Strg + D" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusInfo}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Schließt die aktuelle Terminal-Sitzung oder loggt den Benutzer aus (wie exit)." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Shortcut 3 -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Strg + Z" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusInfo}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Schickt den aktuellen Prozess in den Hintergrund (Pause)." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Shortcut 4 -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Strg + L" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusInfo}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Leert den Bildschirm (gleiche Funktion wie clear)." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- KATEGORIE 2: Navigation in der Zeile -->
+                <Border x:Name="CardCategoryNavigation" Background="{StaticResource AgySurfaceBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusLg}" Padding="14">
+                    <StackPanel Spacing="10">
+                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                            <TextBlock Text="↔️ NAVIGATION IN DER ZEILE" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" Foreground="{StaticResource AgyStatusSuccessLight}" CharacterSpacing="6" />
+                        </StackPanel>
+
+                        <!-- Shortcut 1 -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Strg + A" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusSuccessLight}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Springt an den Anfang der Befehlszeile." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Shortcut 2 -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Strg + E" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusSuccessLight}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Springt an das Ende der Befehlszeile." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Shortcut 3 -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Alt + ◄ / ►" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusSuccessLight}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Springt wortweise vor und zurück (auch Strg + ◄ / ►)." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Shortcut 4 -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Strg + U" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusSuccessLight}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Löscht den Text von der Cursorposition bis zum Zeilenanfang." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Shortcut 5 -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Strg + K" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusSuccessLight}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Löscht den Text von der Cursorposition bis zum Zeilenende." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Shortcut 6 -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Strg + Y" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusSuccessLight}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Fügt den zuvor gelöschten Text (mit U oder K) wieder ein." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- KATEGORIE 3: Suchen & Verlauf -->
+                <Border x:Name="CardCategorySearch" Background="{StaticResource AgySurfaceBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusLg}" Padding="14">
+                    <StackPanel Spacing="10">
+                        <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                            <TextBlock Text="🔍 SUCHEN UND VERLAUF" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" Foreground="{StaticResource AgyStatusWarning}" CharacterSpacing="6" />
+                        </StackPanel>
+
+                        <!-- Shortcut 1 -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Strg + R" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusWarning}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Durchsucht den Verlauf der bereits eingegebenen Befehle (Reverse Search)." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Shortcut 2 -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Pfeil ▲ / ▼" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusWarning}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Blättert durch die vorherigen Befehle im Verlauf." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+
+                        <!-- Shortcut 3 -->
+                        <Border Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusMd}" Padding="12,8">
+                            <Grid ColumnSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Grid.Column="0" Background="{StaticResource AgyMainBg}" BorderBrush="{StaticResource AgyBorderStrong}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusSm}" Padding="8,4" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                    <TextBlock Text="Tab-Taste" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" FontFamily="Consolas" Foreground="{StaticResource AgyStatusWarning}" />
+                                </Border>
+                                <TextBlock Grid.Column="1" Text="Vervollständigt Dateinamen oder Befehle automatisch." FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <!-- Footer Banner & Ask Gemini Action -->
+        <Border Grid.Row="3" Background="{StaticResource AgyHeaderBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="0,1,0,0" Padding="16,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0" Text="Möchtest du Shortcuts für eine bestimmte Shell (Bash, Zsh, PowerShell) oder OS anpassen?" FontSize="{StaticResource AgyFontSizeCaption}" Foreground="{StaticResource AgyTextMuted}" VerticalAlignment="Center" />
+
+                <Button Style="{StaticResource AgySubtleAccentButtonStyle}" Grid.Column="1" Click="BtnAskShellShortcuts_Click" Height="30" Padding="12,0" ToolTipService.ToolTip="Shell-spezifische Shortcuts im Chat erfragen">
+                    <StackPanel Orientation="Horizontal" Spacing="6" VerticalAlignment="Center">
+                        <ImageIcon Source="ms-appx:///Assets/Icons/message-square.svg" Width="12" Height="12" />
+                        <TextBlock Text="Shell-Shortcuts im Chat fragen" FontSize="{StaticResource AgyFontSizeCaption}" FontWeight="SemiBold" Foreground="{StaticResource AgyTextPrimary}" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

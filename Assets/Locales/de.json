@@ -1,0 +1,150 @@
+{
+  "Nav": {
+    "Chats": "Chats",
+    "ChatsTooltip": "Chats & Sessions (Strg+1 · Neuer Chat, Verlauf & Subagenten)",
+    "Prompts": "Prompts",
+    "PromptsTooltip": "Prompt-Vorlagen (Strg+2 · Schnelle Befehle & Automationen)",
+    "Files": "Dateien",
+    "FilesTab": "Dateien",
+    "FilesTooltip": "Projekt-Dateien & Kontext (Strg+3 · Dateien durchsuchen & einbinden)",
+    "Docs": "Wissen",
+    "DocsTab": "Wissen",
+    "DocsTooltip": "Projekt-Wissen & MCP (Strg+4 · Regeln, Skills & Docs)",
+    "Git": "Git",
+    "GitTooltip": "Git-Repository & Commits (Strg+5 · Diff-Viewer & History)"
+  },
+  "Chat": {
+    "Placeholder": "Nachricht an Antigravity eingeben... (Eingabe zum Senden, Umschalt+Eingabe für Zeilenumbruch, Dateien hierher ziehen)",
+    "SendTooltip": "Befehl an Antigravity senden (Eingabetaste · Gedrückthalten: mit Schnellaktion senden)",
+    "CancelTooltip": "Laufende KI-Aktion abbrechen (Strg+C / Esc)",
+    "VoiceTooltip": "Spracheingabe starten / stoppen (Diktatmodus)",
+    "DeepThinkTooltip": "Deep Think (Numpad 1 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "DocsTooltip": "Projekt-Wissen & Dokumentation (Numpad 2 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "SubagentTooltip": "Autonome Subagenten (Numpad 3 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "ReflectionTooltip": "Auto-Reflexion & Code-Audit (Numpad 4 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "WebResearchTooltip": "Web-Recherche via Co-Browser (Numpad 5 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "E2ETestTooltip": "E2E-Tests ausführen (Numpad 7 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "DeadCodeTooltip": "Dead-Code-Prüfung ausführen (Numpad 8 · Klick: Sofort senden · Shift+Klick: Umschalten · Rechtsklick: Als Schnellaktion)",
+    "LanguageToggled": "Sprache umgestellt: {0}"
+  },
+  "Toolbar": {
+    "ProjectsHeader": "PROJEKTE",
+    "NewChatTooltip": "Neuen Chat starten (/clear · Setzt das Gespräch zurück und leert den Prompt-Verlauf)",
+    "RefreshWorkspaceTooltip": "Workspace aktualisieren (Liest Chats, Projektdateien, Git-Status und Regeln neu ein)",
+    "MoreChatActionsTooltip": "Weitere Chat-Aktionen (Pins lösen, mehrere Chats auswählen und bereinigen)",
+    "UnpinAll": "Alle Pins lösen",
+    "UnpinAllTooltip": "Löst alle Fixierungen auf, sodass alle Chats wieder chronologisch sortiert werden",
+    "SelectAndDeleteChats": "Chats auswählen & löschen",
+    "SelectAndDeleteChatsTooltip": "Aktiviert die Kontrollkästchen zur Auswahl mehrerer Chats zum gemeinsamen Löschen",
+    "LanguageToggleTooltip": "Sprache wechseln (DE / EN)",
+    "ProjectSettingsTooltip": "Projekte ein- / ausblenden",
+    "OpenRepoTooltip": "Repository im Browser öffnen (oder Remote verknüpfen)",
+    "EditRemoteTooltip": "Repository-Link hinzufügen / bearbeiten",
+    "AutoPushTooltip": "Auto-Backup: Erstellt alle 30 Min. automatisch einen Git-Commit und pusht zu Remote"
+  },
+  "Sidebars": {
+    "Files": {
+      "Header": "PROJEKT-DATEIEN",
+      "SearchPlaceholder": "Dateien durchsuchen... (Esc)",
+      "ClearSearchTooltip": "Suche leeren (Esc)",
+      "EmptySelection": "Bitte wähle oben ein konkretes Projekt aus, um dessen Dateien anzuzeigen.",
+      "CollapseAll": "Einklappen",
+      "CollapseAllTooltip": "Alle aufgeklappten Ordner einklappen",
+      "NewFolderTooltip": "Neuen Ordner erstellen",
+      "OpenExplorerTooltip": "Projektordner im Windows Explorer öffnen",
+      "HiddenFilesTooltip": "Versteckte Dateien ein-/ausblenden"
+    },
+    "Chats": {
+      "Header": "CHATS & SESSIONS",
+      "SelectAll": "Alle",
+      "SelectAllTooltip": "Alle angezeigten Chats markieren: Wählt alle Chat-Sitzungen in der Liste für Stapelaktionen aus.",
+      "SelectNone": "Keine",
+      "SelectNoneTooltip": "Markierung aufheben: Hebt die Auswahl aller aktuell markierten Chat-Sitzungen auf.",
+      "DeleteBatch": "Löschen ({0})",
+      "DeleteBatchTooltip": "Ausgewählte Chats löschen: Öffnet die Sicherheitsabfrage zur dauerhaften Löschung aller markierten Chats.",
+      "CancelSelectTooltip": "Auswahlmodus beenden (Esc): Schließt die Mehrfachauswahl und hebt alle Markierungen auf.",
+      "SingleDeleteTitle": "Chat unwiderruflich löschen?",
+      "SingleDeleteConfirm": "Löschen",
+      "SingleDeleteCancel": "Abbrechen",
+      "SingleDeleteCancelTooltip": "Abbrechen (Esc): Den Löschvorgang verwerfen und den Chat behalten.",
+      "SingleDeleteConfirmTooltip": "Endgültig löschen: Diesen Chat und sein Transkript unwiderruflich von der Festplatte entfernen.",
+      "MultiDeleteTitle": "Ausgewählte Chats löschen?",
+      "MultiDeleteConfirmDetail": "Möchtest du die ausgewählten Chats wirklich dauerhaft löschen?",
+      "EmptyChats": "Noch keine Chats vorhanden"
+    },
+    "Docs": {
+      "Header": "REGEL-STEUERUNG & WISSEN",
+      "AddRuleTitle": "NEUE REGEL HINZUFÜGEN",
+      "RuleNameLabel": "Name (z. B. TypeScript Strict)",
+      "RuleNamePlaceholder": "Kurzname...",
+      "RuleContentLabel": "Regeltext",
+      "RuleContentPlaceholder": "Anweisung für die KI...",
+      "Cancel": "Abbrechen",
+      "Save": "Speichern",
+      "CancelTooltip": "Regel-Erstellung abbrechen (Esc)",
+      "SaveTooltip": "Regel speichern (Strg+Enter)",
+      "ProjectResourcesHeader": "PROJEKT RESSOURCEN",
+      "ProjectDocsHeader": "WISSEN & DOKUMENTE",
+      "ToggleProjectResourcesTooltip": "Projekt-Ressourcen ein- oder ausklappen (Wissensdateien, Regeln, Protokoll)",
+      "AddProjectDocTooltip": "Neue Wissensdatei (.md) in docs/ erstellen",
+      "ImportGlobalKnowledgeTooltip": "Wissen (.md) importieren",
+      "ExportGlobalKnowledgeTooltip": "Wissen exportieren (Backup / Sharing)"
+    },
+    "Prompts": {
+      "Header": "PROMPT-VORLAGEN",
+      "ActiveChat": "Aktiver Chat",
+      "SearchPlaceholder": "Prompts durchsuchen...",
+      "RefreshTooltip": "Prompts neu laden"
+    },
+    "Git": {
+      "Header": "GIT REPOSITORY & HISTORIE",
+      "EmptySelection": "Bitte wähle oben ein konkretes Projekt aus, um dessen Git-Status anzuzeigen."
+    }
+  },
+  "CoBrowser": {
+    "UrlPlaceholder": "URL eingeben (z. B. https://google.com)...",
+    "StatusReady": "Status: Bereit (Klick: Hinweis-Sprechblase)",
+    "MoreActionsTooltip": "Co-Browser Menü: Navigation (Zurück, Vor, Neu laden), Auto-Fit Zoom, Skalierungsstufen und Fenstersteuerung",
+    "MenuBack": "Zurück",
+    "MenuForward": "Vorwärts",
+    "MenuReload": "Neu laden",
+    "MenuHome": "Startseite",
+    "MenuAutoFit": "Auto-Fit (Breite anpassen)",
+    "MenuZoomIn": "Zoom vergrößern (+10%)",
+    "MenuZoomOut": "Zoom verkleinern (-10%)",
+    "MenuZoomReset": "Zoom zurücksetzen (Auto-Fit)",
+    "MenuClose": "Co-Browser schließen"
+  },
+  "ModelPicker": {
+    "Title": "OpenRouter Modell",
+    "SearchPlaceholder": "Modell suchen...",
+    "RefreshTooltip": "Modelle von OpenRouter neu laden",
+    "BackTooltip": "Zurück zur Sidebar",
+    "SortName": "Name (A → Z)",
+    "SortPriceAsc": "Günstigste ($ ↑)",
+    "SortPriceDesc": "Teuerste ($ ↓)",
+    "SortCtxDesc": "Max. Kontext (Groß → Klein)",
+    "ScoreTooltip": "Kostenanzeige umschalten: Relativer Score (0-100) vs. Exakter Preis ($ pro 1 Mio. Tokens)",
+    "StarTooltip": "Als Favorit markieren / entfernen",
+    "Active": "Aktiv"
+  },
+  "Settings": {
+    "Title": "Projekteinstellungen",
+    "MasterFolder": "Master-Ordner für Projekte:",
+    "ProjectsVisible": "Projekte (Sichtbar):",
+    "DefaultReflection": "Standard-Reflexion:",
+    "RestoreSessions": "Offene Chats bei Neustart wiederherstellen",
+    "LanguageLabel": "Sprache / Language:",
+    "LanguageAuto": "Automatisch (System)",
+    "LanguageDe": "Deutsch (DE)",
+    "LanguageEn": "English (EN)",
+    "Done": "Fertig"
+  },
+  "Common": {
+    "Ready": "Bereit",
+    "Copied": "Kopiert",
+    "Active": "Aktiv",
+    "Inactive": "Inaktiv",
+    "CommunityEdition": "AGY CLI Dashboard • Community Edition"
+  }
+}

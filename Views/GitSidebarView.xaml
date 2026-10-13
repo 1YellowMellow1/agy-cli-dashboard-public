@@ -1,0 +1,15 @@
+<UserControl
+    x:Class="AgyCliDashboard.Views.GitSidebarView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer x:Name="GitPanelScrollViewer" x:FieldModifier="public" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel x:Name="GitPanel" x:FieldModifier="public" Visibility="Visible" Spacing="8">
+            <TextBlock x:Name="TxtGitHeader" Style="{StaticResource AgySidebarSectionHeaderStyle}" Text="GIT REPOSITORY &amp; HISTORIE" />
+            <TextBlock x:Name="TxtGitEmptySelection" Text="Bitte wähle oben ein konkretes Projekt aus, um dessen Git-Status anzuzeigen." FontSize="{StaticResource AgyFontSizeBodyLarge}" Foreground="{StaticResource AgyTextMuted}" TextWrapping="Wrap" Margin="0,4,0,0" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

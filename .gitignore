@@ -1,0 +1,114 @@
+﻿## Hygiene & Archivierung
+_archive/
+*.tmp
+*.bak
+*.old
+*.swp
+*~
+*.dmp
+*.dump
+
+## Environment & Secrets
+.env
+.env.*
+*.env
+*.local
+secrets/
+
+## .NET / Visual Studio
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.cache
+artifacts/
+packages/
+
+## Build logs & Diagnostics
+[Ll]og/
+[Ll]ogs/
+*.log
+*.log.*
+*.binlog
+
+## Test results & Coverage
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+
+## NuGet & Dependencies
+*.nupkg
+*.snupkg
+*.nuget.props
+*.nuget.targets
+project.lock.json
+project.assets.json
+node_modules/
+
+## MSIX packaging output
+AppPackages/
+BundleArtifacts/
+*.msix
+*.msixupload
+*.appx
+*.appxbundle
+*.appxupload
+
+## Publish & Distribution output
+publish/
+dist/
+out/
+build/
+target/
+**/target/
+*.pubxml
+!Properties/PublishProfiles/*.pubxml
+PublishScripts/
+launcher_error.log
+*.zip
+!website/knowledge-pack.zip
+!docs/knowledge-pack.zip
+
+## SQLite Local Databases & WAL Logs
+*.db
+*.sqlite
+*.db-shm
+*.db-wal
+*.sqlite-shm
+*.sqlite-wal
+
+## Rust / Cargo
+*.rs.bk
+
+## Tooling & IDEs
+_ReSharper*/
+*.DotSettings.user
+*.dotCover
+.idea/
+.vscode/
+
+## Generated files
+Generated\ Files/
+Generated Files/
+*_wpftmp.csproj
+
+## OS-specific Files
+Thumbs.db
+desktop.ini
+.DS_Store
+
+## Co-Browser Screenshots & Dumps
+co-browser-screenshot.png
+cobrowser_screenshot.png
+*.screenshot.png
+*.png.tmp
+
+
+

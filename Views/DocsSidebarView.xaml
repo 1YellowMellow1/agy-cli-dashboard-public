@@ -1,0 +1,210 @@
+<UserControl
+    x:Class="AgyCliDashboard.Views.DocsSidebarView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer x:Name="DocsPanelScrollViewer" x:FieldModifier="public" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel x:Name="DocsPanel" x:FieldModifier="public" Visibility="Visible" Spacing="10">
+            <TextBlock x:Name="TxtDocsHeader" Style="{StaticResource AgySidebarSectionHeaderStyle}" Text="REGEL-STEUERUNG &amp; WISSEN" />
+
+            <!-- INLINE DIALOG FOR ADDING INJECTION -->
+            <Border x:Name="PnlAddInjectionDialog" x:FieldModifier="public" Visibility="Collapsed" Background="{StaticResource AgyCardBg}" BorderBrush="{StaticResource AgyBorderDefault}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusLg}" Padding="12">
+                <StackPanel Spacing="10">
+                    <TextBlock x:Name="TxtAddInjectionTitle" x:FieldModifier="public" Text="NEUE REGEL HINZUFÜGEN" FontSize="{StaticResource AgyFontSizeBodyLarge}" FontWeight="Bold" Foreground="{StaticResource AgyTextSecondary}" />
+
+                    <StackPanel Spacing="4">
+                        <TextBlock x:Name="TxtNewInjectionNameLabel" Text="Name (z. B. TypeScript Strict)" FontSize="{StaticResource AgyFontSizeBodyLarge}" FontWeight="SemiBold" Foreground="{StaticResource AgyTextSecondary}" />
+                        <TextBox x:Name="TxtNewInjectionName" x:FieldModifier="public" FontSize="{StaticResource AgyFontSizeBodyLarge}" PlaceholderText="Kurzname..." CornerRadius="{StaticResource AgyRadiusSm}" Background="{StaticResource AgyMainBg}" Foreground="{StaticResource AgyTextPrimary}" />
+                    </StackPanel>
+
+                    <StackPanel Spacing="4">
+                        <TextBlock x:Name="TxtNewInjectionContentLabel" Text="Regeltext" FontSize="{StaticResource AgyFontSizeBodyLarge}" FontWeight="SemiBold" Foreground="{StaticResource AgyTextSecondary}" />
+                        <TextBox x:Name="TxtNewInjectionContent" x:FieldModifier="public" FontSize="{StaticResource AgyFontSizeBodyLarge}" PlaceholderText="Anweisung für die KI..." AcceptsReturn="True" TextWrapping="Wrap" MinHeight="70" CornerRadius="{StaticResource AgyRadiusSm}" Background="{StaticResource AgyMainBg}" Foreground="{StaticResource AgyTextPrimary}" />
+                    </StackPanel>
+
+                    <Grid Margin="0,4,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="BtnCancelAddInjection" AllowFocusOnInteraction="False" Click="BtnCancelAddInjection_Click" Grid.Column="0" Content="Abbrechen" HorizontalAlignment="Stretch" Margin="0,0,4,0" CornerRadius="{StaticResource AgyRadiusSm}" MinHeight="32" Padding="0,2" FontSize="{StaticResource AgyFontSizeBody}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTipService.ToolTip="Regel-Erstellung abbrechen (Esc)" />
+                        <Button x:Name="BtnSaveNewInjection" AllowFocusOnInteraction="False" Click="BtnSaveNewInjection_Click" Grid.Column="1" Content="Speichern" Background="{StaticResource AgyAccent}" Foreground="{StaticResource AgyTextPrimary}" HorizontalAlignment="Stretch" Margin="4,0,0,0" CornerRadius="{StaticResource AgyRadiusSm}" MinHeight="32" Padding="0,2" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="Bold" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTipService.ToolTip="Regel speichern (Strg+Enter)" />
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!-- 1. PROJEKT RESSOURCEN -->
+            <Border Background="{StaticResource AgySurfaceBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusLg}" Padding="10">
+                <StackPanel Spacing="8">
+                    <Button AllowFocusOnInteraction="False" x:Name="BtnToggleProjectResourcesCard" x:FieldModifier="public" Click="BtnToggleProjectResourcesCard_Click" Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" ToolTipService.ToolTip="Projekt-Ressourcen ein- oder ausklappen (Wissensdateien, Regeln, Protokoll)">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <ImageIcon Source="ms-appx:///Assets/Icons/book-open-blue.svg" Width="16" Height="16" VerticalAlignment="Center" />
+                                <TextBlock x:Name="TxtProjectDocsHeader" x:FieldModifier="public" Text="PROJEKT RESSOURCEN" FontSize="{StaticResource AgyFontSizeBodyLarge}" FontWeight="Bold" Foreground="{StaticResource AgyAccent}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            </StackPanel>
+                            <TextBlock x:Name="TxtChevronProjectResources" x:FieldModifier="public" Text="▶" FontSize="{StaticResource AgyFontSizeCaption}" Foreground="{StaticResource AgyTextSubtle}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <StackPanel x:Name="PnlProjectResourcesContent" x:FieldModifier="public" Visibility="Collapsed" Spacing="8">
+                        <StackPanel Spacing="4">
+                            <Grid>
+                                <TextBlock x:Name="TxtProjectDocsSubHeader" Text="WISSEN &amp; DOKUMENTE" FontSize="{StaticResource AgyFontSizeCaption}" FontWeight="Bold" Foreground="{StaticResource AgyTextSubtle}" VerticalAlignment="Center" />
+                                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnAddProjectDoc" x:FieldModifier="public" Click="BtnAddProjectDoc_Click" Width="22" Height="22" BorderThickness="0" CornerRadius="{StaticResource AgyRadiusSm}" HorizontalAlignment="Right" ToolTipService.ToolTip="Neue Wissensdatei (.md) in docs/ erstellen">
+                                    <ImageIcon Source="ms-appx:///Assets/Icons/plus.svg" Width="12" Height="12" />
+                                </Button>
+                            </Grid>
+                            <StackPanel x:Name="PnlProjectDocsList" x:FieldModifier="public" Spacing="2">
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Visibility="Collapsed" Spacing="4">
+                            <Grid>
+                                <TextBlock Text="VERHALTENSREGELN" FontSize="{StaticResource AgyFontSizeCaption}" FontWeight="Bold" Foreground="{StaticResource AgyTextSubtle}" VerticalAlignment="Center" />
+                                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnAddProjectRuleFile" x:FieldModifier="public" Click="BtnAddProjectRuleFile_Click" Width="22" Height="22" BorderThickness="0" CornerRadius="{StaticResource AgyRadiusSm}" HorizontalAlignment="Right" ToolTipService.ToolTip="Neue Projekt-Regel (.md) erstellen">
+                                    <ImageIcon Source="ms-appx:///Assets/Icons/plus.svg" Width="12" Height="12" />
+                                </Button>
+                            </Grid>
+                            <StackPanel x:Name="PnlProjectRulesFilesList" x:FieldModifier="public" Spacing="2">
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Spacing="4" Margin="0,2,0,0">
+                            <TextBlock x:Name="TxtProtocolLabel" Text="PROTOKOLL" FontSize="{StaticResource AgyFontSizeCaption}" FontWeight="Bold" Foreground="{StaticResource AgyTextSubtle}" />
+                            <Button Style="{StaticResource AgySubtleAccentButtonStyle}" x:Name="BtnOpenProjectProtocol" x:FieldModifier="public" Click="BtnOpenProjectProtocol_Click" MinHeight="32" Padding="0,2" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTipService.ToolTip="Projekt-Protokoll öffnen (docs/protocol.md · Vollständige Historie aller Änderungen)">
+                                <StackPanel Orientation="Horizontal" Spacing="6" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                    <Viewbox Width="12" Height="12" VerticalAlignment="Center">
+                                        <Path Data="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8" Stroke="{StaticResource AgyTextPrimary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                                    </Viewbox>
+                                    <TextBlock x:Name="TxtOpenProtocolLabel" Text="docs/protocol.md öffnen" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="SemiBold" Foreground="{StaticResource AgyTextPrimary}" VerticalAlignment="Center" />
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- 2. GLOBALE RESSOURCEN -->
+            <Border Background="{StaticResource AgySurfaceBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusLg}" Padding="10">
+                <StackPanel Spacing="8">
+                    <Button AllowFocusOnInteraction="False" x:Name="BtnToggleGlobalResourcesCard" x:FieldModifier="public" Click="BtnToggleGlobalResourcesCard_Click" Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" ToolTipService.ToolTip="Globale Ressourcen ein- oder ausklappen (Systemweites Wissen, Skills, MCP)">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <ImageIcon Source="ms-appx:///Assets/Icons/book-open-blue.svg" Width="16" Height="16" VerticalAlignment="Center" />
+                                <TextBlock x:Name="TxtGlobalResourcesHeader" Text="GLOBALE RESSOURCEN" FontSize="{StaticResource AgyFontSizeBodyLarge}" FontWeight="Bold" Foreground="{StaticResource AgyAccent}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <TextBlock x:Name="TxtChevronGlobalResources" x:FieldModifier="public" Text="▶" FontSize="{StaticResource AgyFontSizeCaption}" Foreground="{StaticResource AgyTextSubtle}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <StackPanel x:Name="PnlGlobalResourcesContent" x:FieldModifier="public" Visibility="Collapsed" Spacing="8">
+                        <StackPanel Visibility="Collapsed" Spacing="4">
+                            <TextBlock Text="WISSEN &amp; DOKUMENTE" FontSize="{StaticResource AgyFontSizeCaption}" FontWeight="Bold" Foreground="{StaticResource AgyTextSubtle}" />
+                            <StackPanel x:Name="PnlGlobalDocsList" x:FieldModifier="public" Spacing="2">
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Spacing="4">
+                            <Grid>
+                                <TextBlock Text="BENUTZERDEFINIERTES WISSEN" FontSize="{StaticResource AgyFontSizeCaption}" FontWeight="Bold" Foreground="{StaticResource AgyTextSubtle}" VerticalAlignment="Center" />
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Spacing="2">
+                                    <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnImportGlobalKnowledge" x:FieldModifier="public" Click="BtnImportGlobalKnowledge_Click" Width="22" Height="22" BorderThickness="0" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Wissen (.md) importieren">
+                                        <ImageIcon Source="ms-appx:///Assets/Icons/arrow-down.svg" Width="12" Height="12" />
+                                    </Button>
+                                    <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnExportGlobalKnowledge" x:FieldModifier="public" Click="BtnExportGlobalKnowledge_Click" Width="22" Height="22" BorderThickness="0" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Wissen exportieren (Backup / Sharing)">
+                                        <ImageIcon Source="ms-appx:///Assets/Icons/upload-cloud.svg" Width="12" Height="12" />
+                                    </Button>
+                                    <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnAddGlobalKnowledge" x:FieldModifier="public" Click="BtnAddGlobalKnowledge_Click" Width="22" Height="22" BorderThickness="0" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Neues benutzerdefiniertes Wissen (.md) erstellen">
+                                        <ImageIcon Source="ms-appx:///Assets/Icons/plus.svg" Width="12" Height="12" />
+                                    </Button>
+                                </StackPanel>
+                            </Grid>
+                            <StackPanel x:Name="PnlGlobalKnowledgeList" x:FieldModifier="public" Spacing="2">
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="SKILLS" FontSize="{StaticResource AgyFontSizeCaption}" FontWeight="Bold" Foreground="{StaticResource AgyTextSubtle}" />
+                            <StackPanel x:Name="PnlGlobalSkillsList" x:FieldModifier="public" Spacing="2">
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Visibility="Collapsed" Spacing="4">
+                            <Grid>
+                                <TextBlock Text="VERHALTENSREGELN" FontSize="{StaticResource AgyFontSizeCaption}" FontWeight="Bold" Foreground="{StaticResource AgyTextSubtle}" VerticalAlignment="Center" />
+                                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnAddGlobalRuleFile" x:FieldModifier="public" Click="BtnAddGlobalRuleFile_Click" Width="22" Height="22" BorderThickness="0" CornerRadius="{StaticResource AgyRadiusSm}" HorizontalAlignment="Right" ToolTipService.ToolTip="Neue globale Regel (.md) erstellen">
+                                    <ImageIcon Source="ms-appx:///Assets/Icons/plus.svg" Width="12" Height="12" />
+                                </Button>
+                            </Grid>
+                            <StackPanel x:Name="PnlGlobalRulesFilesList" x:FieldModifier="public" Spacing="2">
+                            </StackPanel>
+                        </StackPanel>
+
+                        <StackPanel Spacing="4">
+                            <TextBlock Text="EINSTELLUNGEN &amp; MCP" FontSize="{StaticResource AgyFontSizeCaption}" FontWeight="Bold" Foreground="{StaticResource AgyTextSubtle}" ToolTipService.ToolTip="Model Context Protocol (MCP): Externe Werkzeuge und Schnittstellen-Konfigurationen" />
+                            <StackPanel x:Name="PnlGlobalSettingsList" x:FieldModifier="public" Spacing="2">
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- 3. GLOBALE REGELN -->
+            <Border Background="{StaticResource AgySurfaceBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusLg}" Padding="10">
+                <StackPanel Spacing="8">
+                    <Button AllowFocusOnInteraction="False" x:Name="BtnToggleGlobalInjectionsCard" x:FieldModifier="public" Click="BtnToggleGlobalInjectionsCard_Click" Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" ToolTipService.ToolTip="Globale Systemregeln ein- oder ausklappen">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <ImageIcon Source="ms-appx:///Assets/Icons/shield-check-blue.svg" Width="16" Height="16" VerticalAlignment="Center" />
+                                <TextBlock Text="GLOBALE REGELN" FontSize="{StaticResource AgyFontSizeBodyLarge}" FontWeight="Bold" Foreground="{StaticResource AgyAccent}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            </StackPanel>
+                            <TextBlock x:Name="TxtChevronGlobalInjections" x:FieldModifier="public" Text="▶" FontSize="{StaticResource AgyFontSizeCaption}" Foreground="{StaticResource AgyTextSubtle}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <StackPanel x:Name="PnlGlobalInjectionsCardContent" x:FieldModifier="public" Visibility="Collapsed" Spacing="8">
+                        <StackPanel x:Name="PnlGlobalInjectionsList" x:FieldModifier="public" Spacing="6">
+                        </StackPanel>
+
+                        <Button Style="{StaticResource AgySubtleAccentButtonStyle}" x:Name="BtnAddGlobalInjection" x:FieldModifier="public" Click="BtnAddGlobalInjection_Click" MinHeight="32" Padding="0,2" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTipService.ToolTip="Neue globale Regel hinzufügen (Gilt workspace-übergreifend für alle Projekte)">
+                            <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ImageIcon Source="ms-appx:///Assets/Icons/plus.svg" Width="12" Height="12" VerticalAlignment="Center" />
+                                <TextBlock Text="Globale Regel hinzufügen" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="SemiBold" Foreground="{StaticResource AgyTextPrimary}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- 4. PROJEKT REGELN -->
+            <Border Background="{StaticResource AgySurfaceBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="1" CornerRadius="{StaticResource AgyRadiusLg}" Padding="10">
+                <StackPanel Spacing="8">
+                    <Button AllowFocusOnInteraction="False" x:Name="BtnToggleProjectInjectionsCard" x:FieldModifier="public" Click="BtnToggleProjectInjectionsCard_Click" Background="Transparent" BorderThickness="0" Padding="0" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch" ToolTipService.ToolTip="Projektspezifische Regeln ein- oder ausklappen">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal" Spacing="8" VerticalAlignment="Center" HorizontalAlignment="Left">
+                                <ImageIcon Source="ms-appx:///Assets/Icons/shield-check-blue.svg" Width="16" Height="16" VerticalAlignment="Center" />
+                                <TextBlock x:Name="TxtProjectInjectionHeader" x:FieldModifier="public" Text="PROJEKT REGELN" FontSize="{StaticResource AgyFontSizeBodyLarge}" FontWeight="Bold" Foreground="{StaticResource AgyAccent}" VerticalAlignment="Center" HorizontalAlignment="Left" />
+                            </StackPanel>
+                            <TextBlock x:Name="TxtChevronProjectInjections" x:FieldModifier="public" Text="▶" FontSize="{StaticResource AgyFontSizeCaption}" Foreground="{StaticResource AgyTextSubtle}" HorizontalAlignment="Right" VerticalAlignment="Center" />
+                        </Grid>
+                    </Button>
+
+                    <StackPanel x:Name="PnlProjectInjectionsCardContent" x:FieldModifier="public" Visibility="Collapsed" Spacing="8">
+                        <StackPanel x:Name="PnlProjectInjectionsList" x:FieldModifier="public" Spacing="6">
+                        </StackPanel>
+
+                        <Button Style="{StaticResource AgySubtleAccentButtonStyle}" x:Name="BtnAddProjectInjection" x:FieldModifier="public" Click="BtnAddProjectInjection_Click" MinHeight="32" Padding="0,2" HorizontalAlignment="Stretch" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" ToolTipService.ToolTip="Neue projektspezifische Regel hinzufügen (Gilt verbindlich nur für dieses Repository)">
+                            <StackPanel Orientation="Horizontal" Spacing="4" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <ImageIcon Source="ms-appx:///Assets/Icons/plus.svg" Width="12" Height="12" VerticalAlignment="Center" />
+                                <TextBlock Text="Projekt-Regel hinzufügen" FontSize="{StaticResource AgyFontSizeBody}" FontWeight="SemiBold" Foreground="{StaticResource AgyTextPrimary}" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

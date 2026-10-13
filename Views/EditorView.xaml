@@ -1,0 +1,262 @@
+<UserControl
+    x:Class="AgyCliDashboard.Views.EditorView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid x:Name="EditorContainer" x:FieldModifier="public" Background="{StaticResource AgyTerminalBg}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Editor Header Bar -->
+        <Border Grid.Row="0" x:Name="PnlEditorHeaderBar" x:FieldModifier="public" Background="{StaticResource AgyHeaderBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="0,0,0,1" Padding="12,8">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="8" VerticalAlignment="Center">
+                    <Viewbox Width="14" Height="14" VerticalAlignment="Center">
+                        <Path Data="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8" Stroke="{StaticResource AgyTextSecondary}" StrokeThickness="1.8" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round" Stretch="Uniform" />
+                    </Viewbox>
+                    <TextBlock x:Name="TxtEditorTitle" x:FieldModifier="public" Text="Datei-Editor" FontSize="{StaticResource AgyFontSizeBodyLarge}" FontWeight="SemiBold" Foreground="{StaticResource AgyTextSecondary}" />
+                    <TextBlock x:Name="TxtEditorPath" x:FieldModifier="public" Text="" FontSize="{StaticResource AgyFontSizeCaption}" Foreground="{StaticResource AgyTextSubtle}" VerticalAlignment="Center" Margin="8,0,0,0" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6">
+                    <!-- Formatierungswerkzeuge Toggle (Erweitert-Modus fuer Briefe) -->
+                    <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnToggleFormatToolbar" x:FieldModifier="public" Click="BtnToggleFormatToolbar_Click" Height="28" Padding="6,0" ToolTipService.ToolTip="Formatierungswerkzeuge ein-/ausblenden (Für Briefe, Layout &amp; Weiterschreiben)">
+                        <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                            <FontIcon Glyph="&#xE70F;" FontSize="11" Foreground="{StaticResource AgyTextSecondary}" />
+                            <TextBlock Text="Formatieren" FontSize="{StaticResource AgyFontSizeCaption}" Foreground="{StaticResource AgyTextSecondary}" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnOpenExternalWordPad" x:FieldModifier="public" Click="BtnOpenExternalWordPad_Click" Width="28" Height="28" ToolTipService.ToolTip="In externer Standard-Anwendung öffnen">
+                        <FontIcon Glyph="&#xE792;" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" />
+                    </Button>
+                    <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnCopyEditorText" x:FieldModifier="public" Click="BtnCopyEditorText_Click" Width="28" Height="28" ToolTipService.ToolTip="Text kopieren (Auswahl oder alles, Strg+C / Strg+Shift+C)">
+                        <FontIcon x:Name="IconCopyEditor" Glyph="&#xE8C8;" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" />
+                    </Button>
+                    <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnStripMarkdownEditor" x:FieldModifier="public" Click="BtnStripMarkdownEditor_Click" Width="28" Height="28" ToolTipService.ToolTip="Formatierung entfernen (Reintext erzeugen)">
+                        <FontIcon Glyph="&#xE8D4;" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" />
+                    </Button>
+                    <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnPrintEditorText" x:FieldModifier="public" Click="BtnPrintEditorText_Click" Width="28" Height="28" ToolTipService.ToolTip="Dokument drucken (Strg+P)">
+                        <FontIcon Glyph="&#xE749;" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" />
+                    </Button>
+                    <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnSavePdfEditorText" x:FieldModifier="public" Click="BtnSavePdfEditorText_Click" Width="28" Height="28" ToolTipService.ToolTip="Als PDF speichern">
+                        <FontIcon Glyph="&#xEA90;" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" />
+                    </Button>
+                    <Button Style="{StaticResource AgySubtleAccentButtonStyle}" x:Name="BtnSaveEditorFile" x:FieldModifier="public" Click="BtnSaveEditorFile_Click" Width="28" Height="28" ToolTipService.ToolTip="Datei speichern (Strg+S)">
+                        <ImageIcon Source="ms-appx:///Assets/Icons/save.svg" Width="14" Height="14" />
+                    </Button>
+                    <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnCloseEditorFile" x:FieldModifier="public" Click="BtnCloseEditorFile_Click" Width="28" Height="28" BorderThickness="0" ToolTipService.ToolTip="Editor schließen (Zurück zum Terminal)">
+                        <ImageIcon Source="ms-appx:///Assets/Icons/x.svg" Width="12" Height="12" />
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- WordPad Formatting Toolbar (Standardmäßig eingeklappt für Clean-UIX) -->
+        <Border Grid.Row="1" x:Name="PnlWordPadToolbar" x:FieldModifier="public" Visibility="Collapsed" Background="{StaticResource AgySurfaceBg}" BorderBrush="{StaticResource AgyBorderFaint}" BorderThickness="0,0,0,1" Padding="12,5">
+            <StackPanel Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                <!-- Schriftart -->
+                <ComboBox x:Name="CmbFontFamily" Width="125" Height="28" FontSize="{StaticResource AgyFontSizeCaption}" Padding="6,2" SelectionChanged="CmbFontFamily_SelectionChanged">
+                    <ComboBoxItem Content="Segoe UI" IsSelected="True" />
+                    <ComboBoxItem Content="Consolas" />
+                    <ComboBoxItem Content="Arial" />
+                    <ComboBoxItem Content="Calibri" />
+                    <ComboBoxItem Content="Georgia" />
+                    <ComboBoxItem Content="Times New Roman" />
+                </ComboBox>
+
+                <!-- Schriftgröße -->
+                <ComboBox x:Name="CmbFontSize" Width="68" Height="28" FontSize="{StaticResource AgyFontSizeCaption}" Padding="6,2" SelectionChanged="CmbFontSize_SelectionChanged">
+                    <ComboBoxItem Content="9" />
+                    <ComboBoxItem Content="10" />
+                    <ComboBoxItem Content="11" IsSelected="True" />
+                    <ComboBoxItem Content="12" />
+                    <ComboBoxItem Content="14" />
+                    <ComboBoxItem Content="16" />
+                    <ComboBoxItem Content="18" />
+                    <ComboBoxItem Content="20" />
+                    <ComboBoxItem Content="24" />
+                    <ComboBoxItem Content="28" />
+                </ComboBox>
+
+                <Border Width="1" Height="20" Background="{StaticResource AgyBorderFaint}" Margin="3,0" />
+
+                <!-- Fett, Kursiv, Unterstrichen, Durchgestrichen -->
+                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnBold" Click="BtnBold_Click" Width="28" Height="28" BorderBrush="{StaticResource AgyBorderFaint}" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Fett (Strg+B)">
+                    <TextBlock Text="B" FontWeight="Bold" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextStrong}" />
+                </Button>
+                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnItalic" Click="BtnItalic_Click" Width="28" Height="28" BorderBrush="{StaticResource AgyBorderFaint}" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Kursiv (Strg+I)">
+                    <TextBlock Text="I" FontStyle="Italic" FontWeight="SemiBold" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextStrong}" />
+                </Button>
+                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnUnderline" Click="BtnUnderline_Click" Width="28" Height="28" BorderBrush="{StaticResource AgyBorderFaint}" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Unterstrichen (Strg+U)">
+                    <TextBlock Text="U" TextDecorations="Underline" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextStrong}" />
+                </Button>
+                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnStrikethrough" Click="BtnStrikethrough_Click" Width="28" Height="28" BorderBrush="{StaticResource AgyBorderFaint}" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Durchgestrichen">
+                    <TextBlock Text="S" TextDecorations="Strikethrough" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" />
+                </Button>
+
+                <Border Width="1" Height="20" Background="{StaticResource AgyBorderFaint}" Margin="3,0" />
+
+                <!-- Listen -->
+                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnBulletList" Click="BtnBulletList_Click" Width="28" Height="28" BorderBrush="{StaticResource AgyBorderFaint}" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Aufzählungspunkte">
+                    <FontIcon Glyph="&#xE8FD;" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" />
+                </Button>
+                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnNumberedList" Click="BtnNumberedList_Click" Width="28" Height="28" BorderBrush="{StaticResource AgyBorderFaint}" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Nummerierte Liste">
+                    <FontIcon Glyph="&#xE8F8;" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" />
+                </Button>
+
+                <Border Width="1" Height="20" Background="{StaticResource AgyBorderFaint}" Margin="3,0" />
+
+                <!-- Ausrichtung -->
+                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnAlignLeft" Click="BtnAlignLeft_Click" Width="28" Height="28" BorderBrush="{StaticResource AgyBorderFaint}" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Linksbündig">
+                    <FontIcon Glyph="&#xE8E4;" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" />
+                </Button>
+                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnAlignCenter" Click="BtnAlignCenter_Click" Width="28" Height="28" BorderBrush="{StaticResource AgyBorderFaint}" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Zentriert">
+                    <FontIcon Glyph="&#xE8E3;" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" />
+                </Button>
+                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnAlignRight" Click="BtnAlignRight_Click" Width="28" Height="28" BorderBrush="{StaticResource AgyBorderFaint}" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Rechtsbündig">
+                    <FontIcon Glyph="&#xE8E2;" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" />
+                </Button>
+
+                <Border Width="1" Height="20" Background="{StaticResource AgyBorderFaint}" Margin="3,0" />
+
+                <!-- Blatt-Darstellung (Dunkel / Klassisch Weiß) -->
+                <Button Style="{StaticResource AgyGhostButtonStyle}" x:Name="BtnToggleSheetTheme" Click="BtnToggleSheetTheme_Click" Width="28" Height="28" BorderBrush="{StaticResource AgyBorderFaint}" CornerRadius="{StaticResource AgyRadiusSm}" ToolTipService.ToolTip="Blatt-Farbe umschalten (Dunkel / Klassisch Weiß)">
+                    <FontIcon x:Name="IconSheetTheme" Glyph="&#xE706;" FontSize="{StaticResource AgyFontSizeBody}" Foreground="{StaticResource AgyTextSecondary}" />
+                </Button>
+            </StackPanel>
+        </Border>
+
+        <!-- Document Canvas & Sheet Area -->
+        <ScrollViewer x:Name="EditorScrollViewer" x:FieldModifier="public" Grid.Row="2" Background="{StaticResource AgyTerminalBg}" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <Grid x:Name="PnlDocCanvas" HorizontalAlignment="Stretch" Padding="16,12">
+                <!-- Dokumenten-Canvas (Volle Breite im einheitlichen Terminal-Dark-Design) -->
+                <Border x:Name="DocPageSheet" 
+                        HorizontalAlignment="Stretch" 
+                        Background="{StaticResource AgyTerminalBg}" 
+                        BorderBrush="{StaticResource AgyBorderFaint}" 
+                        BorderThickness="1" 
+                        CornerRadius="{StaticResource AgyRadiusSm}" 
+                        Padding="20,16" 
+                        MinHeight="600">
+                    <RichEditBox x:Name="RichFileEditor" 
+                                 x:FieldModifier="public" 
+                                 AcceptsReturn="True" 
+                                 TextWrapping="Wrap" 
+                                 FontFamily="Segoe UI" 
+                                 FontSize="{StaticResource AgyFontSizeBodyLarge}" 
+                                 Foreground="{StaticResource AgyTextPrimary}" 
+                                 Background="Transparent" 
+                                 BorderThickness="0" 
+                                 Padding="0" 
+                                 SelectionFlyout="{x:Null}"
+                                 IsSpellCheckEnabled="False"
+                                 ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
+                                 KeyDown="RichFileEditor_KeyDown">
+                        <RichEditBox.Resources>
+                            <SolidColorBrush x:Key="TextControlBackground" Color="Transparent" />
+                            <SolidColorBrush x:Key="TextControlBackgroundPointerOver" Color="Transparent" />
+                            <SolidColorBrush x:Key="TextControlBackgroundFocused" Color="Transparent" />
+                            <SolidColorBrush x:Key="TextControlBackgroundDisabled" Color="Transparent" />
+
+                            <SolidColorBrush x:Key="TextControlForeground" Color="#F8FAFC" />
+                            <SolidColorBrush x:Key="TextControlForegroundPointerOver" Color="#F8FAFC" />
+                            <SolidColorBrush x:Key="TextControlForegroundFocused" Color="#F8FAFC" />
+
+                            <SolidColorBrush x:Key="TextControlBorderBrush" Color="Transparent" />
+                            <SolidColorBrush x:Key="TextControlBorderBrushPointerOver" Color="Transparent" />
+                            <SolidColorBrush x:Key="TextControlBorderBrushFocused" Color="Transparent" />
+                            <SolidColorBrush x:Key="TextControlBorderBrushDisabled" Color="Transparent" />
+                        </RichEditBox.Resources>
+                        <RichEditBox.ContextFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem x:Name="MenuCut" Text="Ausschneiden" Click="MenuCut_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE8C6;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem x:Name="MenuCopy" Text="Kopieren (Strg+C)" Click="MenuCopy_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE8C8;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem x:Name="MenuCopyPlain" Text="Als reinen Text kopieren (Strg+Shift+C)" Click="MenuCopyPlain_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE8D4;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem x:Name="MenuPaste" Text="Einfügen" Click="MenuPaste_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE77F;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem x:Name="MenuSelectBlock" Text="Aktuellen Block markieren" Click="MenuSelectBlock_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE8FD;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem x:Name="MenuSelectAll" Text="Alles auswählen (Strg+A)" Click="MenuSelectAll_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE8B3;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutSeparator />
+                                <MenuFlyoutItem x:Name="MenuBold" Text="Fett (Strg+B)" Click="MenuBold_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE8DD;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem x:Name="MenuItalic" Text="Kursiv (Strg+I)" Click="MenuItalic_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE8DB;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem x:Name="MenuUnderline" Text="Unterstrichen (Strg+U)" Click="MenuUnderline_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE8DC;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem x:Name="MenuBulletList" Text="Aufzählung" Click="MenuBulletList_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE8FD;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutSeparator />
+                                <MenuFlyoutItem x:Name="MenuStripMarkdown" Text="Formatierung entfernen (Reintext)" Click="MenuStripMarkdown_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE8D4;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutSeparator />
+                                <MenuFlyoutItem x:Name="MenuPrint" Text="Drucken... (Strg+P)" Click="MenuPrint_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE749;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem x:Name="MenuSavePdf" Text="Als PDF speichern..." Click="MenuSavePdf_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xEA90;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                                <MenuFlyoutItem x:Name="MenuOpenExternal" Text="In externer Anwendung öffnen..." Click="MenuOpenExternal_Click">
+                                    <MenuFlyoutItem.Icon>
+                                        <FontIcon Glyph="&#xE792;" />
+                                    </MenuFlyoutItem.Icon>
+                                </MenuFlyoutItem>
+                            </MenuFlyout>
+                        </RichEditBox.ContextFlyout>
+                    </RichEditBox>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

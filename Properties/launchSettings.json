@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AgyCliDashboard (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "AgyCliDashboard (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
